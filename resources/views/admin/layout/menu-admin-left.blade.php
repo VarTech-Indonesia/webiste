@@ -7,12 +7,14 @@
                 <p> Dashboard </p>
             </a>
         </li>
+        @auth
         <li class="nav-item">
             <a href="{{route('user-admin.index')}}" class="nav-link">
                 <i class="nav-icon fas fa-user-cog"></i>
                 <p> User </p>
             </a>
         </li>
+        @endauth
     </ul>
 </nav>
-@endsection('menu-admin-left')
+@stop

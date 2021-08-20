@@ -1,16 +1,12 @@
 @extends('admin/layout/main')
-@section('title','VarTech - Login Administration')
-@include('admin/layout/menu-admin-non')
-@include('admin/layout/menu-admin-non-left')
-
-@section('menu-admin-non-left')
-@yield('menu-admin-left')
-@endsection('menu-admin-non-left')
-
+@section('title', $title)
+@include('admin/layout/menu-admin-top')
+@include('admin/layout/menu-admin-left')
+@section('menu-admin-top')
+    @yield('menu-admin-top')
+@stop
 @section('main-content')
-
-@section('menu-admin')
-@yield('menu-admin-non')
-@endsection('menu-admin')
-
-@endsection('main-content')
+    @section('menu-admin-left')
+        @yield('menu-admin-left')
+    @stop
+@stop

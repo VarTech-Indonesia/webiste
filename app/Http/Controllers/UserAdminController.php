@@ -37,7 +37,7 @@ class UserAdminController extends Controller
             'title'         => 'Add User Admin | VarTech Indonesia',
             'title_table'   => 'Add Data User Admin'
         ];
-        $data['role']   = Role::orderByDesc('title')->get();
+        $data['role']       = Role::orderBy('title')->get();
         return view('admin.user.add', $data);
     }
 
@@ -49,7 +49,39 @@ class UserAdminController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = [
+            'id_role'               => 'required',
+            'name'                  => 'required|min:3|max:35',
+            'email'                 => 'required|email|unique:users,email',
+            'password'              => 'required|confirmed',
+        ];
+        $messages = [
+            'id_role.required'      => 'Role Name is Required',
+            'name.required'         => 'Name is Required',
+            'name.min'              => 'Name Min 3 charaters',
+            'name.max'              => 'Name Max 35 charaters',
+            'email.required'        => 'Email is Required',
+            'email.email'           => 'Email not Valid',
+            'email.unique'          => 'Email have been Registered',
+            'password.required'     => 'Password is Required',
+            'password.confirmed'    => 'Password and Re-Type Password doesnt match'
+        ];
+        $validator = Validator::make($request->all(), $rules, $messages);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput($request->all);
+        }
+        $query  = User::create([
+            'id_role'           => $request->id_role,
+            'name'              => $request->name,
+            'email'             => $request->email,
+            'password'          => Hash::make($request->password),
+            'status'            => $request->status
+        ]);
+        if ($query) {
+            return redirect()->route('user-admin.index')->with('success', 'Data Successfully saved');
+        } else {
+            return redirect()->back()->with('error', 'Data Failed to Save, Pleast Contact Administrator');
+        }
     }
 
     /**
@@ -71,10 +103,12 @@ class UserAdminController extends Controller
      */
     public function edit($id)
     {
-        #dd($id);
-        $data = User::where('id', $id)->first();
-        #return view('admin.user.edit', compact($data));
-        return response()->json($data);
+        $data = [
+            'title'         => 'Add User Admin | VarTech Indonesia',
+            'title_table'   => 'Add Data User Admin'
+        ];
+        $data['data']   = User::findOrFail($id)->first();
+        return view('admin.user.edit');
     }
 
     /**
@@ -109,45 +143,17 @@ class UserAdminController extends Controller
             // 
             return response()->json(['errors' => $validator->errors()->all()]);
         }
-
-        // $user               = new User;
-        // $user->name         = ucwords(strtolower($request->name));
-        // $user->email        = strtolower($request->email);
-        // $user->password     = Hash::make($request->password);
-        // $user->email_verified_at    = \Carbon\Carbon::now();
-        // $simpan = $user->save();
-
-        // if ($simpan) {
-        //     Session::flash('success', 'Register Berhasil, Silahkan Login');
-        //     return redirect()->route('admin-login');
-        // } else {
-        //     Session::flash('errors', ['' => 'Register Gagal, Hubungi Admin']);
-        //     return redirect()->route('admin-register-create');
-        // }
-
-        // $request->validate([
-        //     'nama'                  => 'required|max:255',
-        //     'email'                 => 'required|email',
-        //     'password'              => 'required|confirmed',
-        // ]);
-        $password = Hash::make($request->password);
-        $user = User::whereId($request->id)->update([
+        $password   = Hash::make($request->password);
+        $query      = User::whereId($request->id)->update([
             'name'      => $request->name,
             'email'     => $request->email,
             'password'  => $password
         ]);
-        if ($user) {
+        if ($query) {
             return response()->json(['success' => 'Data Berhasi Diubah']);
         } else {
             return response()->json(['errorssystem' => 'Data Gagal Diubah, Hubungi Admin']);
         }
-        // return response()->json(
-        //     [
-        //         'success' => true,
-        //         'message' => 'Data inserted successfully',
-        //         200
-        //     ]
-        // );
     }
 
     /**
@@ -158,6 +164,11 @@ class UserAdminController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $query  = User::findOrFail($id)->delete();
+        if ($query) {
+            return redirect()->route('user-admin.index')->with('success', 'Data Successfully Deleted');
+        } else {
+            return redirect()->back()->with('error', 'Data Failed to Delete, Pleast Contact Administrator');
+        }
     }
 }

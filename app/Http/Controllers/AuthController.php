@@ -25,8 +25,7 @@ class AuthController extends Controller
     }
     public function login()
     {
-        if (Auth::check()) { // true sekalian session field di users nanti bisa dipanggil via Auth
-            //Login Success
+        if (Auth::check()) {
             return redirect()->route('admin-home');
         }
         $data = [
@@ -64,16 +63,12 @@ class AuthController extends Controller
             'password'  => $request->input('password'),
         ];
 
-        Auth::attempt($data);
-
-        if (Auth::check()) {
-            // True sekalian session field di users nanti bisa dipanggil via Auth
-            // Login Success
+        if (Auth::attempt($data)) {
+            $request->session()->regenerate();
             return redirect()->route('admin-home');
         } else {
-            // Login Fail
             Session::flash('error', 'Email atau Password Salah');
-            return redirect()->route('admin-login');
+            return redirect()->intended('/admin/login');
         }
     }
     /**
@@ -165,10 +160,11 @@ class AuthController extends Controller
     {
         //
     }
-    public function logout()
+    public function logout(Request $request)
     {
-        // Menghapus session yang aktif
         Auth::logout();
-        return redirect()->route('admin');
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect()->route('admin-login');
     }
 }
