@@ -118,12 +118,12 @@
         </li>
         <li class="nav-item dropdown user-menu">
             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                <img src="{{asset('storage/images-front/vartech.png')}}" class="user-image img-circle elevation-2" alt="User Image">
+                <img src="{{asset('storage/'.Auth::user()->image)}}" class="user-image img-circle elevation-2" alt="User Image">
                 <span class="d-none d-md-inline">{{Auth::user()->name}}</span>
             </a>
             <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                 <li class="user-header bg-info">
-                <img src="{{asset('storage/images-front/vartech.png')}}" class="img-circle elevation-2" alt="User Image">
+                <img src="{{asset('storage/'.Auth::user()->image)}}" class="img-circle elevation-2" alt="User Image">
 
                 <p>
                     {{Auth::user()->name}} 

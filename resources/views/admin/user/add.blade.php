@@ -9,7 +9,6 @@
     @section('menu-admin-left')
         @yield('menu-admin-left')
     @stop
-
     @if(session('error'))
     <script>
         <script>
@@ -45,29 +44,10 @@
         <div class="card-header">
             <h3 class="card-title">{{ $title_table }}</h3>
         </div>
-        {{-- @if(session('error'))
-        <div class="alert alert-danger alert-dismissible">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            <h5><i class="icon fas fa-ban"></i> Alert!</h5>
-            {{ $error }}
-        </div>
-        @endif
-        @if(session('errors'))
-        <div class="alert alert-danger alert-dismissible">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            <h5><i class="icon fas fa-ban"></i> Alert!</h5>
-            <ul>
-                @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-        @endif --}}
-        <form action="{{ route('user-admin.store') }}" method="post" enctype="multipart/form-data">
+        <form action="{{ route('user-admin.store') }}" method="post" enctype="multipart/form-data" class="dropzone">
         @csrf
         @method('POST')
         <div class="card-body">
-            <dl>
             <div class="form-group">
                 <label><h6>Role</h6></label>
                 <div class="input-group">
@@ -99,6 +79,17 @@
                     <input type="email" name="email" class="form-control" placeholder="e-mail"  value="{{ old('email') }}" required>
                 </div>
             </div>
+            
+            <div class="form-group">
+                <label><h6>Avatar</h6></label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-image"></i></span>
+                    </div>
+                    <input type="file" name="image" class="dz-default dz-message" placeholder="avatar"  value="{{ old('image') }}">
+                </div>
+            </div>
+            
             <div class="form-group" id="show_hide_password">
                 <label><h6>Password</h6></label>
                 <div class="input-group">
@@ -141,7 +132,6 @@
                 </div>
             </div>
         </div>
-        </dl>
         <div class="card-footer  float-right">
             <div class="btn-group btn-group-md">
                 <button type="button" class="btn btn-secondary" onclick=" window.location='{{ route('user-admin.index') }}' ">

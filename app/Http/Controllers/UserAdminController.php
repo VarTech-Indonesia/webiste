@@ -49,10 +49,12 @@ class UserAdminController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->file('image'));
         $rules = [
             'id_role'               => 'required',
             'name'                  => 'required|min:3|max:35',
             'email'                 => 'required|email|unique:users,email',
+            'image'                 => 'image|mimes:png,jpg,jpeg|max:1024',
             'password'              => 'required|confirmed',
         ];
         $messages = [
@@ -63,6 +65,9 @@ class UserAdminController extends Controller
             'email.required'        => 'Email is Required',
             'email.email'           => 'Email not Valid',
             'email.unique'          => 'Email have been Registered',
+            'image.image'           => 'Gambar Wajib  di Isi dengan Image Format : JPEG, JPG, PNG Max. 1 Mb',
+            'image.mimes'           => 'Gambar Wajib  dengan Format : JPEG, JPG, PNG Max. 1 Mb',
+            'image.max'             => 'Gambar Max. 1 Mb',
             'password.required'     => 'Password is Required',
             'password.confirmed'    => 'Password and Re-Type Password doesnt match'
         ];
@@ -70,12 +75,29 @@ class UserAdminController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput($request->all);
         }
+        // Image
+        $image              = $request->file('image');
+        if ($image == null) {
+            $uploadedFile   = "";
+        } else {
+            // Ganti Nama Image
+            $title          = strtolower(str_replace(' ', '-', $request->name));
+            $image          = $request->file('image');
+            $ImgValue       = $request->file('image');
+            $getFileExt     = $ImgValue->getClientOriginalExtension();
+            $uploadedFile   = $title  . '-' . '.' . $getFileExt;
+            // Upload Image
+            $image->storeAs('public/images-user', $uploadedFile);
+            // Save Image di DB
+            $uploadedFile   = 'images-user/' . $uploadedFile;
+        }
         $query  = User::create([
-            'id_role'           => $request->id_role,
-            'name'              => $request->name,
-            'email'             => $request->email,
-            'password'          => Hash::make($request->password),
-            'status'            => $request->status
+            'id_role'       => $request->id_role,
+            'name'          => $request->name,
+            'email'         => $request->email,
+            'image'         => $uploadedFile,
+            'password'      => Hash::make($request->password),
+            'status'        => $request->status
         ]);
         if ($query) {
             return redirect()->route('user-admin.index')->with('success', 'Data Successfully saved');
