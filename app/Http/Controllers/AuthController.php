@@ -7,8 +7,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Mail;
 use App\Models\User;
 
 use Carbon\Carbon;
@@ -28,7 +26,7 @@ class AuthController extends Controller
         ];
         return view('admin.layout.index', $data);
     }
-    
+
     public function login()
     {
         if (Auth::check()) {
@@ -54,7 +52,6 @@ class AuthController extends Controller
         $messages = [
             'email.required'        => 'Email wajib diisi',
             'email.email'           => 'Email tidak valid',
-
             'password.required'     => 'Password wajib diisi',
             'password.string'       => 'Password harus berupa string'
         ];
@@ -66,11 +63,11 @@ class AuthController extends Controller
 
         $remember   = $request->has('remember') ? true : false;
 
-        if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')], $remember)) {
+        if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password'), 'status' => 'Active'], $remember)) {
             $request->session()->regenerate();
             return redirect()->intended('/admin/home');
         } else {
-            Session::flash('error', 'Email atau Password Salah');
+            Session::flash('error', 'Gagal Login, Hubungi Admin');
             return redirect()->route('admin-login');
         }
     }
@@ -119,14 +116,14 @@ class AuthController extends Controller
         $user->name         = ucwords(strtolower($request->name));
         $user->email        = strtolower($request->email);
         $user->password     = Hash::make($request->password);
-        $user->email_verified_at    = \Carbon\Carbon::now();
+        $user->email_verified_at    = Carbon::now();
         $simpan = $user->save();
 
         if ($simpan) {
             Session::flash('success', 'Register Berhasil, Silahkan Login');
             return redirect()->route('admin-login');
         } else {
-            Session::flash('errors', ['' => 'Register Gagal, Hubungi Admin']);
+            Session::flash('error', 'Register Gagal, Hubungi Admin');
             return redirect()->route('admin-register-create');
         }
     }
