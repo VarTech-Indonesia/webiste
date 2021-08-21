@@ -16,7 +16,7 @@
         <div class="col-md-4 offset-md-4 mt-5">
             <div class="card card-outline card-primary">
                 <div class="card-header text-center">
-                    <a href="{{route('admin')}}" class="h1"><b>VarTech</b></a>
+                    <a href="{{route('admin')}}"><img src="{{asset('storage/images-front/vartech.png')}}" width="100px" /></a>
                 </div>
                 <div class="card-body">
                     <p class="login-box-msg">Sign in to start your session</p>

@@ -56,9 +56,9 @@
         };
     </script>
 
-    <div class="card card-primary">
+    <div class="card card-lightblue">
         <div class="card-header">
-        <h3 class="card-title">Primary</h3>
+        <h3 class="card-title">Info</h3>
         <div class="card-tools">
             <button type="button" class="btn btn-tool" data-card-widget="collapse">
             <i class="fas fa-minus"></i>
@@ -69,7 +69,7 @@
         The body of the card
         </div>
     </div>
-    <div class="card card-primary">
+    <div class="card card-lightblue">
         <div class="card-header">
             <h3 class="card-title">
                 {{ $title_table }}
@@ -80,8 +80,8 @@
             </button>
             </div>
         </div>
-        <div class="card-body">
-            <table class="table table-head-fixed text-nowrap table-responsive">
+        <div class="card-body table-responsive p-0">
+            <table class="table table-hover text-nowrap">
                 <thead>
                     <tr>
                         <th style="width: 10px">#</th>

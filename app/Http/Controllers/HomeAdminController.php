@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 class HomeAdminController extends Controller
 {
     /**
@@ -14,7 +14,7 @@ class HomeAdminController extends Controller
     public function index()
     {
         $data = [
-            'title' => 'Home Admin | VarTech Indonesia'
+            'title' => 'Halo, ' . Auth::user()->name
         ];
         return view('admin.home', $data);
     }

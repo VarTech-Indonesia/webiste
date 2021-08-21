@@ -44,13 +44,54 @@
     <script src="{{asset('adminlte/plugins/jquery/jquery.min.js')}}"></script>
     <!-- Custom JS -->
     <script src="{{asset('storage/js/custom.js')}}"></script>
+    <style>
+        .color-palette {
+          height: 35px;
+          line-height: 35px;
+          text-align: right;
+          padding-right: .75rem;
+        }
+    
+        .color-palette.disabled {
+          text-align: center;
+          padding-right: 0;
+          display: block;
+        }
+    
+        .color-palette-set {
+          margin-bottom: 15px;
+        }
+    
+        .color-palette span {
+          display: none;
+          font-size: 12px;
+        }
+    
+        .color-palette:hover span {
+          display: block;
+        }
+    
+        .color-palette.disabled span {
+          display: block;
+          text-align: left;
+          padding-left: .75rem;
+        }
+    
+        .color-palette-box h4 {
+          position: absolute;
+          left: 1.25rem;
+          margin-top: .75rem;
+          color: rgba(255, 255, 255, 0.8);
+          font-size: 12px;
+          display: block;
+          z-index: 7;
+        }
+      </style>
 </head>
 
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini layout-navbar-fixed">
     <div class="wrapper">
-        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-            @yield('menu-admin-top')
-        </nav>
+                @yield('menu-admin-top')
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <a href="" class="brand-link">
                 <img src="{{asset('storage/images-front/vartech.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
