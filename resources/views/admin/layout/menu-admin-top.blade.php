@@ -146,7 +146,7 @@
                 </li>
                 <li class="user-footer">
                 <a href="#" class="btn  btn-info"><i class="fa fa-bell"></i> Profile</a>
-                <a href="#" class="btn btn-danger float-right">Sign out</a>
+                <a href="{{route('admin-logout')}}" class="btn btn-danger float-right">Sign out</a>
                 </li>
             </ul>
         </li>

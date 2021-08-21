@@ -69,7 +69,7 @@
                             <div class="row">
                                 <div class="col-8">
                                     <div class="icheck-primary">
-                                        <input type="checkbox" id="remember">
+                                        <input type="checkbox" id="remember" name="remember">
                                         <label for="remember">
                                             Remember Me
                                         </label>
@@ -81,7 +81,7 @@
                             </div>
                     </form>
                     <p class="mb-1">
-                        <a href="#">Lupa Password</a>
+                        <a href="{{route('admin.forget.password.get')}}">Forgot Password</a>
                     </p>
                     <p class="mb-0">
                         <!-- <a href="{{}}" class="text-center">Daftar Akun</a> -->

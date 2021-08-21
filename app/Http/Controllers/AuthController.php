@@ -7,7 +7,12 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use App\Models\User;
+
+use Carbon\Carbon;
+use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
@@ -23,6 +28,7 @@ class AuthController extends Controller
         ];
         return view('admin.layout.index', $data);
     }
+    
     public function login()
     {
         if (Auth::check()) {
@@ -58,17 +64,14 @@ class AuthController extends Controller
             return redirect()->back()->withErrors($validator)->withInput($request->all);
         }
 
-        $data = [
-            'email'     => $request->input('email'),
-            'password'  => $request->input('password'),
-        ];
+        $remember   = $request->has('remember') ? true : false;
 
-        if (Auth::attempt($data)) {
+        if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password')], $remember)) {
             $request->session()->regenerate();
-            return redirect()->route('admin-home');
+            return redirect()->intended('/admin/home');
         } else {
             Session::flash('error', 'Email atau Password Salah');
-            return redirect()->intended('/admin/login');
+            return redirect()->route('admin-login');
         }
     }
     /**
