@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 21 Agu 2021 pada 18.31
--- Versi server: 10.4.19-MariaDB
--- Versi PHP: 8.0.6
+-- Generation Time: Aug 22, 2021 at 02:56 PM
+-- Server version: 10.4.19-MariaDB
+-- PHP Version: 8.0.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `failed_jobs`
+-- Table structure for table `failed_jobs`
 --
 
 CREATE TABLE `failed_jobs` (
@@ -40,7 +40,7 @@ CREATE TABLE `failed_jobs` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `menu_atas`
+-- Table structure for table `menu_atas`
 --
 
 CREATE TABLE `menu_atas` (
@@ -53,7 +53,7 @@ CREATE TABLE `menu_atas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data untuk tabel `menu_atas`
+-- Dumping data for table `menu_atas`
 --
 
 INSERT INTO `menu_atas` (`id`, `title`, `status`, `link`, `created_at`, `updated_at`) VALUES
@@ -70,7 +70,7 @@ INSERT INTO `menu_atas` (`id`, `title`, `status`, `link`, `created_at`, `updated
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `migrations`
+-- Table structure for table `migrations`
 --
 
 CREATE TABLE `migrations` (
@@ -80,7 +80,7 @@ CREATE TABLE `migrations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data untuk tabel `migrations`
+-- Dumping data for table `migrations`
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
@@ -91,7 +91,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `pages`
+-- Table structure for table `pages`
 --
 
 CREATE TABLE `pages` (
@@ -114,7 +114,7 @@ CREATE TABLE `pages` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `password_resets`
+-- Table structure for table `password_resets`
 --
 
 CREATE TABLE `password_resets` (
@@ -126,7 +126,7 @@ CREATE TABLE `password_resets` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `roles`
+-- Table structure for table `roles`
 --
 
 CREATE TABLE `roles` (
@@ -138,7 +138,7 @@ CREATE TABLE `roles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data untuk tabel `roles`
+-- Dumping data for table `roles`
 --
 
 INSERT INTO `roles` (`id`, `title`, `description`, `created_at`, `updated_at`) VALUES
@@ -151,7 +151,7 @@ INSERT INTO `roles` (`id`, `title`, `description`, `created_at`, `updated_at`) V
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
@@ -169,62 +169,65 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data untuk tabel `users`
+-- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `id_role`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `image`, `status`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Andri Muttaqien Akbar', 'andrineverstoptorun@gmail.com', '2021-07-21 23:19:00', '$2y$10$XqnzcnyLRbep4p3y2whzOeDEMdUPE/CmxzxZ3uV0UvuvU3F6Xf/dO', 'dNq9JX8GRFKhTuQVBPfukYu73JnTAKFdNuAaenJT5R6qOBgK6jvHzOtAo1FX', NULL, 'Active', '2021-07-21 23:19:00', '2021-08-21 09:08:08'),
+(1, 1, 'Andri Muttaqien Akbar', 'andrineverstoptorun@gmail.com', '2021-07-21 23:19:00', '$2y$10$oOd/i/wJ0B71/hu4bEFeau3pK23T6wIDlDY0fZjfBt1NrgOPtb.E6', 'BRl7TZr13ddXIYa1aKvHfN07J4SnWgdAcNwlRNGgfUaQX6LGuejuGkVVF7fZ', NULL, 'Active', '2021-07-21 23:19:00', '2021-08-21 21:26:28'),
 (2, 2, 'Landi Ramdhani', 'andrineverstoptorun1@gmail.com', '2021-07-22 04:23:29', '$2y$10$sFn0YyCFtnljWG3ZGCQL8.mbMlAQzNSxpaZ8tCN6dwx73wSbkMTve', NULL, NULL, 'Inactive', '2021-07-22 04:23:29', '2021-07-23 22:45:06'),
 (3, 3, 'Hilman Kurniadi', 'andrimuttaqien@gmail.com', '2021-07-22 04:24:20', '$2y$10$iojlN5m96WgaRXjngMjHQe4gtUjngn.tnUa.XZVYR1UoTZ8luGvHK', NULL, NULL, 'Inactive', '2021-07-22 04:24:21', '2021-07-23 22:45:37'),
 (4, 4, 'Hendi Hafidz', 'admin@akbidcianjur.ac.id', '2021-07-22 04:28:19', '$2y$10$bGRXjmKvl/NWP1w0VIs8XuuV41NCbpveTPkYeFVpksJbiMO2/9lnK', NULL, NULL, 'Inactive', '2021-07-22 04:28:19', '2021-07-23 22:57:59'),
 (6, 5, 'Guest', 'guest@gmail.com', NULL, '$2y$10$nLAl8mqkRgbatc31RRrUc.Khlre8AjDdtDX0GO7hthmQYWx9o6Nb6', NULL, NULL, 'Inactive', '2021-08-20 04:22:21', '2021-08-20 04:22:21'),
 (24, 2, 'vartech@itb.ac.id', 'admin@gmail.com', NULL, '$2y$10$hthSe1jFEu1NhBwKdj.wne7rWlBOjxn/dgnnC4kYukNJbVtOT/hiu', NULL, NULL, 'Active', '2021-08-20 21:54:42', '2021-08-20 21:54:42'),
-(26, 2, '1@gmail.com', '1@gmail.com', NULL, '$2y$10$rLkY9TIX0Dg6zlzpUavU3.hGZNooUTudvgBHUmVGlhlehULN68JIa', 'Mo2f8jk7oqgQH5Oa9nqLraijY1ocI9r0TOtNVRsRDwbxLHaPMndPlkLwz7mT', NULL, 'Active', '2021-08-21 07:01:36', '2021-08-21 07:01:36');
+(26, 2, '1@gmail.com', '1@gmail.com', NULL, '$2y$10$rLkY9TIX0Dg6zlzpUavU3.hGZNooUTudvgBHUmVGlhlehULN68JIa', '547pBtnYm8txQV9HApdTeMsKuc75L5HJHIqVxYYEuTyoCwSgbH83GuzkWjvJ', NULL, 'Active', '2021-08-21 07:01:36', '2021-08-21 07:01:36'),
+(27, 2, '1@gmail.com', 'admin@admin.com', NULL, '$2y$10$baYxvIGi.rhl6w59k/Sv0.wnuFWmE3lSYfB1ePfOjGGG0x5nzM0Va', NULL, NULL, 'Active', '2021-08-21 22:41:33', '2021-08-21 22:41:33'),
+(28, 2, '1@gmail.com', '2@gmail.com', NULL, '$2y$10$XbxnZ7I5OP3EUYiB0pvb7uB8tClbREFVhTfIXJEqcOSrEzVPWW6Au', NULL, NULL, 'Active', '2021-08-21 22:45:03', '2021-08-21 22:45:03'),
+(29, 2, '1222@gmail.com', '1222@gmail.com', NULL, '$2y$10$t6LTvaHMuO19A2PWmmzivOy4E23Ylpcbvi29YTOVqBu.vEAXv5Puu', NULL, NULL, 'Active', '2021-08-21 22:46:07', '2021-08-21 22:46:07');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indeks untuk tabel `failed_jobs`
+-- Indexes for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
 
 --
--- Indeks untuk tabel `menu_atas`
+-- Indexes for table `menu_atas`
 --
 ALTER TABLE `menu_atas`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `migrations`
+-- Indexes for table `migrations`
 --
 ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `pages`
+-- Indexes for table `pages`
 --
 ALTER TABLE `pages`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_author` (`id_author`);
 
 --
--- Indeks untuk tabel `password_resets`
+-- Indexes for table `password_resets`
 --
 ALTER TABLE `password_resets`
   ADD KEY `password_resets_email_index` (`email`);
 
 --
--- Indeks untuk tabel `roles`
+-- Indexes for table `roles`
 --
 ALTER TABLE `roles`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `users`
+-- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
@@ -232,51 +235,51 @@ ALTER TABLE `users`
   ADD KEY `id_role` (`id_role`) USING BTREE;
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `failed_jobs`
+-- AUTO_INCREMENT for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `menu_atas`
+-- AUTO_INCREMENT for table `menu_atas`
 --
 ALTER TABLE `menu_atas`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- AUTO_INCREMENT untuk tabel `migrations`
+-- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT untuk tabel `pages`
+-- AUTO_INCREMENT for table `pages`
 --
 ALTER TABLE `pages`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `roles`
+-- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT untuk tabel `users`
+-- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
--- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+-- Constraints for dumped tables
 --
 
 --
--- Ketidakleluasaan untuk tabel `users`
+-- Constraints for table `users`
 --
 ALTER TABLE `users`
   ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`id_role`) REFERENCES `roles` (`id`) ON UPDATE CASCADE;
