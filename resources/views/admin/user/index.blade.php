@@ -85,13 +85,13 @@
                 <thead>
                     <tr>
                         <th style="width: 10px">#</th>
-                        <th>Role</th>
-                        <th>Nama</th>
-                        <th>Alamat Email</th>
-                        <th>Status</th>
+                        <th><i class="fas fa-cogs">&nbsp; Role</i></th>
+                        <th><i class="fas fa-user-tag"></i>&nbsp; Name</th>
+                        <th><i class="fas fa-envelope"></i>&nbsp; e-mail</th>
+                        <th><i class="fas fa-user-secret"></i>&nbsp; Status</th>
                         <th style="width: 40px">
                             <a class="btn btn-info btn-sm" href="{{ route('user-admin.create') }}">
-                                <i class="fas fa-user-plus"></i> Add User
+                                <i class="fas fa-user-plus"></i>&nbsp; &nbsp; Add User
                             </a>
                         </th>
                     </tr>
