@@ -19,7 +19,7 @@
                     <a href="{{route('admin')}}"><img src="{{asset('storage/images-front/vartech.png')}}" width="100px" /></a>
                 </div>
                 <div class="card-body">
-                    <p class="login-box-msg">Sign in to start your session</p>
+                    <p class="login-box-msg text-info">Sign in to start your session</p>
                     <form action="{{ route('admin-login-proses') }}" method="post">
                         @csrf
                         @method('post')
@@ -68,10 +68,10 @@
                             </div>
                             <div class="row">
                                 <div class="col-8">
-                                    <div class="icheck-primary">
-                                        <input type="checkbox" id="remember" name="remember">
-                                        <label for="remember">
-                                            Remember Me
+                                    <div class="custom-control custom-checkbox">
+                                        <input class="custom-control-input" type="checkbox" id="customCheckbox2" id="remember" name="remember">
+                                        <label for="customCheckbox2" class="custom-control-label">
+                                            <p class="text-info">Remember Me</p>
                                         </label>
                                     </div>
                                 </div>
@@ -81,7 +81,7 @@
                             </div>
                     </form>
                     <p class="mb-1">
-                        <a href="{{route('admin.forget.password.get')}}">Forgot Password</a>
+                        <a href="{{route('admin.forget.password.get')}}"  class="text-danger">Forget Password</a>
                     </p>
                     <p class="mb-0">
                         <!-- <a href="{{}}" class="text-center">Daftar Akun</a> -->

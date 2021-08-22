@@ -62,7 +62,7 @@ class AuthController extends Controller
         }
 
         $remember   = $request->has('remember') ? true : false;
-
+        //dd($remember);
         if (Auth::attempt(['email' => $request->input('email'), 'password' => $request->input('password'), 'status' => 'Active'], $remember)) {
             $request->session()->regenerate();
             return redirect()->intended('/admin/home');

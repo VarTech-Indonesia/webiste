@@ -40,6 +40,8 @@
     <link rel="stylesheet" href="{{asset('adminlte/plugins/dropzone/min/dropzone.min.css')}}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{asset('adminlte/dist/css/adminlte.min.css')}}">
+    <!-- pace-progress -->
+    <link rel="stylesheet" href="{{asset('adminlte/plugins/pace-progress/themes/black/pace-theme-flat-top.css')}}">
     <!-- jQuery -->
     <script src="{{asset('adminlte/plugins/jquery/jquery.min.js')}}"></script>
     <!-- Custom JS -->
@@ -87,20 +89,16 @@
           z-index: 7;
         }
       </style>
+       
 </head>
 
-<body class="hold-transition sidebar-mini layout-navbar-fixed">
+<body class="hold-transition sidebar-mini layout-navbar-fixed layout-footer-fixed pace-lightblue">
+    {{-- <div class="preloader flex-column justify-content-center align-items-center">
+        <img class="animation__wobble" src="{{asset('storage/images-front/vartech.png')}}" alt="VarTech" height="60" width="60">
+    </div> --}}
     <div class="wrapper">
-                @yield('menu-admin-top')
-        <aside class="main-sidebar sidebar-dark-primary elevation-4">
-            <a href="" class="brand-link">
-                <img src="{{asset('storage/images-front/vartech.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">VarTech</span>
-            </a>
-            <div class="sidebar">
-                @yield('menu-admin-left')
-            </div>
-        </aside>
+        @yield('menu-admin-top')
+        @yield('menu-admin-left')
         <div class="content-wrapper">
             <section class="content-header">
                 <div class="container-fluid">
@@ -111,21 +109,22 @@
                     </div>
                 </div>
             </section>
-
             <!-- Main content -->
             <section class="content">
                 @yield('main-content')
             </section>
             <!-- Main content end-->
-
         </div>
+
         <footer class="main-footer">
             <div class="float-right d-none d-sm-block">
                 <b>Version</b>1.1.0
             </div>
-            <strong>Copyright &copy; {{date('Y')}} <a href="/">VarTech Indonesia</a></strong> All rights reserved.
+            <strong>Copyright &copy; {{date('Y')}} <a href="/" class="text-info">VarTech Indonesia</a></strong> All rights reserved.
         </footer>
+
     </div>
+
     <!-- Bootstrap 4 -->
     <script src="{{asset('adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
     <!-- AdminLTE App -->
@@ -155,7 +154,8 @@
     <script src="{{asset('adminlte/plugins/bs-stepper/js/bs-stepper.min.js')}}"></script>
     <!-- Dropzonejs -->
     <script src="{{asset('adminlte/plugins/dropzone/min/dropzone.min.js')}}"></script>
-
+    <!-- pace-progress -->
+    <script src="{{asset('adminlte/plugins/pace-progress/pace.min.js')}}"></script>
     <!-- Page specific script -->
     <script>
         $(function() {
@@ -311,7 +311,6 @@
             });
         });
     </script>
-
     <script>
         $(function() {
             //Initialize Select2 Elements

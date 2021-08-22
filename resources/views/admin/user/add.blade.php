@@ -10,42 +10,42 @@
         @yield('menu-admin-left')
     @stop
 
-    {{-- @if(session('error'))
+    @if(session('error'))
     <script>
-        $(function() {
-            var Toast = Swal.mixin({
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 100000
+        <script>
+            $(function() {
+                 $(document).Toasts('create', {
+                    icon    : 'fas fa-exclamation-triangle',
+                    class   : 'bg-danger',
+                    title   : 'Save Failed :',
+                    subtitle: '',
+                    body    : '{{ $error }}'
+                })
             });
-            toastr.error("{{ $error }}")
-        });
+        </script>
     </script>
     @endif
-    <script>
-    </script> --}}
 
-    {{-- @if(session('errors'))
+    @if(session('errors'))
         @foreach ($errors->all() as $error)
         <script>
             $(function() {
-                var Toast = Swal.mixin({
-                    toast: true,
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    timer: 100000
-                });
-                toastr.error("{{ $error }}")
+                 $(document).Toasts('create', {
+                    icon    : 'fas fa-exclamation-triangle',
+                    class   : 'bg-danger',
+                    title   : 'Input Failed :',
+                    subtitle: '',
+                    body    : '{{ $error }}'
+                })
             });
         </script>
         @endforeach
-    @endif --}}
+    @endif
     <div class="card card-lightblue">
         <div class="card-header">
             <h3 class="card-title">{{ $title_table }}</h3>
         </div>
-        @if(session('error'))
+        {{-- @if(session('error'))
         <div class="alert alert-danger alert-dismissible">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
             <h5><i class="icon fas fa-ban"></i> Alert!</h5>
@@ -62,13 +62,14 @@
                 @endforeach
             </ul>
         </div>
-        @endif
+        @endif --}}
         <form action="{{ route('user-admin.store') }}" method="post" enctype="multipart/form-data">
         @csrf
         @method('POST')
         <div class="card-body">
+            <dl>
             <div class="form-group">
-                <label>Role</label>
+                <label><h6>Role</h6></label>
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas fa-cogs"></i></span>
@@ -81,7 +82,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label>Username</label>
+                <label><h6>Username</h6></label>
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas fa-user-tag"></i></span>
@@ -90,7 +91,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label>E-mail</label>
+                <label><h6>E-mail</h6></label>
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas fa-envelope"></i></span>
@@ -99,7 +100,7 @@
                 </div>
             </div>
             <div class="form-group" id="show_hide_password">
-                <label>Password</label>
+                <label><h6>Password</h6></label>
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas fa-key"></i></span>
@@ -113,7 +114,7 @@
                 </div>
             </div>
             <div class="form-group" id="show_hide_password">
-                <label>Re-Type Password</label>
+                <label><h6>Re-Type Password</h6></label>
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas fa-key"></i></span>
@@ -127,29 +128,32 @@
                 </div>
             </div>
             <div class="form-group">
-            <label for="exampleInputEmail1">Status</label>
+            <label for="exampleInputEmail1"><h6>Status</h6></label>
                 <div class="col-sm-10">
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="status" id="status" value="Active" checked>
-                        <label class="form-check-label" for="gridRadios1">
-                        Active
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="status" id="status" value="Inactive">
-                        <label class="form-check-label" for="gridRadios2">
-                        Inactive
-                        </label>
-                    </div>
+                    <div class="custom-control custom-radio">
+                        <input class="custom-control-input" type="radio" id="customRadio1" name="status" value="Active" checked>
+                        <label for="customRadio1" class="custom-control-label"><h6>Active</h6></label>
+                      </div>
+                      <div class="custom-control custom-radio">
+                        <input class="custom-control-input" type="radio" id="customRadio2" name="status" value="Inactive" >
+                        <label for="customRadio2" class="custom-control-label"><h6>Inactive</h6></label>
+                      </div>
                 </div>
             </div>
         </div>
-        <div class="card-footer">
-            <div class="btn-group btn-group-sm">
-                <button type="button" class="btn btn-secondary" onclick=" window.location='{{ route('user-admin.index') }}' ">Back</button>
+        </dl>
+        <div class="card-footer  float-right">
+            <div class="btn-group btn-group-md">
+                <button type="button" class="btn btn-secondary" onclick=" window.location='{{ route('user-admin.index') }}' ">
+                <i class="fas fa-backward"></i>    
+                Back
+                </button>
             </div>
-            <div class="btn-group btn-group-sm">
-                <button type="submit" class="btn btn-primary">Save</button>
+            <div class="btn-group btn-group-md">
+                <button type="submit" class="btn btn-primary">
+                <i class="far fa-save"></i>    
+                Save
+                </button>
             </div>
         </div>
         </form>
