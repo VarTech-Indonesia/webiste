@@ -72,9 +72,6 @@
                         <th><i class="far fa-clipboard">&nbsp; Title</i></th>
                         <th><i class="fas fa-user-secret"></i>&nbsp; Status</th>
                         <th style="width: 40px">
-                            {{-- <a class="btn btn-info btn-sm" href="{{ route('page-category.create') }}">
-                                <i class="fas fa-user-plus"></i>&nbsp; &nbsp; Add Page Category
-                            </a> --}}
                             <a class="btn btn-info btn-sm" href="javascript:void(0)" id="addCategory">
                             <i class="fas fa-user-plus"></i>&nbsp; &nbsp; Add Page Category</a>
                         </th>
@@ -88,7 +85,7 @@
                         <td>{{$show->status}}</td>
                         <td class="project-actions text-right">
                             <a class="btn btn-primary btn-sm" href="#"> <i class="fas fa-folder"></i></a>
-                            <a class="btn btn-warning btn-sm" href="{{ route('user-admin.edit',$show->id) }}"> <i class="fas fa-pencil-alt"></i></a>
+                            <a class="btn btn-warning btn-sm editCategory" href="javascript:void(0)" id="editCategory" data-id="{{$show->id}}"><i class="fas fa-pencil-alt"></i></a>
                         </td>
                     </tr>
                     @endforeach
@@ -96,116 +93,93 @@
             </table>
         </div>
     </div>
-    <div class="modal fade" id="ajaxModel">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header bg-info">
-                    <h4 class="modal-title" id="modelHeading"></h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="javascript:window.location.reload()">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="alert alert-danger" style="display:none"></div>
-                    <div class="alert alert-success" style="display:none"></div>
-                    <form name="pageForm" id="pageForm" method="POST" enctype="multipart/form-data">
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <label><h6>Title</h6></label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="far fa-clipboard"></i></span>
-                                    </div>
-                                    <input type="text" name="title" id="title" class="form-control" placeholder="Page Category"  value="{{ old('title') }}" required>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputEmail1"><h6>Status</h6></label>
-                                <div class="col-sm-10">
-                                    <div class="custom-control custom-radio">
-                                        <input class="custom-control-input" type="radio" id="customRadio1" name="status" value="Active" checked>
-                                        <label for="customRadio1" class="custom-control-label"><h6>Active</h6></label>
-                                    </div>
-                                    <div class="custom-control custom-radio">
-                                        <input class="custom-control-input" type="radio" id="customRadio2" name="status" value="Inactive" >
-                                        <label for="customRadio2" class="custom-control-label"><h6>Inactive</h6></label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer justify-content-between">
-                    <button type="button" class="btn btn-default" data-dismiss="modal" onclick="javascript:window.location.reload()">Close</button>
-                    <button type="button" class="btn btn-primary" id="saveBtn" value="create">Save changes</button>
-                </div>
-            </div>
-        </div>
-    </div>
-<script type="text/javascript">
-$(function () {
-    $.ajaxSetup( {
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-    
-    $('#addCategory').click(function () {
-        $('#modelHeading').html("Create New Page Category");
-        $('#saveBtn').val("create-book");
-        $('#title').val('');
-        $('#pageForm').trigger("reset");
-        $('#ajaxModel').modal('show');
-    });
+    @include('admin/page_category/form')
 
-    $('body').on('click', '.editBook', function () {
-        var book_id = $(this).data('id');
-        $.get("{{ route('page-category.index') }}" +'/' + book_id +'/edit', function (data) {
-            $('#modelHeading').html("Edit Book");
-            $('#saveBtn').val("edit-book");
-            $('#ajaxModel').modal('show');
-            $('#book_id').val(data.id);
-            $('#title').val(data.title);
-            $('#author').val(data.author);
-        })
-    });
-
-    $('#saveBtn').click(function (e) {
-        
-        jQuery('.alert-danger').hide();
-        jQuery('.alert-success').hide();
-        e.preventDefault();
-        $(this).html('Save');
-    
-        $.ajax ({
-            data    : $('#pageForm').serialize(),
-            url     : "{{ route('page-category.store') }}",
-            type    : "POST",
-            dataType: 'json',
-            success: function(result)  {
-                if (result.errors)  {
-                    jQuery('.alert-danger').html('');
-                    jQuery.each(result.errors, function(key, value) 
-                    {
-                        jQuery('.alert-danger').show();
-                        jQuery('.alert-danger').append('<li>' + value + '</li>');
-                    });
-                }
-                else if (result.error)  {
-                    jQuery('.alert-danger').show();
-                    jQuery('.alert-danger').append('result.errorssystem');
-                } 
-                else {
-                    jQuery('.alert-success').html('');
-                    jQuery('.alert-success').show();
-                    jQuery('.alert-success').append(result.success);
-                    $('#pageForm').trigger("reset");
-                }
+    <script type="text/javascript">
+    $(function () {
+        $.ajaxSetup( {
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-    });
-});
-</script>
+        
+        $('#addCategory').click(function () {
+                $('#modelHeading').html("Create New Page Category");
+                $('#saveBtn').val("create");
+                $('#id_page_category').val('');
+                $('#title').val('');
+                $('#pageForm').trigger("reset");
+                $('#ajaxModel').modal('show');
+            });
+
+            $('body').on('click', '.editCategory', function () {
+                var id = $(this).data('id');
+                $.get("{{ route('page-category.index') }}" +'/' + id +'/edit', function (data) {
+                    $('#modelHeading').html("Edit Page Category");
+                    $('#saveBtn').val("update");
+                    $('#ajaxModel').modal('show');
+                    $('#id_page_category').val(data.id);
+                    $('#title').val(data.title);
+                    if (data.status==="Active") {
+                        $('input:radio[name=status]')[0].checked = true;   
+                    }
+                    else  {
+                        $('input:radio[name=status]')[1].checked = true; 
+                    }   
+                })
+            });
+
+            $('#saveBtn').click(function (e) {
+
+                var status_button   = $('#saveBtn').val();
+                var id              = $('#id_page_category').val();
+
+                if (status_button=="create") {
+                    var url         ="{{ route('page-category.store') }}";
+                    var type        ="POST";
+                } else {
+                    var url         ="{{ url('admin/page-category') }}" +"/"+id;
+                    var type        ="PUT";
+                }
+
+                // alert(status_button);
+                // alert(url);
+                // alert(type);
+
+                jQuery('.alert-danger').hide();
+                jQuery('.alert-success').hide();
+                e.preventDefault();
+                $(this).html('Save');
+            
+                $.ajax ({
+                    data    : $('#pageForm').serialize(),
+                    url     : url,
+                    type    : type,
+                    dataType: 'json',
+                    success: function(result)  {
+                        if (result.errors)  {
+                            jQuery('.alert-danger').html('');
+                            jQuery.each(result.errors, function(key, value) 
+                            {
+                                jQuery('.alert-danger').show();
+                                jQuery('.alert-danger').append('<li>' + value + '</li>');
+                            });
+                        }
+                        else if (result.error)  {
+                            jQuery('.alert-danger').show();
+                            jQuery('.alert-danger').append(result.error);
+                        } 
+                        else {
+                            jQuery('.alert-success').html('');
+                            jQuery('.alert-success').show();
+                            jQuery('.alert-success').append(result.success);
+                            $('#pageForm').trigger("reset");
+                        }
+                    }
+                });
+            });
+        });
+        </script>
 @stop
 
 

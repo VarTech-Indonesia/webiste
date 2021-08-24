@@ -144,7 +144,7 @@ class UserAdminController extends Controller
     {
         $rules = [
             'name'                  => 'required|min:3|max:35',
-            'email'                 => 'required|email',
+            'email'                 => 'required|email|unique:users,email',
             'password'              => 'required|confirmed'
         ];
 

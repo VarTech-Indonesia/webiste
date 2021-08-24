@@ -16,7 +16,8 @@ class CreatePageCategoriesTable extends Migration
         Schema::create('page_categories', function (Blueprint $table) {
             $table->id();
             $table->string('title')->unique();
-            $table->string('status')->default('Active');
+            $table->text('desciption')->nullable();
+            $table->string('status')->default('Inactive');
             $table->timestamps();
         });
     }

@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\PageCategory;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\hash;
 
 class PageCategoryController extends Controller
 {
@@ -33,8 +31,8 @@ class PageCategoryController extends Controller
     public function create()
     {
         $data = [
-            'title'         => 'Add User Admin | VarTech Indonesia',
-            'title_table'   => 'Add Data User Admin'
+            'title'         => 'Create Data Page Categories | VarTech Indonesia',
+            'title_table'   => 'Create Data Page Categories'
         ];
         $data['role']       = PageCategory::orderBy('title')->get();
         return view('admin.page_category.add', $data);
@@ -48,28 +46,33 @@ class PageCategoryController extends Controller
      */
     public function store(Request $request)
     {
+
         $rules = [
-            'title'             => 'required|min:3|max:35'
+            'title'             => 'required|min:3|max:50',
+            'status'            => 'required'
         ];
 
         $messages = [
             'title.required'    => 'Title Required',
             'title.min'         => 'Title Min. 3 karakter',
             'title.max'         => 'Title Max. 35 karakter',
+            'status.required'   => 'Status Required',
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()->all()]);
         }
-        $query = PageCategory::updateOrCreate([
+        $query  = PageCategory::create([
+            'id'        => $request->id_page_category,
             'title'     => $request->title,
-            'status'    => $request->status,
+            'status'    => $request->status
         ]);
+
         if ($query) {
             return response()->json(['success'  => 'Page Category Saved Successfully']);
         } else {
-            return response()->json(['error'    => 'Page Category Failed to Save']);
+            return response()->json(['error'    => 'Page Category Saved Failed']);
         }
     }
 
@@ -92,12 +95,8 @@ class PageCategoryController extends Controller
      */
     public function edit($id)
     {
-        $data = [
-            'title'         => 'Add User Admin | VarTech Indonesia',
-            'title_table'   => 'Add Data User Admin'
-        ];
-        $data['data']   = PageCategory::findOrFail($id)->first();
-        return view('admin.page_category.edit');
+        $data   = PageCategory::find($id);
+        return response()->json($data);
     }
 
     /**
@@ -110,38 +109,31 @@ class PageCategoryController extends Controller
     public function update(Request $request)
     {
         $rules = [
-            'name'                  => 'required|min:3|max:35',
-            'email'                 => 'required|email',
-            'password'              => 'required|confirmed'
+            'title'             => 'required|min:3|max:50',
+            'status'            => 'required'
         ];
 
         $messages = [
-            'name.required'         => 'Nama Lengkap Wajib Diisi',
-            'name.min'              => 'Nama Lengkap Minimal 3 karakter',
-            'name.max'              => 'Nama Lengkap Maksimal 35 karakter',
-
-            'email.required'        => 'Email Wajib Diisi',
-            'email.email'           => 'Email Tidak valid',
-
-            'password.required'     => 'Password Wajib Diisi',
-            'password.confirmed'    => 'Password Tidak Sama'
+            'title.required'    => 'Title Required',
+            'title.min'         => 'Title Min. 3 karakter',
+            'title.max'         => 'Title Max. 35 karakter',
+            'status.required'   => 'Status Required',
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
         if ($validator->fails()) {
-            // 
             return response()->json(['errors' => $validator->errors()->all()]);
         }
-        $password   = Hash::make($request->password);
-        $query      = PageCategory::whereId($request->id)->update([
-            'name'      => $request->name,
-            'email'     => $request->email,
-            'password'  => $password
+
+        $query  = PageCategory::whereId($request->id_page_category)->update([
+            'title'     => $request->title,
+            'status'    => $request->status
         ]);
+
         if ($query) {
-            return response()->json(['success' => 'Data Berhasi Diubah']);
+            return response()->json(['success'  => 'Page Category Saved Successfully']);
         } else {
-            return response()->json(['errorssystem' => 'Data Gagal Diubah, Hubungi Admin']);
+            return response()->json(['error'    => 'Page Category Saved Failed']);
         }
     }
 
