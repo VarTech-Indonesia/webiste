@@ -83,4 +83,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     Route::get('logout', [AuthController::class, 'logout'])->name('admin-logout');
     // User
     Route::resource('user-admin', UserAdminController::class);
+    // Page Category
+    Route::resource('page-category', PageCategoryController::class);
 });
