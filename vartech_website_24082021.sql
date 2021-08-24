@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 4.8.4
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Aug 22, 2021 at 02:56 PM
--- Server version: 10.4.19-MariaDB
--- PHP Version: 8.0.6
+-- Host: 127.0.0.1:3306
+-- Generation Time: Aug 24, 2021 at 01:57 PM
+-- Server version: 5.7.24
+-- PHP Version: 7.3.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -27,14 +28,17 @@ SET time_zone = "+00:00";
 -- Table structure for table `failed_jobs`
 --
 
-CREATE TABLE `failed_jobs` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+DROP TABLE IF EXISTS `failed_jobs`;
+CREATE TABLE IF NOT EXISTS `failed_jobs` (
+  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -43,14 +47,16 @@ CREATE TABLE `failed_jobs` (
 -- Table structure for table `menu_atas`
 --
 
-CREATE TABLE `menu_atas` (
-  `id` int(10) UNSIGNED NOT NULL,
+DROP TABLE IF EXISTS `menu_atas`;
+CREATE TABLE IF NOT EXISTS `menu_atas` (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `link` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `menu_atas`
@@ -73,11 +79,13 @@ INSERT INTO `menu_atas` (`id`, `title`, `status`, `link`, `created_at`, `updated
 -- Table structure for table `migrations`
 --
 
-CREATE TABLE `migrations` (
-  `id` int(10) UNSIGNED NOT NULL,
+DROP TABLE IF EXISTS `migrations`;
+CREATE TABLE IF NOT EXISTS `migrations` (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `batch` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `batch` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `migrations`
@@ -94,22 +102,55 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 -- Table structure for table `pages`
 --
 
-CREATE TABLE `pages` (
-  `id` int(10) UNSIGNED NOT NULL,
+DROP TABLE IF EXISTS `pages`;
+CREATE TABLE IF NOT EXISTS `pages` (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `id_author` int(11) NOT NULL,
   `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `meta_keywords` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `meta_description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `meta_keywords` text COLLATE utf8mb4_unicode_ci,
+  `meta_description` text COLLATE utf8mb4_unicode_ci,
   `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `excerpt` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `body` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `excerpt` text COLLATE utf8mb4_unicode_ci,
+  `body` text COLLATE utf8mb4_unicode_ci,
   `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '''Published''',
   `link_1` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `link_2` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_author` (`id_author`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `page_categories`
+--
+
+DROP TABLE IF EXISTS `page_categories`;
+CREATE TABLE IF NOT EXISTS `page_categories` (
+  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `desciption` text COLLATE utf8mb4_unicode_ci,
+  `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Inactive',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `title` (`title`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `page_categories`
+--
+
+INSERT INTO `page_categories` (`id`, `title`, `desciption`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'Beranda', NULL, 'Active', '2021-08-24 01:40:12', '2021-08-24 01:41:39'),
+(2, 'Tentang Kami', NULL, 'Active', '2021-08-24 01:40:59', '2021-08-24 01:41:46'),
+(3, 'Layanan', NULL, 'Active', '2021-08-24 01:41:20', '2021-08-24 06:48:34'),
+(4, 'Portofolio', NULL, 'Active', '2021-08-24 01:41:30', '2021-08-24 06:48:19'),
+(5, 'Pengguna', NULL, 'Active', '2021-08-24 06:48:40', '2021-08-24 06:57:18'),
+(6, 'Hubungi Kami', NULL, 'Active', '2021-08-24 06:57:06', '2021-08-24 06:57:12');
 
 -- --------------------------------------------------------
 
@@ -117,10 +158,12 @@ CREATE TABLE `pages` (
 -- Table structure for table `password_resets`
 --
 
-CREATE TABLE `password_resets` (
+DROP TABLE IF EXISTS `password_resets`;
+CREATE TABLE IF NOT EXISTS `password_resets` (
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL
+  `created_at` timestamp NULL DEFAULT NULL,
+  KEY `password_resets_email_index` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -129,13 +172,15 @@ CREATE TABLE `password_resets` (
 -- Table structure for table `roles`
 --
 
-CREATE TABLE `roles` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+DROP TABLE IF EXISTS `roles`;
+CREATE TABLE IF NOT EXISTS `roles` (
+  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `roles`
@@ -154,8 +199,9 @@ INSERT INTO `roles` (`id`, `title`, `description`, `created_at`, `updated_at`) V
 -- Table structure for table `users`
 --
 
-CREATE TABLE `users` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `id_role` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -165,114 +211,18 @@ CREATE TABLE `users` (
   `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status` varchar(22) COLLATE utf8mb4_unicode_ci DEFAULT 'Inactive',
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `users_email_unique` (`email`),
+  KEY `id_role` (`id_role`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `id_role`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `image`, `status`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Andri Muttaqien Akbar', 'andrineverstoptorun@gmail.com', '2021-07-21 23:19:00', '$2y$10$oOd/i/wJ0B71/hu4bEFeau3pK23T6wIDlDY0fZjfBt1NrgOPtb.E6', 'BRl7TZr13ddXIYa1aKvHfN07J4SnWgdAcNwlRNGgfUaQX6LGuejuGkVVF7fZ', NULL, 'Active', '2021-07-21 23:19:00', '2021-08-21 21:26:28'),
-(2, 2, 'Landi Ramdhani', 'andrineverstoptorun1@gmail.com', '2021-07-22 04:23:29', '$2y$10$sFn0YyCFtnljWG3ZGCQL8.mbMlAQzNSxpaZ8tCN6dwx73wSbkMTve', NULL, NULL, 'Inactive', '2021-07-22 04:23:29', '2021-07-23 22:45:06'),
-(3, 3, 'Hilman Kurniadi', 'andrimuttaqien@gmail.com', '2021-07-22 04:24:20', '$2y$10$iojlN5m96WgaRXjngMjHQe4gtUjngn.tnUa.XZVYR1UoTZ8luGvHK', NULL, NULL, 'Inactive', '2021-07-22 04:24:21', '2021-07-23 22:45:37'),
-(4, 4, 'Hendi Hafidz', 'admin@akbidcianjur.ac.id', '2021-07-22 04:28:19', '$2y$10$bGRXjmKvl/NWP1w0VIs8XuuV41NCbpveTPkYeFVpksJbiMO2/9lnK', NULL, NULL, 'Inactive', '2021-07-22 04:28:19', '2021-07-23 22:57:59'),
-(6, 5, 'Guest', 'guest@gmail.com', NULL, '$2y$10$nLAl8mqkRgbatc31RRrUc.Khlre8AjDdtDX0GO7hthmQYWx9o6Nb6', NULL, NULL, 'Inactive', '2021-08-20 04:22:21', '2021-08-20 04:22:21'),
-(24, 2, 'vartech@itb.ac.id', 'admin@gmail.com', NULL, '$2y$10$hthSe1jFEu1NhBwKdj.wne7rWlBOjxn/dgnnC4kYukNJbVtOT/hiu', NULL, NULL, 'Active', '2021-08-20 21:54:42', '2021-08-20 21:54:42'),
-(26, 2, '1@gmail.com', '1@gmail.com', NULL, '$2y$10$rLkY9TIX0Dg6zlzpUavU3.hGZNooUTudvgBHUmVGlhlehULN68JIa', '547pBtnYm8txQV9HApdTeMsKuc75L5HJHIqVxYYEuTyoCwSgbH83GuzkWjvJ', NULL, 'Active', '2021-08-21 07:01:36', '2021-08-21 07:01:36'),
-(27, 2, '1@gmail.com', 'admin@admin.com', NULL, '$2y$10$baYxvIGi.rhl6w59k/Sv0.wnuFWmE3lSYfB1ePfOjGGG0x5nzM0Va', NULL, NULL, 'Active', '2021-08-21 22:41:33', '2021-08-21 22:41:33'),
-(28, 2, '1@gmail.com', '2@gmail.com', NULL, '$2y$10$XbxnZ7I5OP3EUYiB0pvb7uB8tClbREFVhTfIXJEqcOSrEzVPWW6Au', NULL, NULL, 'Active', '2021-08-21 22:45:03', '2021-08-21 22:45:03'),
-(29, 2, '1222@gmail.com', '1222@gmail.com', NULL, '$2y$10$t6LTvaHMuO19A2PWmmzivOy4E23Ylpcbvi29YTOVqBu.vEAXv5Puu', NULL, NULL, 'Active', '2021-08-21 22:46:07', '2021-08-21 22:46:07');
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `failed_jobs`
---
-ALTER TABLE `failed_jobs`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
-
---
--- Indexes for table `menu_atas`
---
-ALTER TABLE `menu_atas`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `migrations`
---
-ALTER TABLE `migrations`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `pages`
---
-ALTER TABLE `pages`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `id_author` (`id_author`);
-
---
--- Indexes for table `password_resets`
---
-ALTER TABLE `password_resets`
-  ADD KEY `password_resets_email_index` (`email`);
-
---
--- Indexes for table `roles`
---
-ALTER TABLE `roles`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `users_email_unique` (`email`),
-  ADD KEY `id_role` (`id_role`) USING BTREE;
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `failed_jobs`
---
-ALTER TABLE `failed_jobs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `menu_atas`
---
-ALTER TABLE `menu_atas`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
---
--- AUTO_INCREMENT for table `migrations`
---
-ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT for table `pages`
---
-ALTER TABLE `pages`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `roles`
---
-ALTER TABLE `roles`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT for table `users`
---
-ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+(1, 2, 'admin@admin.com', 'admin@admin.com', NULL, '$2y$10$DHuj7SPjI4.vUaMqOLO0mu8srSGZRqWkPvcU7djzfC4k9c8p/E75.', 'HrqCXasF7vIPig6D69OQ3SaVCjmEp8hH8zWPP8VuGTGLCXok0EYWcff82FFr', 'images-user/admin@admin.com-.jpg', 'Active', '2021-08-20 00:23:56', '2021-08-20 00:23:56');
 
 --
 -- Constraints for dumped tables
