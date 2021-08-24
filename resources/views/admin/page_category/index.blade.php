@@ -104,12 +104,13 @@
         });
         
         $('#addCategory').click(function () {
+                $('#ajaxModel').modal('show');
+                $('#pageForm').trigger("reset");
                 $('#modelHeading').html("Create New Page Category");
                 $('#saveBtn').val("create");
                 $('#id_page_category').val('');
                 $('#title').val('');
-                $('#pageForm').trigger("reset");
-                $('#ajaxModel').modal('show');
+                $("#customRadio1").prop('checked', true);
             });
 
             $('body').on('click', '.editCategory', function () {
@@ -121,10 +122,10 @@
                     $('#id_page_category').val(data.id);
                     $('#title').val(data.title);
                     if (data.status==="Active") {
-                        $('input:radio[name=status]')[0].checked = true;   
+                        $("#customRadio1").prop('checked', true);  
                     }
                     else  {
-                        $('input:radio[name=status]')[1].checked = true; 
+                        $("#customRadio2").prop('checked', true);
                     }   
                 })
             });
@@ -134,7 +135,7 @@
                 var status_button   = $('#saveBtn').val();
                 var id              = $('#id_page_category').val();
 
-                if (status_button=="create") {
+                if (status_button==="create") {
                     var url         ="{{ route('page-category.store') }}";
                     var type        ="POST";
                 } else {
@@ -174,6 +175,7 @@
                             jQuery('.alert-success').show();
                             jQuery('.alert-success').append(result.success);
                             $('#pageForm').trigger("reset");
+                            $('#saveBtn').val("create");
                         }
                     }
                 });
