@@ -48,14 +48,14 @@ class PageCategoryController extends Controller
     {
 
         $rules = [
-            'title'             => 'required|min:3|max:50',
+            'title'             => 'required|min:3|max:50|unique:page_categories,title',
             'status'            => 'required'
         ];
-
         $messages = [
             'title.required'    => 'Title Required',
             'title.min'         => 'Title Min. 3 karakter',
             'title.max'         => 'Title Max. 35 karakter',
+            'title.unique'      => 'Title have been Registered',
             'status.required'   => 'Status Required',
         ];
 
@@ -63,6 +63,7 @@ class PageCategoryController extends Controller
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()->all()]);
         }
+
         $query  = PageCategory::create([
             'id'        => $request->id_page_category,
             'title'     => $request->title,
@@ -112,7 +113,6 @@ class PageCategoryController extends Controller
             'title'             => 'required|min:3|max:50',
             'status'            => 'required'
         ];
-
         $messages = [
             'title.required'    => 'Title Required',
             'title.min'         => 'Title Min. 3 karakter',
@@ -147,9 +147,9 @@ class PageCategoryController extends Controller
     {
         $query  = PageCategory::findOrFail($id)->delete();
         if ($query) {
-            return redirect()->route('user-page-category.index')->with('success', 'Data Successfully Deleted');
+            return response()->json(['success'  => 'Page Category Delete Successfully']);
         } else {
-            return redirect()->back()->with('error', 'Data Failed to Delete, Pleast Contact Administrator');
+            return response()->json(['error'    => 'Page Category Delete Failed']);
         }
     }
 }

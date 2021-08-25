@@ -21,7 +21,7 @@
                                     <span class="input-group-text"><i class="far fa-clipboard"></i></span>
                                 </div>
                                 <input type="hidden" name="id_page_category" id="id_page_category">
-                                <input type="text" name="title" id="title" class="form-control" placeholder="Page Category" required>
+                                <input type="text" name="title" id="title" class="form-control" placeholder="Page Category" autofocus required>
                             </div>
                         </div>
                         <div class="form-group">
