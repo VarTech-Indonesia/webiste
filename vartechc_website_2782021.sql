@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Aug 24, 2021 at 01:57 PM
+-- Generation Time: Aug 27, 2021 at 09:10 AM
 -- Server version: 5.7.24
 -- PHP Version: 7.3.1
 
@@ -134,23 +134,21 @@ CREATE TABLE IF NOT EXISTS `page_categories` (
   `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `desciption` text COLLATE utf8mb4_unicode_ci,
   `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Inactive',
+  `author_id` bigint(20) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `title` (`title`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  UNIQUE KEY `title` (`title`),
+  KEY `author_id` (`author_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `page_categories`
 --
 
-INSERT INTO `page_categories` (`id`, `title`, `desciption`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'Beranda', NULL, 'Active', '2021-08-24 01:40:12', '2021-08-24 01:41:39'),
-(2, 'Tentang Kami', NULL, 'Active', '2021-08-24 01:40:59', '2021-08-24 01:41:46'),
-(3, 'Layanan', NULL, 'Active', '2021-08-24 01:41:20', '2021-08-24 06:48:34'),
-(4, 'Portofolio', NULL, 'Active', '2021-08-24 01:41:30', '2021-08-24 06:48:19'),
-(5, 'Pengguna', NULL, 'Active', '2021-08-24 06:48:40', '2021-08-24 06:57:18'),
-(6, 'Hubungi Kami', NULL, 'Active', '2021-08-24 06:57:06', '2021-08-24 06:57:12');
+INSERT INTO `page_categories` (`id`, `title`, `desciption`, `status`, `author_id`, `created_at`, `updated_at`) VALUES
+(7, 'Beranda', NULL, 'Active', 1, '2021-08-26 20:11:29', '2021-08-26 20:11:29'),
+(8, 'Layanan Kami', NULL, 'Active', 2, '2021-08-26 20:13:13', '2021-08-26 20:13:13');
 
 -- --------------------------------------------------------
 
@@ -215,14 +213,15 @@ CREATE TABLE IF NOT EXISTS `users` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`),
   KEY `id_role` (`id_role`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `id_role`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `image`, `status`, `created_at`, `updated_at`) VALUES
-(1, 2, 'admin@admin.com', 'admin@admin.com', NULL, '$2y$10$DHuj7SPjI4.vUaMqOLO0mu8srSGZRqWkPvcU7djzfC4k9c8p/E75.', 'HrqCXasF7vIPig6D69OQ3SaVCjmEp8hH8zWPP8VuGTGLCXok0EYWcff82FFr', 'images-user/admin@admin.com-.jpg', 'Active', '2021-08-20 00:23:56', '2021-08-20 00:23:56');
+(1, 2, 'Zen', 'admin@admin.com', NULL, '$2y$10$k9udIwJqo.5qvy1OUqgS6uJ9EcP4RzqZOz1dYFtNDSutOgYZQuB6y', 'FDroTDN6nFORCzo3U5yE5MnycbyQvJ5Z3Xbz7Pt6RvumJraWv3zfDfQ1ozYs', 'images-user/zen-.jpg', 'Active', '2021-08-20 00:23:56', '2021-08-27 01:58:26'),
+(2, 2, 'Andri', 'andri@admin.com', NULL, 'images-user/andri-.jpg', 'ki6UUgb63mcRD8s8fiP0hGd92dcPRQJenETqv6f11DCuvANjnNYwpnOvcRTa', 'images-user/andri-.jpg', 'Active', '2021-08-26 02:10:57', '2021-08-27 01:57:33');
 
 --
 -- Constraints for dumped tables
