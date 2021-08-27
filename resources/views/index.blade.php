@@ -63,7 +63,7 @@
                         <a href="#home" class="nav-link">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#about" class="nav-link">Tentang Kami</a>
+                        <a href="#about" class="nav-link">{{ __('lang.Tentang Kami') }}</a>
                     </li>
                     <li class="nav-item">
                         <a href="#services" class="nav-link">Layanan</a>
@@ -76,6 +76,12 @@
                     </li>
                     <li class="nav-item">
                         <a href="#contact" class="nav-link">Hubungi Kami</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="lang/id" class="nav-link"><img src="{{asset('storage/images-front/id.png')}}" width="18px"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="lang/en" class="nav-link"><img src="{{asset('storage/images-front/us.png')}}" width="18px"></a>
                     </li>
                 </ul>
 
