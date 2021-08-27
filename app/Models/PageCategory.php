@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class PageCategory extends Model
 {
     use HasFactory;
-    protected $fillable = ['title', 'description', 'status'];
+    protected $fillable = ['title', 'description', 'status', 'author_id'];
 }

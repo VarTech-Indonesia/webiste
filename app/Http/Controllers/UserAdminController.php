@@ -126,11 +126,12 @@ class UserAdminController extends Controller
     public function edit($id)
     {
         $data = [
-            'title'         => 'Add User Admin | VarTech Indonesia',
-            'title_table'   => 'Add Data User Admin'
+            'title'         => 'Edit User Admin | VarTech Indonesia',
+            'title_table'   => 'Edit Data User Admin'
         ];
-        $data['data']   = User::findOrFail($id)->first();
-        return view('admin.user.edit');
+        $data['role']   = Role::orderBy('title')->get();
+        $data['data']   = User::find($id);
+        return view('admin.user.edit', $data);
     }
 
     /**

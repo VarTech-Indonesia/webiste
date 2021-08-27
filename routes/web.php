@@ -25,7 +25,7 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::get('/lang/{locale}', [LocalizationController::class,'index']);
+Route::get('/lang/{locale}', [LocalizationController::class, 'index']);
 
 Route::get('/admin', [AuthController::class, 'index'])->name('admin');
 

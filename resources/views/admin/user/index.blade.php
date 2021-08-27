@@ -55,7 +55,7 @@
             })
         };
     </script>
-
+    
     <div class="card card-lightblue">
         <div class="card-header">
         <h3 class="card-title">Info</h3>
@@ -81,12 +81,12 @@
             </div>
         </div>
         <div class="card-body table-responsive p-0">
-            <table class="table table-hover text-nowrap">
+            <table class="table table-hover text-nowrap table-striped">
                 <thead>
                     <tr>
                         <th style="width: 10px">#</th>
-                        <th><i class="fas fa-cogs">&nbsp; Role</i></th>
                         <th><i class="fas fa-user-tag"></i>&nbsp; Name</th>
+                        <th><i class="fas fa-user-tag"></i>&nbsp; Avatar</th>
                         <th><i class="fas fa-envelope"></i>&nbsp; e-mail</th>
                         <th><i class="fas fa-user-secret"></i>&nbsp; Status</th>
                         <th style="width: 40px">
@@ -100,9 +100,15 @@
                     @foreach($data as $show)
                     <tr>
                         <td>{{$loop->iteration}}</td>
-                        <td>{{$show->role->title}}</td>
-                        <td>{{$show->name}}</td>
-                        <td>{{$show->email}}</td>
+                        <td>
+                            {{$show->name}}
+                            <br/>
+                            <small>
+                            {{$show->role->title}}  
+                            </small>
+                        </td>
+                        <td><img src="{{asset('storage/'.$show->image)}}" alt="User Avatar" class="img-size-50 mr-3 img-circle"></td>
+                        <td>{{$show->id}} </td>
                         <td>{{$show->status}}</td>
                         <td class="project-actions text-right">
                             <form id="delete-form" action="{{ route('user-admin.destroy',$show->id) }}" method="POST">

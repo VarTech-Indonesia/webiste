@@ -9,102 +9,95 @@
     @section('menu-admin-left')
         @yield('menu-admin-left')
     @stop
-
-    {{-- @if(session('error'))
+    @if(session('error'))
     <script>
-        $(function() {
-            var Toast = Swal.mixin({
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 100000
+        <script>
+            $(function() {
+                 $(document).Toasts('create', {
+                    icon    : 'fas fa-exclamation-triangle',
+                    class   : 'bg-danger',
+                    title   : 'Save Failed :',
+                    subtitle: '',
+                    body    : '{{ $error }}'
+                })
             });
-            toastr.error("{{ $error }}")
-        });
+        </script>
     </script>
     @endif
-    <script>
-    </script> --}}
 
-    {{-- @if(session('errors'))
+    @if(session('errors'))
         @foreach ($errors->all() as $error)
         <script>
             $(function() {
-                var Toast = Swal.mixin({
-                    toast: true,
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    timer: 100000
-                });
-                toastr.error("{{ $error }}")
+                 $(document).Toasts('create', {
+                    icon    : 'fas fa-exclamation-triangle',
+                    class   : 'bg-danger',
+                    title   : 'Input Failed :',
+                    subtitle: '',
+                    body    : '{{ $error }}'
+                })
             });
         </script>
         @endforeach
-    @endif --}}
+    @endif
+    
     <div class="card card-lightblue">
         <div class="card-header">
             <h3 class="card-title">{{ $title_table }}</h3>
         </div>
-        @if(session('error'))
-        <div class="alert alert-danger alert-dismissible">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            <h5><i class="icon fas fa-ban"></i> Alert!</h5>
-            {{ $error }}
-        </div>
-        @endif
-        @if(session('errors'))
-        <div class="alert alert-danger alert-dismissible">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-            <h5><i class="icon fas fa-ban"></i> Alert!</h5>
-            <ul>
-                @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-        @endif
-        <form action="{{ route('user-admin.update',$data->id) }}" method="post" enctype="multipart/form-data">
+        <form action="{{ route('user-admin.store') }}" method="post" enctype="multipart/form-data">
         @csrf
         @method('POST')
         <div class="card-body">
             <div class="form-group">
-                <label>Role</label>
+                <label><h6>Role {{$data->id_role}}</h6></label>
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas fa-cogs"></i></span>
                     </div>
                     <select id="id_role" class="form-control" name="id_role" style="cursor: pointer" autofocus required>
                         @foreach ($role as $role_item)
-                        <option value="{{ $role_item->id }}" >{{$role_item->title}}</option>
+                        <option value="{{ $role_item->id }}" {{ $role_item->id == $data->id_role ? 'selected' : '' }}>{{$role_item->title}}</option>
                         @endforeach
                     </select>
                 </div>
             </div>
             <div class="form-group">
-                <label>Username</label>
+                <label><h6>Username</h6></label>
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas fa-user-tag"></i></span>
                     </div>
-                    <input type="text" name="name" class="form-control" placeholder="Username"  value="{{ old('name') }}" required>
+                    <input type="text" name="name" class="form-control" placeholder="Username"  value="{{ old('name',$data->name) }}" required>
                 </div>
             </div>
             <div class="form-group">
-                <label>E-mail</label>
+                <label><h6>E-mail</h6></label>
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas fa-envelope"></i></span>
                     </div>
-                    <input type="email" name="email" class="form-control" placeholder="e-mail"  value="{{ old('email') }}" required>
+                    <input type="email" name="email" class="form-control" placeholder="e-mail"  value="{{ old('email',$data->email) }}" required>
                 </div>
             </div>
+            
+            <div class="form-group">
+                <label><h6>Avatar <br ><small>Kosongkan jika tidak ada perubahan</small></h6></label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                    </div>
+                    <input type="file" name="image" placeholder="Kosongkan jika tidak ada perubahan"  value="{{ old('image') }}">
+                    <img src="{{asset('storage/'.$data->image)}}" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+                </div>
+            </div>
+            
             <div class="form-group" id="show_hide_password">
-                <label>Password</label>
+                <label><h6>Password</h6></label>
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas fa-key"></i></span>
                     </div>
-                    <input type="password" name="password" class="form-control" placeholder="Password" value="{{ old('password') }}" required>
+                    <input type="password" name="password" class="form-control" placeholder="Kosongkan jika tidak ada perubahan" value="{{ old('password') }}" required>
                     <div class="input-group-prepend">
                         <div class="input-group-text">
                             <i class="fa fa-eye-slash" aria-hidden="true" onclick="showPassword()" style="cursor:pointer;"></i>
@@ -113,12 +106,12 @@
                 </div>
             </div>
             <div class="form-group" id="show_hide_password">
-                <label>Re-Type Password</label>
+                <label><h6>Re-Type Password</h6></label>
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas fa-key"></i></span>
                     </div>
-                    <input type="password" name="password_confirmation" class="form-control" placeholder="Re-Type Password" value="{{ old('password_confirmation') }}" required>
+                    <input type="password" name="password_confirmation" class="form-control" placeholder="Kosongkan jika tidak ada perubahan" value="{{ old('password_confirmation') }}" required>
                     <div class="input-group-prepend">
                         <div class="input-group-text">
                             <i class="fa fa-eye-slash" aria-hidden="true" onclick="showPassword()" style="cursor:pointer;"></i>
@@ -127,29 +120,31 @@
                 </div>
             </div>
             <div class="form-group">
-            <label for="exampleInputEmail1">Status</label>
+            <label for="exampleInputEmail1"><h6>Status</h6></label>
                 <div class="col-sm-10">
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="status" id="status" value="Active" checked>
-                        <label class="form-check-label" for="gridRadios1">
-                        Active
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="status" id="status" value="Inactive">
-                        <label class="form-check-label" for="gridRadios2">
-                        Inactive
-                        </label>
-                    </div>
+                    <div class="custom-control custom-radio">
+                        <input class="custom-control-input" type="radio" id="customRadio1" name="status" value="Active"  {{ $data->status == 'Active' ? 'checked' : '' }}>
+                        <label for="customRadio1" class="custom-control-label"><h6>Active</h6></label>
+                      </div>
+                      <div class="custom-control custom-radio">
+                        <input class="custom-control-input" type="radio" id="customRadio2" name="status" value="Inactive"  {{ $data->status == 'Inactive' ? 'checked' : '' }}>
+                        <label for="customRadio2" class="custom-control-label"><h6>Inactive</h6></label>
+                      </div>
                 </div>
             </div>
         </div>
-        <div class="card-footer">
-            <div class="btn-group btn-group-sm">
-                <button type="button" class="btn btn-secondary" onclick=" window.location='{{ route('user-admin.index') }}' ">Back</button>
+        <div class="card-footer  float-right">
+            <div class="btn-group btn-group-md">
+                <button type="button" class="btn btn-secondary" onclick=" window.location='{{ route('user-admin.index') }}' ">
+                <i class="fas fa-backward"></i>    
+                Back
+                </button>
             </div>
-            <div class="btn-group btn-group-sm">
-                <button type="submit" class="btn btn-primary">Save</button>
+            <div class="btn-group btn-group-md">
+                <button type="submit" class="btn btn-primary">
+                <i class="far fa-save"></i>    
+                Save
+                </button>
             </div>
         </div>
         </form>

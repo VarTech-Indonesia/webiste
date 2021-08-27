@@ -40,11 +40,12 @@
         </script>
         @endforeach
     @endif
+    
     <div class="card card-lightblue">
         <div class="card-header">
             <h3 class="card-title">{{ $title_table }}</h3>
         </div>
-        <form action="{{ route('user-admin.store') }}" method="post" enctype="multipart/form-data" class="dropzone">
+        <form action="{{ route('user-admin.store') }}" method="post" enctype="multipart/form-data">
         @csrf
         @method('POST')
         <div class="card-body">
@@ -84,9 +85,8 @@
                 <label><h6>Avatar</h6></label>
                 <div class="input-group">
                     <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="fas fa-image"></i></span>
                     </div>
-                    <input type="file" name="image" class="dz-default dz-message" placeholder="avatar"  value="{{ old('image') }}">
+                    <input type="file" name="image" placeholder="avatar"  value="{{ old('image') }}">
                 </div>
             </div>
             

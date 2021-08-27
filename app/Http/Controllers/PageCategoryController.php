@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\PageCategory;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class PageCategoryController extends Controller
@@ -67,7 +68,8 @@ class PageCategoryController extends Controller
         $query  = PageCategory::create([
             'id'        => $request->id_page_category,
             'title'     => $request->title,
-            'status'    => $request->status
+            'status'    => $request->status,
+            'author_id' => Auth::user()->id
         ]);
 
         if ($query) {
@@ -127,7 +129,8 @@ class PageCategoryController extends Controller
 
         $query  = PageCategory::whereId($request->id_page_category)->update([
             'title'     => $request->title,
-            'status'    => $request->status
+            'status'    => $request->status,
+            'author_id' => Auth::user()->id
         ]);
 
         if ($query) {
