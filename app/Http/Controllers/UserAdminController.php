@@ -8,6 +8,7 @@ use App\Models\Role;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\hash;
+use Illuminate\Support\Facades\Storage;
 
 class UserAdminController extends Controller
 {
@@ -141,41 +142,86 @@ class UserAdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
         $rules = [
             'name'                  => 'required|min:3|max:35',
-            'email'                 => 'required|email|unique:users,email',
-            'password'              => 'required|confirmed'
+            'email'                 => 'required|email',
         ];
-
         $messages = [
-            'name.required'         => 'Nama Lengkap Wajib Diisi',
-            'name.min'              => 'Nama Lengkap Minimal 3 karakter',
-            'name.max'              => 'Nama Lengkap Maksimal 35 karakter',
-
-            'email.required'        => 'Email Wajib Diisi',
-            'email.email'           => 'Email Tidak valid',
-
-            'password.required'     => 'Password Wajib Diisi',
-            'password.confirmed'    => 'Password Tidak Sama'
+            'name.required'         => 'Nama Lengkap wajib diisi',
+            'name.min'              => 'Nama lengkap minimal 3 karakter',
+            'name.max'              => 'Nama lengkap maksimal 35 karakter',
+            'email.required'        => 'Email wajib diisi',
+            'email.email'           => 'Email tidak valid',
         ];
 
-        $validator = Validator::make($request->all(), $rules, $messages);
+        $validator  = Validator::make($request->all(), $rules, $messages);
         if ($validator->fails()) {
-            // 
-            return response()->json(['errors' => $validator->errors()->all()]);
+            return redirect()->back()->withErrors($validator)->withInput($request->all);
         }
-        $password   = Hash::make($request->password);
-        $query      = User::whereId($request->id)->update([
-            'name'      => $request->name,
-            'email'     => $request->email,
-            'password'  => $password
+
+        $user       = User::find($id);
+        if (($request->email) != ($user->email)) {
+            if (User::where('email', $request->email)->exists()) {
+                return redirect()->back()->with('error', 'Email sudah terdaftar');
+            } else {
+                $newEmail   = $request->email;
+            }
+        } else {
+            $newEmail       = $request->email;
+        }
+
+        if (($request->password) != "") {
+            if (($request->password) != ($request->password_confirmation)) {
+                return redirect()->back()->with('error', 'Password tidak sama dengan Re-Type Password');
+            } else {
+                $newPassword    = Hash::make($request->password);
+            }
+        }
+
+        if ((($request->password) && ($request->password_confirmation)) != "") {
+            if (($request->password) != ($request->password_confirmation)) {
+                return redirect()->back()->with('error', 'Password tidak sama dengan Re-Type Password');
+            } else {
+                $newPassword    = Hash::make($request->password);
+            }
+        } else {
+            $newPassword    = $request->image_hidden;
+        }
+
+        // Image
+        $image              = $request->file('image');
+        if ($image == null) {
+            $uploadedFile   = $request->image_hidden;
+        } else {
+            // Ganti Nama Image
+            $title          = strtolower(str_replace(' ', '-', $request->name));
+            $image          = $request->file('image');
+            $ImgValue       = $request->file('image');
+            $getFileExt     = $ImgValue->getClientOriginalExtension();
+            $uploadedFile   = $title  . '-' . '.' . $getFileExt;
+            // Delete Image
+            Storage::delete('public/' . $request->image_hidden);
+            // Upload Image
+            $image->storeAs('public/images-user', $uploadedFile);
+            // Save Image di DB
+            $uploadedFile   = 'images-user/' . $uploadedFile;
+        }
+
+
+        $query  = User::where('id', $id)->update([
+            'id_role'           => $request->id_role,
+            'name'              => $request->name,
+            'email'             => $newEmail,
+            'password'          => $newPassword,
+            'status'            => $request->status,
+            'image'             => $uploadedFile
         ]);
         if ($query) {
-            return response()->json(['success' => 'Data Berhasi Diubah']);
+            return redirect()->route('user-admin.index')->with('success', 'Data Berhasil Disimpan');
         } else {
-            return response()->json(['errorssystem' => 'Data Gagal Diubah, Hubungi Admin']);
+            return redirect()->back()->with('error', 'Data Gagal Disimpan, Hubungi Admin');
         }
     }
 

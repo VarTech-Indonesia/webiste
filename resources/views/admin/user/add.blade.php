@@ -9,9 +9,9 @@
     @section('menu-admin-left')
         @yield('menu-admin-left')
     @stop
+    
     @if(session('error'))
     <script>
-        <script>
             $(function() {
                  $(document).Toasts('create', {
                     icon    : 'fas fa-exclamation-triangle',
@@ -21,7 +21,6 @@
                     body    : '{{ $error }}'
                 })
             });
-        </script>
     </script>
     @endif
 

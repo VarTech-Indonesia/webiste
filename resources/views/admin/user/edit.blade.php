@@ -9,19 +9,18 @@
     @section('menu-admin-left')
         @yield('menu-admin-left')
     @stop
+
     @if(session('error'))
     <script>
-        <script>
             $(function() {
                  $(document).Toasts('create', {
                     icon    : 'fas fa-exclamation-triangle',
                     class   : 'bg-danger',
                     title   : 'Save Failed :',
                     subtitle: '',
-                    body    : '{{ $error }}'
+                    body    : '{{ session('error') }}'
                 })
             });
-        </script>
     </script>
     @endif
 
@@ -45,9 +44,9 @@
         <div class="card-header">
             <h3 class="card-title">{{ $title_table }}</h3>
         </div>
-        <form action="{{ route('user-admin.store') }}" method="post" enctype="multipart/form-data">
+        <form action="{{ route('user-admin.update',$data->id) }}" method="post" enctype="multipart/form-data">
         @csrf
-        @method('POST')
+        @method('PUT')
         <div class="card-body">
             <div class="form-group">
                 <label><h6>Role {{$data->id_role}}</h6></label>
@@ -87,6 +86,7 @@
                     <div class="input-group-prepend">
                     </div>
                     <input type="file" name="image" placeholder="Kosongkan jika tidak ada perubahan"  value="{{ old('image') }}">
+                    <input type="hidden" value="{{$data->image}}" name="image_hidden" id="image_hidden">
                     <img src="{{asset('storage/'.$data->image)}}" alt="User Avatar" class="img-size-50 mr-3 img-circle">
                 </div>
             </div>
@@ -97,7 +97,8 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas fa-key"></i></span>
                     </div>
-                    <input type="password" name="password" class="form-control" placeholder="Kosongkan jika tidak ada perubahan" value="{{ old('password') }}" required>
+                    <input type="password" name="password" class="form-control" placeholder="Kosongkan jika tidak ada perubahan" value="{{ old('password') }}">
+                    <input type="hidden" name="password_hidden" id="password_hidden" value="{{$data->password}}">
                     <div class="input-group-prepend">
                         <div class="input-group-text">
                             <i class="fa fa-eye-slash" aria-hidden="true" onclick="showPassword()" style="cursor:pointer;"></i>
@@ -111,7 +112,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas fa-key"></i></span>
                     </div>
-                    <input type="password" name="password_confirmation" class="form-control" placeholder="Kosongkan jika tidak ada perubahan" value="{{ old('password_confirmation') }}" required>
+                    <input type="password" name="password_confirmation" class="form-control" placeholder="Kosongkan jika tidak ada perubahan" value="{{ old('password_confirmation') }}">
                     <div class="input-group-prepend">
                         <div class="input-group-text">
                             <i class="fa fa-eye-slash" aria-hidden="true" onclick="showPassword()" style="cursor:pointer;"></i>

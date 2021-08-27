@@ -86,7 +86,7 @@
                     <tr>
                         <th style="width: 10px">#</th>
                         <th><i class="fas fa-user-tag"></i>&nbsp; Name</th>
-                        <th><i class="fas fa-user-tag"></i>&nbsp; Avatar</th>
+                        <th></th>
                         <th><i class="fas fa-envelope"></i>&nbsp; e-mail</th>
                         <th><i class="fas fa-user-secret"></i>&nbsp; Status</th>
                         <th style="width: 40px">
@@ -108,7 +108,7 @@
                             </small>
                         </td>
                         <td><img src="{{asset('storage/'.$show->image)}}" alt="User Avatar" class="img-size-50 mr-3 img-circle"></td>
-                        <td>{{$show->id}} </td>
+                        <td>{{$show->email}} </td>
                         <td>{{$show->status}}</td>
                         <td class="project-actions text-right">
                             <form id="delete-form" action="{{ route('user-admin.destroy',$show->id) }}" method="POST">
