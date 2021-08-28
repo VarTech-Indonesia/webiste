@@ -121,6 +121,7 @@
                     </div>
                 </div>
             </section>
+            
             <!-- Main content -->
             <section class="content">
                 @yield('main-content')

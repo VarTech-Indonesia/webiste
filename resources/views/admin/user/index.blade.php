@@ -58,17 +58,18 @@
     
     <div class="card card-lightblue">
         <div class="card-header">
-        <h3 class="card-title">Info</h3>
-        <div class="card-tools">
-            <button type="button" class="btn btn-tool" data-card-widget="collapse">
-            <i class="fas fa-minus"></i>
-            </button>
-        </div>
+            <h3 class="card-title">Roles</h3>
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                <i class="fas fa-minus"></i>
+                </button>
+            </div>
         </div>
         <div class="card-body">
-        The body of the card
+       
         </div>
     </div>
+
     <div class="card card-lightblue">
         <div class="card-header">
             <h3 class="card-title">
@@ -125,6 +126,7 @@
             </table>
         </div>
     </div>
+    
 @stop
 
 

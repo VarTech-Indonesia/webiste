@@ -184,16 +184,16 @@ class PageController extends Controller
         if ($image == NULL) {
             $uploadedFile   = $request->image_hidden;
         } else {
-            // Ganti Nama Image
+            // Change Image Name
             $image          = $request->file('image');
             $ImgValue       = $request->file('image');
             $getFileExt     = $ImgValue->getClientOriginalExtension();
             $uploadedFile   = $slug . '-' . '.' . $getFileExt;
             // Delete Old Image
             File::delete('storage/' . $request->file('image_hidden'));
-            // Upload Image
+            // Upload New Image
             $image->storeAs('public/images-page', $uploadedFile);
-            // Save Image di DB
+            // Save Image in DB
             $uploadedFile   = 'images-page/' . $uploadedFile;
         }
 
