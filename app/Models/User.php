@@ -22,6 +22,12 @@ class User extends Authenticatable
      */
     protected $guarded = ['id'];
 
+    // Relationship to Page
+    public function belongsToPage()
+    {
+        return $this->belongsTo('App\Models\Page');
+    }
+
     /**
      * The attributes that should be hidden for arrays.
      *

@@ -20,13 +20,13 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-item menu-open">
                     <a href="#" class="nav-link active">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <img src="{{asset('storage/images-front/business-report.svg')}}" width="25px" >
                         <p>Dashboard</p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="{{route('user-admin.index')}}" class="nav-link">
-                        <i class="nav-icon fas fa-user-cog"></i>
+                        <img src="{{asset('storage/images-front/profile.svg')}}" width="25px" >
                         <p>
                             User
                             <span class="badge badge-info right">
@@ -37,7 +37,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-book"></i>
+                        <img src="{{asset('storage/images-front/checklist.svg')}}" width="25px" >
                         <p>
                             Pages
                             <i class="fas fa-angle-left right"></i>
@@ -51,7 +51,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="" class="nav-link">
+                            <a href="{{ url('admin/page-admin/index') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Pages</p>
                             </a>
@@ -60,7 +60,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-book"></i>
+                        <img src="{{asset('storage/images-front/checklist.svg')}}" width="25px" >
                         <p>
                             Posts
                             <i class="fas fa-angle-left right"></i>
@@ -83,7 +83,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="{{route('user-admin.index')}}" class="nav-link">
-                        <i class="nav-icon far fa-image"></i>
+                        <img src="{{asset('storage/images-front/slider.svg')}}" width="25px" >
                         <p>
                             Slider
                             <span class="badge badge-info right">

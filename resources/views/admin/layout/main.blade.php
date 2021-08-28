@@ -16,6 +16,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{asset('adminlte/plugins/fontawesome-free/css/all.min.css')}}">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="{{asset('adminlte/dist/css/adminlte.min.css')}}">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- SweetAlert2 -->
@@ -38,13 +40,20 @@
     <!-- BS Stepper -->
     <link rel="stylesheet" href="{{asset('adminlte/plugins/bs-stepper/css/bs-stepper.min.css')}}">
     <!-- dropzonejs -->
-    {{-- <link rel="stylesheet" href="{{asset('adminlte/plugins/dropzone/min/dropzone.min.css')}}"> --}}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/basic.css" integrity="sha512-+Vla3mZvC+lQdBu1SKhXLCbzoNCl0hQ8GtCK8+4gOJS/PN9TTn0AO6SxlpX8p+5Zoumf1vXFyMlhpQtVD5+eSw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{{asset('adminlte/plugins/dropzone/min/dropzone.min.css')}}">
+    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/basic.css" integrity="sha512-+Vla3mZvC+lQdBu1SKhXLCbzoNCl0hQ8GtCK8+4gOJS/PN9TTn0AO6SxlpX8p+5Zoumf1vXFyMlhpQtVD5+eSw==" crossorigin="anonymous" referrerpolicy="no-referrer" /> --}}
 
-    <!-- Theme style -->
-    <link rel="stylesheet" href="{{asset('adminlte/dist/css/adminlte.min.css')}}">
     <!-- pace-progress -->
     <link rel="stylesheet" href="{{asset('adminlte/plugins/pace-progress/themes/black/pace-theme-flat-top.css')}}">
+
+    <!-- summernote -->
+    <link rel="stylesheet" href="{{asset('adminlte/plugins/summernote/summernote-bs4.min.css')}}">
+    <!-- CodeMirror -->
+    <link rel="stylesheet" href="{{asset('adminlte/plugins/codemirror/codemirror.css')}}">
+    <link rel="stylesheet" href="{{asset('adminlte/plugins/codemirror/theme/monokai.css')}}">
+    <!-- SimpleMDE -->
+    <link rel="stylesheet" href="{{asset('adminlte/plugins/simplemde/simplemde.min.css')}}">
+
     <!-- jQuery -->
     <script src="{{asset('adminlte/plugins/jquery/jquery.min.js')}}"></script>
     <!-- Custom JS -->
@@ -156,11 +165,33 @@
     <!-- BS-Stepper -->
     <script src="{{asset('adminlte/plugins/bs-stepper/js/bs-stepper.min.js')}}"></script>
     <!-- Dropzonejs -->
-    {{-- <script src="{{asset('adminlte/plugins/dropzone/min/dropzone.min.js')}}"></script> --}}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/min/dropzone.min.js" integrity="sha512-VQQXLthlZQO00P+uEu4mJ4G4OAgqTtKG1hri56kQY1DtdLeIqhKUp9W/lllDDu3uN3SnUNawpW7lBda8+dSi7w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="{{asset('adminlte/plugins/dropzone/min/dropzone.min.js')}}"></script>
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/min/dropzone.min.js" integrity="sha512-VQQXLthlZQO00P+uEu4mJ4G4OAgqTtKG1hri56kQY1DtdLeIqhKUp9W/lllDDu3uN3SnUNawpW7lBda8+dSi7w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
     <!-- pace-progress -->
     <script src="{{asset('adminlte/plugins/pace-progress/pace.min.js')}}"></script>
+    <!-- Summernote -->
+    <script src="{{asset('adminlte/plugins/summernote/summernote-bs4.min.js')}}"></script>
+    <!-- CodeMirror -->
+    <script src="{{asset('adminlte/plugins/codemirror/codemirror.js')}}"></script>
+    <script src="{{asset('adminlte/plugins/codemirror/mode/css/css.js')}}"></script>
+    <script src="{{asset('adminlte/plugins/codemirror/mode/xml/xml.js')}}"></script>
+    <script src="{{asset('adminlte/plugins/codemirror/mode/htmlmixed/htmlmixed.js')}}"></script>
+
     <!-- Page specific script -->
+    <script>
+    $(function () {
+        // Summernote
+        $('#excerpt').summernote()
+        $('#body').summernote()
+        // CodeMirror
+        CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {
+        mode: "htmlmixed",
+        theme: "monokai"
+        });
+    })
+    </script>
+    <!-- Page specific script -->
+
     <script>
         $(function() {
             var Toast = Swal.mixin({
