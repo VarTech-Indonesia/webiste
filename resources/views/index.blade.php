@@ -3,10 +3,10 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>VarTech - Digital Partner</title>
+    <title>{{$title}}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="VarTech - Digital Partner" />
-    <meta name="keywords" content="VarTech - Digital Partner" />
+    <meta name="description" content="{{ $beranda->meta_description }}" />
+    <meta name="keywords" content="{{ $beranda->meta_keywords }}" />
     <meta content="VarTech" name="author" />
     <!-- favicon -->
     <link rel="shortcut icon" href="{{asset('storage/images-front/vartech.ico')}}">
@@ -101,12 +101,12 @@
                         <div class="col-lg-7">
                             <div class="mt-40 text-center home-5-content">
                                 <div class="home-icon mb-4">
-                                    <i class="mdi mdi-pinwheel mdi-spin text-white h1"></i>
+                                    {{-- <i class="mdi mdi-pinwheel mdi-spin text-white h1">VarTech Indonesia</i> --}}
                                 </div>
-                                <h1 class="text-white font-weight-normal home-5-title mb-0">VarTech Indonesia</h1>
+                                <h1 class="text-white font-weight-normal home-5-title mb-0"></h1>
                                 <p class="text-white-70 mt-4 f-15 mb-0">Information Technology and Printing Service Provider</p>
                                 <div class="mt-5">
-                                    <button type="submit" class="btn btn-custom">Lihat Lebih Lanjut >></button>
+                                    {{-- <button type="submit" class="btn btn-custom">Lihat Lebih Lanjut >></button> --}}
                                 </div>
                             </div>
                         </div>
@@ -172,8 +172,8 @@
             <div class="row align-items-center mt-5">
                 <div class="col-md-6" data-aos="fade-up" data-aos-duration="2000">
                     <div class="about-desc">
-                        <h3 class="text-dark mb-3 font-weight-light">Solusi Terbaik Jasa Teknologi Informasi Anda</h3>
-                        <p class="text-muted f-15">Temporibus autem quibusdam a aut officiis debitis rerum necessitatibus saepeeveniet ut et voluptates repudiandae sint a molestiae recusandae itaque earum rerum hic tenetur a sapiente delectus ut at aut reiciendis voluptatibus maiores alias consequatur perferendis doloribus asperiores rerum necessitat saepeeveniet.</p>
+                        <h3 class="text-dark mb-3 font-weight-light">{{ $beranda->title }}</h3>
+                        <p class="text-muted f-15">{!! $beranda->excerpt !!}</p>
                         <div class="about-by">
                             <p class="mb-0 text-uppercase f-13"><a href="#" class="text-primary">Selanjutnya<i class="mdi mdi-arrow-right ml-2"></i></a></p>
                         </div>
@@ -181,7 +181,7 @@
                 </div>
                 <div class="col-md-6" data-aos="zoom-in" data-aos-duration="2000">
                     <div class="about-img light-img position-relative p-4">
-                        <img src="{{asset('storage/images/about-img.jpg')}}" alt="" class="img-fluid mx-auto d-block">
+                        <img src="{{asset('storage/'.$beranda->image)}}" alt="" class="img-fluid mx-auto d-block">
                     </div>
                 </div>
             </div>
@@ -344,20 +344,21 @@
                 </div>
             </div>
             <div class="row">
+                @foreach ($portofolio as $item_portofolio)
                 <div class="col-lg-4">
                     <div class="blog position-relative">
                         <div class="blog-img position-relative mt-4" data-aos="zoom-in" data-aos-duration="2000">
                             <div class="blog-date">
-                                <p class="mb-0 font-weight-light text-white f-15">Sistem Informasi Akademik</p>
+                                <p class="mb-0 font-weight-light text-white f-15">{{ $item_portofolio->title }}</p>
                             </div>
-                            <img src="{{asset('storage/images/blog/img-1.jpg')}}" alt="" class="img-fluid mx-auto d-block rounded">
+                            <img src="{{asset('storage/'.$item_portofolio->image)}}" alt="" class="img-fluid mx-auto d-block rounded">
                         </div>
                         <div class="position-relative">
                             <div class="blog-content text-center bg-white p-4" data-aos="fade-up" data-aos-duration="2000" data-aos-delay="1000">
-                                <p class="text-uppercase f-13 mb-2 text-muted">ui/ux designer</p>
-                                <h5 class="font-weight-normal f-18"><a href="#" class="text-dark">Quis autem reprehenderit</a></h5>
+                                <p class="text-uppercase f-13 mb-2 text-muted">{{ $item_portofolio->title }}</p>
+                                <h5 class="font-weight-normal f-18"><a href="#" class="text-dark">{{ $item_portofolio->title }}</a></h5>
                                 <p class="text-muted f-14">
-                                    At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis deleniti corrupti.
+                                    {!! $item_portofolio->excerpt !!}
                                 </p>
                                 <div class="read-more">
                                     <a href="#" class=" text-primary f-15">Read more<i class="mdi mdi-arrow-right"></i></a>
@@ -366,7 +367,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4">
+                @endforeach
+                {{-- <div class="col-lg-4">
                     <div class="blog position-relative">
                         <div class="blog-img position-relative mt-4" data-aos="zoom-in" data-aos-duration="2000">
                             <div class="blog-date">
@@ -409,7 +411,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </section>
@@ -430,11 +432,12 @@
             </div>
             <div class="row">
                 <div id="owl-demo">
+                    @foreach ($testimoni as $item_testimoni)
                     <div class="item">
                         <div class="testi-content">
                             <div class="testi-box mt-4">
-                                <h4 class="text-white mb-3 font-weight-light">"Senior Management"</h4>
-                                <p class="text-white-70 font-weight-light mb-0 f-15">At vero eos et accusamus et iusto odio dignissimos that site ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores quas molestias excepturi cupiditate non.</p>
+                                <h4 class="text-white mb-3 font-weight-light">{{ $item_testimoni->title }}</h4>
+                                <p class="text-white-70 font-weight-light mb-0 f-15">{!! $item_testimoni->excerpt !!}</p>
                                 <div class="quote-img">
                                     <img src="{{asset('storage/images/quote-img.png')}}" alt="" class="img-fluid">
                                 </div>
@@ -442,16 +445,17 @@
                             <div class="mt-2">
                                 <div class="float-right ml-3">
                                     <div class="client-img">
-                                        <img src="{{asset('storage/images/clients/img-1.jpg')}}" alt="" class="img-fluid rounded-circle">
+                                        <img src="{{ asset('storage/'.$item_testimoni->image )}}" alt="" class="img-fluid rounded-circle">
                                     </div>
                                 </div>
                                 <div class="clients-name text-right pt-3">
-                                    <h6 class="text-white font-weight-normal position-relative f-17 mb-0"><span class="after-border"></span> Sherrie Barboza</h6>
-                                    <p class="text-white-70 f-13 mb-0">UI/UX Designer</p>
+                                    <h6 class="text-white font-weight-normal position-relative f-17 mb-0"><span class="after-border"></span>{{ $item_testimoni->title }}</h6>
+                                    <p class="text-white-70 f-13 mb-0">{{ $item_testimoni->title }}</p>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    @endforeach
                     <div class="item">
                         <div class="testi-content">
                             <div class="testi-box mt-4">
@@ -766,16 +770,18 @@
     </script>
 
     <!-- GSP -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/TextPlugin.min.js"></script>
+    {{-- https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/gsap.min.js --}}
+    <script src="{{asset('storage/js/gsap.min.js')}}"></script>
+    {{-- https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/TextPlugin.min.js --}}
+    <script src="{{asset('storage/js/TextPlugin.min.js')}}"></script>
     <script>
         gsap.registerPlugin(TextPlugin);
-        gsap.from('.navbar', {
-            duration: 1.5,
-            y: '-300%',
-            opacity: 0,
-            ease: 'bounce'
-        });
+        // gsap.from('.navbar', {
+        //     duration: 1.5,
+        //     y: '-300%',
+        //     opacity: 0,
+        //     ease: 'bounce'
+        // });
         gsap.to(".gsap-text-inovatif", {
             duration: 1,
             delay: 1,
