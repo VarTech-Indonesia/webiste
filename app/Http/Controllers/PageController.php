@@ -22,7 +22,7 @@ class PageController extends Controller
             'title'         => 'Data Page | VarTech Indonesia',
             'title_table'   => 'Data Page'
         ];
-        $data['page_category']  = PageCategory::orderBy('title')->get();
+        $data['page_category']  = PageCategory::where('status', 'Active')->orderBy('title')->get();
         $data['data']           = Page::with('PageCategory', 'User')->orderByDesc('updated_at')->get();
         return view('admin.page.index', $data);
     }
@@ -38,7 +38,7 @@ class PageController extends Controller
             'title'         => 'Add Data Page | VarTech Indonesia',
             'title_table'   => 'Add Data Page'
         ];
-        $data['page_category']  = PageCategory::orderByDesc('title')->get();
+        $data['page_category']  = PageCategory::where('status', 'Active')->orderBy('title')->get();
         return view('admin.page.index', $data);
     }
 
@@ -226,8 +226,10 @@ class PageController extends Controller
      */
     public function destroy($id)
     {
-        $query  = Page::find($id);
-        if ((File::delete('storage/' . $query->image)) and (Page::where('id', $query->id)->delete())) {
+        $find  = Page::find($id);
+        File::delete('storage/' . $find->image);
+        // $query ?  return response()->json(['success'  => 'Page Delete Successfully']) :  return response()->json(['error'    => 'Page Delete Failed']);
+        if (Page::where('id', $find->id)->delete()) {
             return response()->json(['success'  => 'Page Delete Successfully']);
         } else {
             return response()->json(['error'    => 'Page Delete Failed']);

@@ -20,13 +20,13 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-item menu-open">
                     <a href="#" class="nav-link active">
-                        <img src="{{asset('storage/images-front/business-report.svg')}}" width="25px" >
+                        <img src="{{asset('storage/images-front/business-report.svg')}}" width="20px" >
                         <p>Dashboard</p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="{{route('user-admin.index')}}" class="nav-link">
-                        <img src="{{asset('storage/images-front/profile.svg')}}" width="25px" >
+                        <img src="{{asset('storage/images-front/profile.svg')}}" width="20px" >
                         <p>
                             User
                             <span class="badge badge-info right">
@@ -37,7 +37,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-                        <img src="{{asset('storage/images-front/checklist.svg')}}" width="25px" >
+                        <img src="{{asset('storage/images-front/checklist.svg')}}" width="20px" >
                         <p>
                             Pages
                             <i class="fas fa-angle-left right"></i>
@@ -60,7 +60,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-                        <img src="{{asset('storage/images-front/checklist.svg')}}" width="25px" >
+                        <img src="{{asset('storage/images-front/checklist.svg')}}" width="20px" >
                         <p>
                             Posts
                             <i class="fas fa-angle-left right"></i>
@@ -83,7 +83,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="{{route('user-admin.index')}}" class="nav-link">
-                        <img src="{{asset('storage/images-front/slider.svg')}}" width="25px" >
+                        <img src="{{asset('storage/images-front/slider.svg')}}" width="20px" >
                         <p>
                             Slider
                             <span class="badge badge-info right">

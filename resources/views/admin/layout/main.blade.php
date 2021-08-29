@@ -42,10 +42,8 @@
     <!-- dropzonejs -->
     <link rel="stylesheet" href="{{asset('adminlte/plugins/dropzone/min/dropzone.min.css')}}">
     {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.2/basic.css" integrity="sha512-+Vla3mZvC+lQdBu1SKhXLCbzoNCl0hQ8GtCK8+4gOJS/PN9TTn0AO6SxlpX8p+5Zoumf1vXFyMlhpQtVD5+eSw==" crossorigin="anonymous" referrerpolicy="no-referrer" /> --}}
-
     <!-- pace-progress -->
     <link rel="stylesheet" href="{{asset('adminlte/plugins/pace-progress/themes/black/pace-theme-flat-top.css')}}">
-
     <!-- summernote -->
     <link rel="stylesheet" href="{{asset('adminlte/plugins/summernote/summernote-bs4.min.css')}}">
     <!-- CodeMirror -->
@@ -53,7 +51,10 @@
     <link rel="stylesheet" href="{{asset('adminlte/plugins/codemirror/theme/monokai.css')}}">
     <!-- SimpleMDE -->
     <link rel="stylesheet" href="{{asset('adminlte/plugins/simplemde/simplemde.min.css')}}">
-
+    <!-- DataTables -->
+    <link rel="stylesheet" href="{{asset('adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
+    <link rel="stylesheet" href="{{asset('adminlte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
+    <link rel="stylesheet" href="{{asset('adminlte/plugins/datatables-buttons/css/buttons.bootstrap4.min.css')}}">
     <!-- jQuery -->
     <script src="{{asset('adminlte/plugins/jquery/jquery.min.js')}}"></script>
     <!-- Custom JS -->
@@ -177,7 +178,40 @@
     <script src="{{asset('adminlte/plugins/codemirror/mode/css/css.js')}}"></script>
     <script src="{{asset('adminlte/plugins/codemirror/mode/xml/xml.js')}}"></script>
     <script src="{{asset('adminlte/plugins/codemirror/mode/htmlmixed/htmlmixed.js')}}"></script>
-
+    <!-- DataTables  & Plugins -->
+    //cdn.datatables.net/1.11.0/js/jquery.dataTables.min.js
+    <script src="{{asset('adminlte/plugins/datatables/jquery.dataTables.min.js')}}"></script>
+    <script src="{{asset('adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
+    <script src="{{asset('adminlte/plugins/datatables-responsive/js/dataTables.responsive.min.js')}}"></script>
+    <script src="{{asset('adminlte/plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script>
+    <script src="{{asset('adminlte/plugins/datatables-buttons/js/dataTables.buttons.min.js')}}"></script>
+    <script src="{{asset('adminlte/plugins/datatables-buttons/js/buttons.bootstrap4.min.js')}}"></script>
+    <script src="{{asset('adminlte/plugins/jszip/jszip.min.js')}}"></script>
+    <script src="{{asset('adminlte/plugins/pdfmake/pdfmake.min.js')}}"></script>
+    <script src="{{asset('adminlte/plugins/pdfmake/vfs_fonts.js')}}"></script>
+    <script src="{{asset('adminlte/plugins/datatables-buttons/js/buttons.html5.min.js')}}"></script>
+    <script src="{{asset('adminlte/plugins/datatables-buttons/js/buttons.print.min.js')}}"></script>
+    <script src="{{asset('adminlte/plugins/datatables-buttons/js/buttons.colVis.min.js')}}"></script>
+    <!-- Page specific script -->
+    <script>
+        $(function() {
+            $("#example1").DataTable({
+                "responsive": true,
+                "lengthChange": false,
+                "autoWidth": false,
+                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+            $('#example2').DataTable({
+                "paging": true,
+                "lengthChange": false,
+                "searching": true,
+                "ordering": false,
+                "info": true,
+                "autoWidth": false,
+                "responsive": true,
+            });
+        });
+    </script>
     <!-- Page specific script -->
     <script>
     $(function () {
