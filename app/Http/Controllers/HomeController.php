@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Home;
 use App\Models\Page;
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -22,6 +23,11 @@ class HomeController extends Controller
             Page::whereHas('PageCategory', function ($query) {
                 return $query->where('status', 'Active')->where('title', 'Beranda');
             })->where('status', 'Published')->first();
+
+        $data['layanan']   =
+            Post::whereHas('PostCategory', function ($query) {
+                return $query->where('status', 'Active')->where('title', 'Layanan');
+            })->where('status', 'Published')->orderBy('order_position')->get();
 
         $data['portofolio']   =
             Page::whereHas('PageCategory', function ($query) {

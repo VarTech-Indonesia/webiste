@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeAdminController;
 use App\Http\Controllers\LocalizationController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\PostController;
 
 // User
 use App\Http\Controllers\HomeController;
@@ -51,4 +52,12 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     Route::GET('/page-admin/{id}/edit', [PageController::class, 'edit']);
     Route::POST('/page-admin/update/{id}', [PageController::class, 'update']);
     Route::DELETE('/page-admin/delete/{id}', [PageController::class, 'destroy']);
+    // Post Category
+    Route::resource('post-category', PostCategoryController::class);
+    // Post
+    Route::GET('/post-admin', [PostController::class, 'index']);
+    Route::POST('/post-admin/store', [PostController::class, 'store']);
+    Route::GET('/post-admin/{id}/edit', [PostController::class, 'edit']);
+    Route::POST('/post-admin/update/{id}', [PostController::class, 'update']);
+    Route::DELETE('/post-admin/delete/{id}', [PostController::class, 'destroy']);
 });
