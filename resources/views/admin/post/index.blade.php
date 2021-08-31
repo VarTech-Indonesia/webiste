@@ -71,8 +71,8 @@
         </div>
     </div>
 
-    @include('admin/post/form')
-    @include('admin/post/js')
+    @include('admin/post/form_post')
+    @include('admin/post/js_post')
 
 @stop
 

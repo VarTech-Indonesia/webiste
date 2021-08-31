@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Page;
 use App\Models\PageCategory;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
@@ -181,20 +182,41 @@ class PageController extends Controller
 
         // Image
         $image              = $request->file('image');
-        if ($image == NULL) {
-            $uploadedFile   = $request->image_hidden;
-        } else {
+        if (($request->title != $request->title_hidden) && ($image != NULL)) {
             // Change Image Name
             $image          = $request->file('image');
             $ImgValue       = $request->file('image');
             $getFileExt     = $ImgValue->getClientOriginalExtension();
             $uploadedFile   = $slug . '-' . '.' . $getFileExt;
             // Delete Old Image
-            File::delete('storage/' . $request->file('image_hidden'));
+            File::delete('storage/' . $request->image_hidden);
             // Upload New Image
             $image->storeAs('public/images-page', $uploadedFile);
             // Save Image in DB
             $uploadedFile   = 'images-page/' . $uploadedFile;
+        } else if (($request->title != $request->title_hidden) && ($image == NULL)) {
+            // Change Image Name
+            $image          = $request->image_hidden;
+            $getFileExt     = substr($image, strpos($image, ".") + 1);
+            $uploadedFile   = $slug . '-' . '.' . $getFileExt;
+            // Save Image in DB
+            $uploadedFile   = 'images-page/' . $uploadedFile;
+            // Rename Image
+            Storage::rename('public/' . $request->image_hidden, 'public/' . $uploadedFile);
+        } else if (($request->title == $request->title_hidden) && ($image != NULL)) {
+            // Change Image Name
+            $image          = $request->file('image');
+            $ImgValue       = $request->file('image');
+            $getFileExt     = $ImgValue->getClientOriginalExtension();
+            $uploadedFile   = $slug . '-' . '.' . $getFileExt;
+            // Delete Old Image
+            File::delete('storage/' . $request->image_hidden);
+            // Upload New Image
+            $image->storeAs('public/images-page', $uploadedFile);
+            // Save Image in DB
+            $uploadedFile   = 'images-page/' . $uploadedFile;
+        } else {
+            $uploadedFile   = $request->image_hidden;
         }
 
         $query  = Page::whereId($id)->update([

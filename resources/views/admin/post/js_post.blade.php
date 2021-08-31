@@ -38,11 +38,7 @@ $(function() {
             $('#title_hidden').val(data.title);
             $('#excerpt').summernote('code', data.excerpt);
             $('#body').summernote('code', data.body);
-            if (data.status === "Published") {
-                $("#customRadio1").prop('checked', true);
-            } else {
-                $("#customRadio2").prop('checked', true);
-            }
+            (data.status === "Published") ?  $("#customRadio1").prop('checked', true) :  $("#customRadio2").prop('checked', true);
             $('#image').val('');
             $('#image_hidden').val(data.image);
             $('#image_show').html(" <img src={{ asset('storage') }}/" + data.image + " width=200px> ");
@@ -60,10 +56,10 @@ $(function() {
         jQuery('.alert-success').hide();
         const formData = new FormData(form);
         jQuery.ajax({
-            type: 'POST',
-            url: url,
-            data: formData,
-            cache: false,
+            type    : 'POST',
+            url     : url,
+            data    : formData,
+            cache   : false,
             contentType: false,
             processData: false,
             success: function(result) {
@@ -93,13 +89,13 @@ $(function() {
     $('body').on('click', '.delete', function() {
         let id = $(this).data('id');
         Swal.fire({
-            title: 'Are you sure ?',
-            text: "You won't be able to revert this !",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it'
+            title   : 'Are you sure ?',
+            text    : "You won't be able to revert this !",
+            icon    : 'warning',
+            showCancelButton    : true,
+            confirmButtonColor  : '#3085d6',
+            cancelButtonColor   : '#d33',
+            confirmButtonText   : 'Yes, delete it'
         }).then((result) => {
             if (result.isConfirmed) {
                 $.ajax({
@@ -109,18 +105,18 @@ $(function() {
                     success: function(result) {
                         if (result.error) {
                             $(document).Toasts('create', {
-                                icon: 'fas fa-exclamation-triangle',
-                                class: 'bg-danger',
-                                title: 'Input Failed :',
+                                icon    : 'fas fa-exclamation-triangle',
+                                class   : 'bg-danger',
+                                title   : 'Input Failed :',
                                 subtitle: '',
-                                body: result.error
+                                body    : result.error
                             })
                         } else {
                             var Toast = Swal.mixin({
-                                toast: true,
+                                toast   : true,
                                 position: 'top-end',
                                 showConfirmButton: false,
-                                timer: 1000
+                                timer   : 1000
                             });
                             toastr.success(result.success);
                             setTimeout(() => {

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 30, 2021 at 05:48 PM
+-- Generation Time: Aug 31, 2021 at 03:40 PM
 -- Server version: 10.4.19-MariaDB
 -- PHP Version: 8.0.6
 
@@ -116,12 +116,7 @@ CREATE TABLE `pages` (
 --
 
 INSERT INTO `pages` (`id`, `id_page_category`, `id_author`, `slug`, `seo_title`, `meta_keywords`, `meta_description`, `title`, `excerpt`, `body`, `image`, `status`, `created_at`, `updated_at`) VALUES
-(1, 2, 1, 'solusi-terbaik-jasa-teknologi-informasi-anda', 'vartech-indonesia-solusi-terbaik-jasa-teknologi-informasi-anda', 'Solusi Terbaik Jasa Teknologi Informasi Anda', 'Solusi Terbaik Jasa Teknologi Informasi Anda', 'Solusi Terbaik Jasa Teknologi Informasi Anda', '<h6 class=\"text-dark mb-3 font-weight-light\">VarTech Indonesia berkomitmen secara Profesional, Terpercaya,\r\n                            Adaptif dan Inovatif dalam mengerjakan semua kebutuhan konsumen yang dipercayakan kepada kami\r\n                        </h6>', '<h6 class=\"text-dark mb-3 font-weight-light\">VarTech Indonesia berkomitmen secara Profesional, Terpercaya,\r\n                            Adaptif dan Inovatif dalam mengerjakan semua kebutuhan konsumen yang dipercayakan kepada kami\r\n                        </h6>', 'images-page/solusi-terbaik-jasa-teknologi-informasi-anda-.png', 'Published', '2021-08-29 08:29:21', '2021-08-29 09:59:57'),
-(2, 3, 1, 'pembuatan-website', 'vartech-indonesia-pembuatan-website', 'Pembuatan Website', 'Pembuatan Website', 'Pembuatan Website', '<h6 class=\"font-weight-normal mb-3\"><a href=\"http://127.0.0.1:8000/#\" class=\"text-dark\">Pembuatan Website</a></h6>', '<h6 class=\"font-weight-normal mb-3\"><a href=\"http://127.0.0.1:8000/#\" class=\"text-dark\">Pembuatan Website</a></h6>', NULL, 'Unpublish', '2021-08-29 08:30:06', '2021-08-30 04:25:51'),
-(3, 3, 1, 'sistem-informasi-akademik', 'vartech-indonesia-sistem-informasi-akademik', 'Sistem Informasi Akademik', 'Sistem Informasi Akademik', 'Sistem Informasi Akademik', '<h6 class=\"font-weight-normal mb-3\"><a href=\"http://127.0.0.1:8000/#\" class=\"text-dark\">Sistem Informasi Akademik</a></h6>', '<h6 class=\"font-weight-normal mb-3\"><a href=\"http://127.0.0.1:8000/#\" class=\"text-dark\">Sistem Informasi Akademik</a></h6>', NULL, 'Unpublish', '2021-08-29 08:30:24', '2021-08-30 04:25:34'),
-(4, 3, 1, 'sistem-informasi-pemerintahan-(e-government)', 'vartech-indonesia-sistem-informasi-pemerintahan-(e-government)', 'Sistem Informasi Pemerintahan (e-government)', 'Sistem Informasi Pemerintahan (e-government)', 'Sistem Informasi Pemerintahan (e-government)', '<h6 class=\"font-weight-normal mb-3\"><a href=\"http://127.0.0.1:8000/#\" class=\"text-dark\">Sistem Informasi Pemerintahan (e-government)</a></h6>', '<h6 class=\"font-weight-normal mb-3\"><a href=\"http://127.0.0.1:8000/#\" class=\"text-dark\">Sistem Informasi Pemerintahan (e-government)</a></h6>', NULL, 'Unpublish', '2021-08-29 08:30:47', '2021-08-30 04:25:42'),
-(5, 4, 1, 'portofolio---sistem-informasi-akademik-(siakad)', 'vartech-indonesia-portofolio---sistem-informasi-akademik-(siakad)', 'Portofolio - Sistem Informasi Akademik (SIAKAD)', 'Portofolio - Sistem Informasi Akademik (SIAKAD)', 'Portofolio - Sistem Informasi Akademik (SIAKAD)', '<h6>Portofolio - Sistem Informasi Akademik (SIAKAD)</h6>', 'Portofolio - Sistem Informasi Akademik (SIAKAD)', 'images-page/portofolio---sistem-informasi-akademik-(siakad)-.png', 'Published', '2021-08-29 09:33:10', '2021-08-29 09:33:10'),
-(6, 5, 1, 'testimoni-pengguna----senior-management', 'vartech-indonesia-testimoni-pengguna----senior-management', 'Testimoni Pengguna -  Senior Management', 'Testimoni Pengguna -  Senior Management', 'Testimoni Pengguna -  Senior Management', '<h6>Testimoni Pengguna -&nbsp; Senior Management</h6>', '<h6>Testimoni Pengguna -&nbsp; Senior Management</h6>', 'images-page/testimoni-pengguna----senior-management-.png', 'Unpublish', '2021-08-29 09:40:54', '2021-08-30 04:25:09');
+(7, 2, 1, 'solusi-terbaik-jasa-teknologi-informasi-anda', 'vartech-indonesia-solusi-terbaik-jasa-teknologi-informasi-anda', 'Solusi Terbaik Jasa Teknologi Informasi Anda', 'Solusi Terbaik Jasa Teknologi Informasi Anda', 'Solusi Terbaik Jasa Teknologi Informasi Anda', '<h6 style=\"font-family: Rubik, sans-serif; line-height: 1.5; background-color: rgb(248, 249, 250);\">Solusi Terbaik Jasa Teknologi Informasi Anda</h6>', '<h6 style=\"font-family: Rubik, sans-serif; line-height: 1.5; background-color: rgb(248, 249, 250);\">Solusi Terbaik Jasa Teknologi Informasi Anda</h6>', 'images-page/solusi-terbaik-jasa-teknologi-informasi-anda-.png', 'Published', '2021-08-31 05:59:03', '2021-08-31 05:59:50');
 
 -- --------------------------------------------------------
 
@@ -146,10 +141,8 @@ CREATE TABLE `page_categories` (
 INSERT INTO `page_categories` (`id`, `author_id`, `title`, `desciption`, `status`, `created_at`, `updated_at`) VALUES
 (1, 1, 'Visi, Misi dan Tujuan', NULL, 'Active', '2021-08-29 08:26:51', '2021-08-29 08:26:51'),
 (2, 1, 'Beranda', NULL, 'Active', '2021-08-29 08:26:58', '2021-08-29 08:26:58'),
-(3, 1, 'Layanan', NULL, 'Inactive', '2021-08-29 08:27:10', '2021-08-30 04:36:09'),
-(4, 1, 'Portofolio', NULL, 'Inactive', '2021-08-29 08:27:20', '2021-08-30 04:24:40'),
-(5, 1, 'Testimoni', NULL, 'Inactive', '2021-08-29 08:27:39', '2021-08-30 04:35:50'),
-(6, 1, 'Perjanjian dan Kerjasama', NULL, 'Active', '2021-08-29 08:28:15', '2021-08-29 08:28:15');
+(6, 1, 'Nilai-nilai Perusahaan', NULL, 'Active', '2021-08-29 08:28:15', '2021-08-31 06:25:17'),
+(8, 1, 'Sumber Daya', NULL, 'Active', '2021-08-31 06:25:27', '2021-08-31 06:25:27');
 
 -- --------------------------------------------------------
 
@@ -183,6 +176,9 @@ CREATE TABLE `posts` (
   `body` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '''Published''',
+  `icon` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `bg_color` char(64) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `bg_hover_color` char(64) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -191,8 +187,8 @@ CREATE TABLE `posts` (
 -- Dumping data for table `posts`
 --
 
-INSERT INTO `posts` (`id`, `id_post_category`, `id_author`, `slug`, `seo_title`, `meta_keywords`, `meta_description`, `order_position`, `title`, `excerpt`, `body`, `image`, `status`, `created_at`, `updated_at`) VALUES
-(12, 9, 1, 'pembuatan-website', 'vartech-indonesia-pembuatan-website', 'Pembuatan Website', 'Pembuatan Website', 1, 'Pembuatan Website', '<pre class=\"lang-php s-code-block\" style=\"margin-bottom: 0px; padding: 12px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; line-height: 1.30769; font-family: var(--ff-mono); font-size: 13px; vertical-align: baseline; box-sizing: inherit; width: auto; max-height: 600px; background-color: var(--highlight-bg); border-radius: 5px; color: var(--highlight-color); overflow-wrap: normal;\"><code class=\"hljs language-php\" style=\"margin: 0px; padding: 0px; border: 0px; font-style: inherit; font-variant: inherit; font-weight: inherit; font-stretch: inherit; line-height: inherit; font-family: inherit; font-size: 13px; vertical-align: baseline; box-sizing: inherit; background-color: transparent; white-space: inherit;\">rename</code></pre>', '<pre class=\"lang-php s-code-block\" style=\"margin-bottom: 0px; padding: 12px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; line-height: 1.30769; font-family: var(--ff-mono); font-size: 13px; vertical-align: baseline; box-sizing: inherit; width: auto; max-height: 600px; background-color: var(--highlight-bg); border-radius: 5px; color: var(--highlight-color); overflow-wrap: normal;\"><code class=\"hljs language-php\" style=\"margin: 0px; padding: 0px; border: 0px; font-style: inherit; font-variant: inherit; font-weight: inherit; font-stretch: inherit; line-height: inherit; font-family: inherit; font-size: 13px; vertical-align: baseline; box-sizing: inherit; background-color: transparent; white-space: inherit;\">rename</code></pre>', 'images-post/pembuatan-website-.png', 'Published', '2021-08-30 08:24:03', '2021-08-30 08:45:27');
+INSERT INTO `posts` (`id`, `id_post_category`, `id_author`, `slug`, `seo_title`, `meta_keywords`, `meta_description`, `order_position`, `title`, `excerpt`, `body`, `image`, `status`, `icon`, `bg_color`, `bg_hover_color`, `created_at`, `updated_at`) VALUES
+(12, 9, 1, 'pembuatan-website', 'vartech-indonesia-pembuatan-website', 'Pembuatan Website', 'Pembuatan Website', 1, 'Pembuatan Website', '<pre class=\"lang-php s-code-block\" style=\"margin-bottom: 0px; padding: 12px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; line-height: 1.30769; font-family: var(--ff-mono); font-size: 13px; vertical-align: baseline; box-sizing: inherit; width: auto; max-height: 600px; background-color: var(--highlight-bg); border-radius: 5px; color: var(--highlight-color); overflow-wrap: normal;\"><code class=\"hljs language-php\" style=\"margin: 0px; padding: 0px; border: 0px; font-style: inherit; font-variant: inherit; font-weight: inherit; font-stretch: inherit; line-height: inherit; font-family: inherit; font-size: 13px; vertical-align: baseline; box-sizing: inherit; background-color: transparent; white-space: inherit;\">rename</code></pre>', '<pre class=\"lang-php s-code-block\" style=\"margin-bottom: 0px; padding: 12px; border: 0px; font-variant-numeric: inherit; font-variant-east-asian: inherit; font-stretch: inherit; line-height: 1.30769; font-family: var(--ff-mono); font-size: 13px; vertical-align: baseline; box-sizing: inherit; width: auto; max-height: 600px; background-color: var(--highlight-bg); border-radius: 5px; color: var(--highlight-color); overflow-wrap: normal;\"><code class=\"hljs language-php\" style=\"margin: 0px; padding: 0px; border: 0px; font-style: inherit; font-variant: inherit; font-weight: inherit; font-stretch: inherit; line-height: inherit; font-family: inherit; font-size: 13px; vertical-align: baseline; box-sizing: inherit; background-color: transparent; white-space: inherit;\">rename</code></pre>', 'images-post/pembuatan-website-.png', 'Unpublish', NULL, NULL, NULL, '2021-08-30 08:24:03', '2021-08-31 06:31:06');
 
 -- --------------------------------------------------------
 
@@ -372,13 +368,13 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `pages`
 --
 ALTER TABLE `pages`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `page_categories`
 --
 ALTER TABLE `page_categories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `posts`
@@ -390,7 +386,7 @@ ALTER TABLE `posts`
 -- AUTO_INCREMENT for table `post_categories`
 --
 ALTER TABLE `post_categories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `roles`

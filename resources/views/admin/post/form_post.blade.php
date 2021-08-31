@@ -94,7 +94,7 @@
                                         <span class="input-group-text"><i class="far fa-clipboard"></i></span>
                                     </div>
                                     <input type="text" name="title" id="title" class="form-control" placeholder="Title" value="{{ old('title') }}" required>
-                                    <input type="text" name="title_hidden" id="title_hidden">
+                                    <input type="hidden" name="title_hidden" id="title_hidden">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -117,7 +117,7 @@
                                 <label><h6>Image</h6></label>
                                 <div class="input-group">
                                     <input type="file" name="image" id="image">
-                                    <input type="text" name="image_hidden" id="image_hidden">
+                                    <input type="hidden" name="image_hidden" id="image_hidden">
                                     <div id="image_show" name="image_show"></div>
                                 </div>
                             </div>

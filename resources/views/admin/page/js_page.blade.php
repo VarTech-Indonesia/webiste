@@ -16,10 +16,12 @@ $(function() {
         $('#meta_keywords').val('');
         $('#meta_description').val('');
         $('#title').val('');
+        $('#title_hidden').val('');
         $('#excerpt').summernote('code', '');
         $('#body').summernote('code', '');
         $("#customRadio1").prop('checked', true);
         $('#image').val('');
+        $('#image_hidden').val('');
     });
 
     $('body').on('click', '.edit', function() {
@@ -33,13 +35,10 @@ $(function() {
             $('#meta_keywords').val(data.meta_keywords);
             $('#meta_description').val(data.meta_description);
             $('#title').val(data.title);
+            $('#title_hidden').val(data.title);
             $('#excerpt').summernote('code', data.excerpt);
             $('#body').summernote('code', data.body);
-            if (data.status === "Published") {
-                $("#customRadio1").prop('checked', true);
-            } else {
-                $("#customRadio2").prop('checked', true);
-            }
+            (data.status === "Published") ?  $("#customRadio1").prop('checked', true) :  $("#customRadio2").prop('checked', true);
             $('#image').val('');
             $('#image_hidden').val(data.image);
             $('#image_show').html(" <img src={{ asset('storage') }}/" + data.image + " width=200px> ");
@@ -50,16 +49,9 @@ $(function() {
     $('#saveBtn').click(function(e) {
         e.preventDefault();
         let id = $('#id_hidden').val();
-
         let status_button = $('#saveBtn').val();
         let url;
         status_button === ("create") ? url = "{{ url('admin/page-admin/store') }}" : url = "{{ url('admin/page-admin/update') }}" + "/" + id;
-
-        // if (status_button === "create") {
-        //     var url = "{{ url('admin/page-admin/store') }}";
-        // } else {
-        //     var url = "{{ url('admin/page-admin/update') }}" + "/" + id;
-        // }
         jQuery('.alert-danger').hide();
         jQuery('.alert-success').hide();
         const formData = new FormData(form);

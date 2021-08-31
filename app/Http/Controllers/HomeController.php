@@ -38,7 +38,7 @@ class HomeController extends Controller
             Page::whereHas('PageCategory', function ($query) {
                 return $query->where('status', 'Active')->where('title', 'Testimoni');
             })->where('status', 'Published')->get();
-        // dd($data['testimoni']);
+
         return view('index', $data);
     }
 

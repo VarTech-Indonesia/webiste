@@ -12,7 +12,7 @@
 
     <div class="card card-lightblue">
         <div class="card-header">
-            <h3 class="card-title">Page Categories</h3>
+            <h3 class="card-title">Info</h3>
             <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse">
                 <i class="fas fa-minus"></i>
@@ -20,7 +20,7 @@
             </div>
         </div>
         <div class="card-body">
-       
+           
         </div>
     </div>
     <div class="card card-lightblue">
@@ -68,10 +68,8 @@
             </table>
         </div>
     </div>
-
-    @include('admin/page/form')
-    @include('admin/page/js')
-
+    @include('admin/page/js_page')
+    @include('admin/page/form_page')
 @stop
 
 
