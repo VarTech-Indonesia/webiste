@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Page;
-use App\Models\PageCategory;
+use App\Models\Post;
+use App\Models\PostCategory;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
 
-class PageController extends Controller
+class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,13 +20,12 @@ class PageController extends Controller
     public function index()
     {
         $data = [
-            'title'         => 'Data Page | VarTech Indonesia',
-            'title_table'   => 'Data Page'
+            'title'         => 'Data Post | VarTech Indonesia',
+            'title_table'   => 'Data Post'
         ];
-        $data['page_category']  = PageCategory::where('status', 'Active')->orderBy('title')->get();
-        $data['data']           = Page::with('PageCategory', 'User')->orderByDesc('updated_at')->get();
-        dd($data['data']);
-        return view('admin.page.index', $data);
+        $data['post_category']  = PostCategory::where('status', 'Active')->orderBy('title')->get();
+        $data['data']           = Post::with('PostCategory', 'User')->orderByDesc('updated_at')->get();
+        return view('admin.post.index', $data);
     }
 
     /**
@@ -37,11 +36,11 @@ class PageController extends Controller
     public function create()
     {
         $data = [
-            'title'         => 'Add Data Page | VarTech Indonesia',
-            'title_table'   => 'Add Data Page'
+            'title'         => 'Add Data Post | VarTech Indonesia',
+            'title_table'   => 'Add Data Post'
         ];
-        $data['page_category']  = PageCategory::where('status', 'Active')->orderBy('title')->get();
-        return view('admin.page.index', $data);
+        $data['post_category']  = PostCategory::where('status', 'Active')->orderBy('title')->get();
+        return view('admin.post.index', $data);
     }
 
     /**
@@ -53,6 +52,7 @@ class PageController extends Controller
     public function store(Request $request)
     {
         $rules = [
+            'order_position'    => 'required',
             'title'             => 'required|min:5|max:255',
             'excerpt'           => 'required',
             'body'              => 'required',
@@ -60,6 +60,7 @@ class PageController extends Controller
             'status'            => 'required'
         ];
         $messages = [
+            'order_position.required'    => 'Order Position Required',
             'title.required'    => 'Title Required',
             'title.min'         => 'Title Min. 5 karakter',
             'title.max'         => 'Title Max. 255 karakter',
@@ -93,18 +94,19 @@ class PageController extends Controller
             $getFileExt     = $ImgValue->getClientOriginalExtension();
             $uploadedFile   = $slug . '-' . '.' . $getFileExt;
             // Upload Image
-            $image->storeAs('public/images-page', $uploadedFile);
+            $image->storeAs('public/images-post', $uploadedFile);
             // Save Image di DB
-            $uploadedFile   = 'images-page/' . $uploadedFile;
+            $uploadedFile   = 'images-post/' . $uploadedFile;
         }
 
-        $query  = Page::create([
-            'id_page_category'  => $request->id_page_category,
+        $query  = Post::create([
+            'id_post_category'  => $request->id_post_category,
             'id_author'         => Auth::user()->id,
             'slug'              => $slug,
             'seo_title'         => $seo_title,
             'meta_keywords'     => $request->meta_keywords,
             'meta_description'  => $request->meta_description,
+            'order_position'    => $request->order_position,
             'title'             => $request->title,
             'excerpt'           => $request->excerpt,
             'body'              => $request->body,
@@ -113,9 +115,9 @@ class PageController extends Controller
         ]);
 
         if ($query) {
-            return response()->json(['success'  => 'Page Category Saved Successfully']);
+            return response()->json(['success'  => 'Post Category Saved Successfully']);
         } else {
-            return response()->json(['error'    => 'Page Category Saved Failed']);
+            return response()->json(['error'    => 'Post Category Saved Failed']);
         }
     }
 
@@ -138,7 +140,7 @@ class PageController extends Controller
      */
     public function edit($id)
     {
-        $data   = Page::find($id);
+        $data   = Post::find($id);
         return response()->json($data);
     }
 
@@ -152,6 +154,7 @@ class PageController extends Controller
     public function update(Request $request, $id)
     {
         $rules = [
+            'order_position'    => 'required',
             'title'             => 'required|min:5|max:255',
             'excerpt'           => 'required',
             'body'              => 'required',
@@ -159,17 +162,15 @@ class PageController extends Controller
             'status'            => 'required'
         ];
         $messages = [
+            'order_position.required'    => 'Order Position Required',
             'title.required'    => 'Title Required',
             'title.min'         => 'Title Min. 5 karakter',
             'title.max'         => 'Title Max. 255 karakter',
-
             'excerpt.required'  => 'Excerpt Required',
             'body.required'     => 'Body Required',
-
             'image.image'       => 'Gambar Wajib  di Isi dengan Image Format : JPEG, JPG, PNG Max. 10 Mb',
             'image.mimes'       => 'Gambar Wajib  dengan Format : JPEG, JPG, PNG Max. 10 Mb',
             'image.max'         => 'Gambar Max. 10 Mb',
-
             'status.required'   => 'Status Required',
         ];
 
@@ -192,16 +193,16 @@ class PageController extends Controller
             // Delete Old Image
             File::delete('storage/' . $request->image_hidden);
             // Upload New Image
-            $image->storeAs('public/images-page', $uploadedFile);
+            $image->storeAs('public/images-post', $uploadedFile);
             // Save Image in DB
-            $uploadedFile   = 'images-page/' . $uploadedFile;
+            $uploadedFile   = 'images-post/' . $uploadedFile;
         } else if (($request->title != $request->title_hidden) && ($image == NULL)) {
             // Change Image Name
             $image          = $request->image_hidden;
             $getFileExt     = substr($image, strpos($image, ".") + 1);
             $uploadedFile   = $slug . '-' . '.' . $getFileExt;
             // Save Image in DB
-            $uploadedFile   = 'images-page/' . $uploadedFile;
+            $uploadedFile   = 'images-post/' . $uploadedFile;
             // Rename Image
             Storage::rename('public/' . $request->image_hidden, 'public/' . $uploadedFile);
         } else if (($request->title == $request->title_hidden) && ($image != NULL)) {
@@ -213,20 +214,21 @@ class PageController extends Controller
             // Delete Old Image
             File::delete('storage/' . $request->image_hidden);
             // Upload New Image
-            $image->storeAs('public/images-page', $uploadedFile);
+            $image->storeAs('public/images-post', $uploadedFile);
             // Save Image in DB
-            $uploadedFile   = 'images-page/' . $uploadedFile;
+            $uploadedFile   = 'images-post/' . $uploadedFile;
         } else {
             $uploadedFile   = $request->image_hidden;
         }
 
-        $query  = Page::whereId($id)->update([
-            'id_page_category'  => $request->id_page_category,
+        $query  = Post::whereId($id)->update([
+            'id_post_category'  => $request->id_post_category,
             'id_author'         => Auth::user()->id,
             'slug'              => $slug,
             'seo_title'         => $seo_title,
             'meta_keywords'     => $request->meta_keywords,
             'meta_description'  => $request->meta_description,
+            'order_position'    => $request->order_position,
             'title'             => $request->title,
             'excerpt'           => $request->excerpt,
             'body'              => $request->body,
@@ -235,9 +237,9 @@ class PageController extends Controller
         ]);
 
         if ($query) {
-            return response()->json(['success'  => 'Page Saved Successfully']);
+            return response()->json(['success'  => 'Post Saved Successfully']);
         } else {
-            return response()->json(['error'    => 'Page Saved Failed']);
+            return response()->json(['error'    => 'Post Saved Failed']);
         }
     }
 
@@ -249,13 +251,12 @@ class PageController extends Controller
      */
     public function destroy($id)
     {
-        $find  = Page::find($id);
+        $find  = Post::find($id);
         File::delete('storage/' . $find->image);
-        // $query ?  return response()->json(['success'  => 'Page Delete Successfully']) :  return response()->json(['error'    => 'Page Delete Failed']);
-        if (Page::where('id', $find->id)->delete()) {
-            return response()->json(['success'  => 'Page Delete Successfully']);
+        if (Post::where('id', $find->id)->delete()) {
+            return response()->json(['success'  => 'Post Delete Successfully']);
         } else {
-            return response()->json(['error'    => 'Page Delete Failed']);
+            return response()->json(['error'    => 'Post Delete Failed']);
         }
     }
 }

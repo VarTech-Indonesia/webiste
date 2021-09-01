@@ -68,13 +68,13 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="" class="nav-link">
+                            <a href="{{route('post-category.index')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Categories</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="" class="nav-link">
+                            <a href="{{ url('admin/post-admin') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Posts</p>
                             </a>
@@ -85,7 +85,18 @@
                     <a href="{{route('user-admin.index')}}" class="nav-link">
                         <img src="{{asset('storage/images-front/slider.svg')}}" width="20px" >
                         <p>
-                            Slider
+                            Portofolio
+                            <span class="badge badge-info right">
+                                2
+                            </span>
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('user-admin.index')}}" class="nav-link">
+                        <img src="{{asset('storage/images-front/slider.svg')}}" width="20px" >
+                        <p>
+                            Guest Book
                             <span class="badge badge-info right">
                                 2
                             </span>

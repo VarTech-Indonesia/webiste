@@ -9,6 +9,20 @@
     @section('menu-admin-left')
         @yield('menu-admin-left')
     @stop
+
+    <div class="card card-lightblue">
+        <div class="card-header">
+            <h3 class="card-title">Post Categories</h3>
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                <i class="fas fa-minus"></i>
+                </button>
+            </div>
+        </div>
+        <div class="card-body">
+       
+        </div>
+    </div>
     <div class="card card-lightblue">
         <div class="card-header">
             <h3 class="card-title">
@@ -20,16 +34,19 @@
             </button>
             </div>
         </div>
-        <div class="card-body table-responsive p-0">
-            <table class="table table-hover text-nowrap">
+        <div class="card-body">
+            <table class="table table-hover text-nowrap" id="example2">
                 <thead>
                     <tr>
                         <th style="width: 10px">#</th>
+                        <th><i class="fas fa-cogs">&nbsp; Kategori</i></th>
+                        <th><i class="far fa-clipboard">&nbsp; Order Position</i></th>
                         <th><i class="far fa-clipboard">&nbsp; Title</i></th>
+                        <th></th>
                         <th><i class="fas fa-user-secret"></i>&nbsp; Status</th>
                         <th style="width: 40px">
-                            <a class="btn btn-info btn-sm" href="javascript:void(0)" id="addCategory">
-                            <i class="fas fa-user-plus"></i>&nbsp; &nbsp; Add Page Category</a>
+                            <a class="btn btn-info btn-sm" href="javascript:void(0)" id="addPost">
+                            <i class="fas fa-user-plus"></i>&nbsp; &nbsp; Add Post</a>
                         </th>
                     </tr>
                 </thead>
@@ -37,11 +54,14 @@
                     @foreach($data as $show)
                     <tr>
                         <td>{{$loop->iteration}}</td>
+                        <td>{{$show->PostCategory->title}}</td>
+                        <td>{{$show->order_position}}</td>
                         <td>{{$show->title}}</td>
+                        <td><img src="{{asset('storage/'.$show->image)}}" width="200px"></td>
                         <td>{{$show->status}}</td>
                         <td class="project-actions text-right">
                             <a class="btn btn-primary btn-sm" href="#"> <i class="fas fa-folder"></i></a>
-                            <a class="btn btn-warning btn-sm editCategory" href="javascript:void(0)" id="editCategory" data-id="{{$show->id}}"><i class="fas fa-pencil-alt"></i></a>
+                            <a class="btn btn-warning btn-sm edit" href="javascript:void(0)" id="edit" data-id="{{$show->id}}"><i class="fas fa-pencil-alt"></i></a>
                             <a class="btn btn-danger btn-sm delete" href="javascript:void(0)" id="delete" data-id="{{$show->id}}"><i class="fas fa-trash"></i></a>
                         </td>
                     </tr>
@@ -50,8 +70,10 @@
             </table>
         </div>
     </div>
-    @include('admin/page_category/form_page_category')
-    @include('admin/page_category/js_page_category')
+
+    @include('admin/post/form_post')
+    @include('admin/post/js_post')
+
 @stop
 
 

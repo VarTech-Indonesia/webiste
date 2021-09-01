@@ -29,7 +29,7 @@
                         <th><i class="fas fa-user-secret"></i>&nbsp; Status</th>
                         <th style="width: 40px">
                             <a class="btn btn-info btn-sm" href="javascript:void(0)" id="addCategory">
-                            <i class="fas fa-user-plus"></i>&nbsp; &nbsp; Add Page Category</a>
+                            <i class="fas fa-user-plus"></i>&nbsp; &nbsp; Add Post Category</a>
                         </th>
                     </tr>
                 </thead>
@@ -50,8 +50,8 @@
             </table>
         </div>
     </div>
-    @include('admin/page_category/form_page_category')
-    @include('admin/page_category/js_page_category')
+    @include('admin/post_category/form_post_category')
+    @include('admin/post_category/js_post_category')
 @stop
 
 

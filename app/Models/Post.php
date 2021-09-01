@@ -8,11 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     use HasFactory;
-    protected $fillable =[
-        'title',
-        'excerpt',
-        'body',
-        'image',
-        'published_at',
-    ];
+    protected $guarded = ['id'];
+
+    // Relationship to Post Categories
+    public function PostCategory()
+    {
+        return $this->hasOne('App\Models\PostCategory', 'id', 'id_post_category');
+    }
+    // Relationship to User
+    public function user()
+    {
+        return $this->hasOne('App\Models\User', 'id', 'id_author');
+    }
 }

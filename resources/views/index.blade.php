@@ -129,20 +129,33 @@
                 </div>
             </div>
             <div class="row" data-aos="flip-left">
-                <div class="col-lg-4">
+                <div class="col-lg-3">
+                    <div class="about-box about-light text-center p-3">
+                        <div class="about-icon mb-4">
+                            <i class="mdi mdi-nature"></i>
+                        </div>
+                        <h4 class="font-weight-light">
+                            <a href="#" class="text-dark">
+                                <p class="gsap-text-profesional"></p>
+                            </a>
+                        </h4>
+                        <p class="text-muted f-14"></p>
+                    </div>
+                </div>
+                <div class="col-lg-3">
                     <div class="about-box about-light text-center p-3">
                         <div class="about-icon mb-4">
                             <i class="mdi mdi-lightbulb"></i>
                         </div>
                         <h4 class="font-weight-light">
                             <a href="#" class="text-dark">
-                                <p class="gsap-text-inovatif"></p>
+                                <p class="gsap-text-terpercaya"></p>
                             </a>
                         </h4>
                         <p class="text-muted f-14"></p>
                     </div>
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-3">
                     <div class="about-box about-light text-center p-3">
                         <div class="about-icon mb-4">
                             <i class="mdi mdi-projector-screen"></i>
@@ -155,14 +168,14 @@
                         <p class="text-muted f-14"></p>
                     </div>
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-3">
                     <div class="about-box about-light text-center p-3">
                         <div class="about-icon mb-4">
-                            <i class="mdi mdi-nature"></i>
+                            <i class="mdi mdi-lightbulb"></i>
                         </div>
                         <h4 class="font-weight-light">
                             <a href="#" class="text-dark">
-                                <p class="gsap-text-profesional"></p>
+                                <p class="gsap-text-inovatif"></p>
                             </a>
                         </h4>
                         <p class="text-muted f-14"></p>
@@ -201,7 +214,23 @@
                 </div>
             </div>
             <div class="row">
+                @foreach ($layanan as $item_layanan)
                 <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="50">
+                    <div class=" service-box rounded mt-4 p-4">
+                        <div class="service-icon mb-3">
+                            <i class="mdi mdi-database"></i>
+                        </div>
+                        <div class="services-desc">
+                            <div class="service-title mb-2 position-relative">
+                                <h5 class="font-weight-normal mb-3"><a href="#" class="text-dark">{{ $item_layanan->title }}</a></h5>
+                            </div>
+                            <p class="text-muted mb-3 f-14">{!! $item_layanan->excerpt !!}</p>
+                            <p class="mb-0 text-uppercase f-13"><a href="#" class="text-primary">Selanjutnya<i class="mdi mdi-arrow-right ml-2"></i></a></p>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+                {{-- <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="50">
                     <div class=" service-box rounded mt-4 p-4">
                         <div class="service-icon mb-3">
                             <i class="mdi mdi-database"></i>
@@ -326,7 +355,7 @@
                             <p class="mb-0 text-uppercase f-13"><a href="#" class="text-primary">Selanjutnya<i class="mdi mdi-arrow-right ml-2"></i></a></p>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </section>
@@ -782,20 +811,25 @@
         //     opacity: 0,
         //     ease: 'bounce'
         // });
-        gsap.to(".gsap-text-inovatif", {
+        gsap.to(".gsap-text-profesional", {
             duration: 1,
             delay: 1,
-            text: "Inovatif"
+            text: "Profesional"
+        })
+        gsap.to(".gsap-text-terpercaya", {
+            duration: 1,
+            delay: 2,
+            text: "Terpercaya"
         })
         gsap.to(".gsap-text-adaftif", {
             duration: 1,
-            delay: 2,
+            delay: 3,
             text: "Adaftif"
         })
-        gsap.to(".gsap-text-profesional", {
+        gsap.to(".gsap-text-inovatif", {
             duration: 1,
-            delay: 3,
-            text: "Profesional"
+            delay: 4,
+            text: "Inovatif"
         })
     </script>
 </body>
