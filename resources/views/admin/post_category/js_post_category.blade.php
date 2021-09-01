@@ -5,7 +5,7 @@ $(function () {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-    $('#addCategory').click(function () {
+    $('body').on('click', '.add', function () {
         $('#ajaxModel').modal('show');
         $('#postForm').trigger("reset");
         $('#modelHeading').html("Create New Post Category");

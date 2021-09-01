@@ -6,10 +6,10 @@ $(function() {
         }
     });
 
-    $('#addPost').click(function() {
+    $('body').on('click', '.add', function() {
         $('#ajaxModel').modal('show');
         $('#form').trigger("reset");
-        $('#modelHeading').html("Create New Post");
+        $('#modelHeading').html("Create New Page");
         $('#saveBtn').val("create");
         $('#id_hidden').val('');
         $('#meta_keywords').val('');
@@ -21,6 +21,12 @@ $(function() {
         $("#customRadio1").prop('checked', true);
         $('#image').val('');
         $('#image_hidden').val('');
+        $('#image_show').html('');
+        $('#icon').val('');
+        $('#icon_hidden').html('');
+        $('#icon_show').html('');
+        $('#bg_color').val('');
+        $('#bg_color_hover').val('');
     });
 
     $('body').on('click', '.edit', function() {
@@ -42,6 +48,11 @@ $(function() {
             $('#image').val('');
             $('#image_hidden').val(data.image);
             $('#image_show').html(" <img src={{ asset('storage') }}/" + data.image + " width=200px> ");
+            $('#icon').val('');
+            $('#icon_hidden').val(data.icon);
+            $('#icon_show').html(" <img src={{ asset('storage') }}/" + data.icon + " width=100px> ");
+            $('#bg_color').val(data.bg_color);
+            $('#bg_hover_color').val(data.bg_hover_color);
         })
 
     });

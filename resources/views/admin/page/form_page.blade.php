@@ -1,5 +1,5 @@
 <div class="modal fade" id="ajaxModel">
-    <form name="form" id="form"  enctype="multipart/form-data">
+    <form name="form" id="form" method="POST" enctype="multipart/form-data">
         <input type="hidden" name="id_hidden" id="id_hidden">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -10,12 +10,12 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="card card-lightblue">
+                    <div class="card card-lightblue collapsed-card">
                         <div class="card-header">
                         <h3 class="card-title">SEO</h3>
                         <div class="card-tools">
                             <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                            <i class="fas fa-minus"></i>
+                            <i class="fas fa-plus"></i>
                             </button>
                         </div>
                         </div>
@@ -104,6 +104,11 @@
                                     </div>
                                     <input type="file" name="image" id="image">
                                     <input type="hidden" name="image_hidden" id="image_hidden">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label><h6>Preview</h6></label>
+                                <div class="input-group">
                                     <div id="image_show" name="image_show"></div>
                                 </div>
                             </div>
@@ -127,9 +132,62 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="alert alert-danger" style="display:none"></div>
-                        <div class="alert alert-success" style="display:none"></div>
                     </div>
+                    <div class="card card-lightblue collapsed-card">
+                        <div class="card-header">
+                        <h3 class="card-title">Style</h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                            <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label>
+                                    <h6>Icon</h6>
+                                </label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                    </div>
+                                    <input type="file" name="icon" id="icon">
+                                    <input type="hidden" name="icon_hidden" id="icon_hidden">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>
+                                    <h6>Preview</h6>
+                                </label>
+                                <div class="input-group">
+                                    <div id="icon_show" name="icon_show"></div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>
+                                    <h6>Background Color</h6>
+                                </label>
+                                <div class="input-group my-colorpicker2">
+                                    <input type="text" class="form-control" name="bg_color" id="bg_color">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text"><i class="fas fa-square"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>
+                                    <h6>Background Hover Color</h6>
+                                </label>
+                                <div class="input-group my-colorpicker3">
+                                    <input type="text" class="form-control" name="bg_hover_color" id="bg_hover_color">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text"><i class="fas fa-square"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="alert alert-danger" style="display:none"></div>
+                    <div class="alert alert-success" style="display:none"></div>
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-default" data-dismiss="modal" onclick="javascript:window.location.reload()">Close</button>

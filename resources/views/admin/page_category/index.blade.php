@@ -20,16 +20,17 @@
             </button>
             </div>
         </div>
-        <div class="card-body table-responsive p-0">
-            <table class="table table-hover text-nowrap">
+        <div class="card-body">
+            <table class="table table-hover text-nowrap" id="example2">
                 <thead>
                     <tr>
                         <th style="width: 10px">#</th>
                         <th><i class="far fa-clipboard">&nbsp; Title</i></th>
                         <th><i class="fas fa-user-secret"></i>&nbsp; Status</th>
                         <th style="width: 40px">
-                            <a class="btn btn-info btn-sm" href="javascript:void(0)" id="addCategory">
-                            <i class="fas fa-user-plus"></i>&nbsp; &nbsp; Add Page Category</a>
+                            <a class="btn btn-info btn-sm add" href="javascript:void(0)" id="add">
+                                <i class="fas fa-user-plus"></i>&nbsp; &nbsp; Add Page Category
+                            </a>
                         </th>
                     </tr>
                 </thead>

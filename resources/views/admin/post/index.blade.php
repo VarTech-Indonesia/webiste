@@ -45,8 +45,9 @@
                         <th></th>
                         <th><i class="fas fa-user-secret"></i>&nbsp; Status</th>
                         <th style="width: 40px">
-                            <a class="btn btn-info btn-sm" href="javascript:void(0)" id="addPost">
-                            <i class="fas fa-user-plus"></i>&nbsp; &nbsp; Add Post</a>
+                            <a class="btn btn-info btn-sm add" href="javascript:void(0)" id="add">
+                                <i class="fas fa-user-plus"></i>&nbsp; &nbsp; Add Post
+                            </a>
                         </th>
                     </tr>
                 </thead>

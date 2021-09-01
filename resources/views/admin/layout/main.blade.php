@@ -14,6 +14,10 @@
     <link rel="shortcut icon" href="{{asset('storage/images-front/vartech.ico')}}">
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Google Font: Roboto -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;500;900&display=swap" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{asset('adminlte/plugins/fontawesome-free/css/all.min.css')}}">
     <!-- Theme style -->
@@ -104,7 +108,6 @@
       </style>
        
 </head>
-
 <body class="hold-transition sidebar-mini layout-navbar-fixed layout-footer-fixed pace-lightblue">
     {{-- <div class="preloader flex-column justify-content-center align-items-center">
         <img class="animation__wobble" src="{{asset('storage/images-front/vartech.png')}}" alt="VarTech" height="60" width="60">
@@ -129,14 +132,12 @@
             </section>
             <!-- Main content end-->
         </div>
-
         <footer class="main-footer">
             <div class="float-right d-none d-sm-block">
                 <b>Version</b>1.1.0
             </div>
             <strong>Copyright &copy; {{date('Y')}} <a href="/" class="text-info">VarTech Indonesia</a></strong> All rights reserved.
         </footer>
-
     </div>
 
     <!-- Bootstrap 4 -->
@@ -179,7 +180,6 @@
     <script src="{{asset('adminlte/plugins/codemirror/mode/xml/xml.js')}}"></script>
     <script src="{{asset('adminlte/plugins/codemirror/mode/htmlmixed/htmlmixed.js')}}"></script>
     <!-- DataTables  & Plugins -->
-    //cdn.datatables.net/1.11.0/js/jquery.dataTables.min.js
     <script src="{{asset('adminlte/plugins/datatables/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
     <script src="{{asset('adminlte/plugins/datatables-responsive/js/dataTables.responsive.min.js')}}"></script>
@@ -216,8 +216,40 @@
     <script>
     $(function () {
         // Summernote
-        $('#excerpt').summernote()
-        $('#body').summernote()
+        $('#excerpt').summernote({
+            height: 150,
+            fontSizes: ['8', '9', '10', '11', '12', '14','16','18','20','22','24'],
+            toolbar: [
+                ['style', ['style']],
+                ['font', ['bold', 'italic', 'underline', 'clear']],
+                ['fontsize', ['fontsize']],
+                ['fontname', ['fontname']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['height', ['height']],
+                ['table', ['table']],
+                ['insert', ['link', 'picture', 'hr']],
+                ['view', ['fullscreen', 'codeview']],
+                ['help', ['help']]
+            ],
+        })
+        $('#body').summernote({
+            height: 300,
+            fontSizes: ['8', '9', '10', '11', '12', '14','16','18','20','22','24'],
+            toolbar: [
+                ['style', ['style']],
+                ['font', ['bold', 'italic', 'underline', 'clear']],
+                ['fontsize', ['fontsize']],
+                ['fontname', ['fontname']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['height', ['height']],
+                ['table', ['table']],
+                ['insert', ['link', 'picture', 'hr']],
+                ['view', ['fullscreen', 'codeview']],
+                ['help', ['help']]
+            ],
+        })
         // CodeMirror
         CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {
         mode: "htmlmixed",
@@ -225,8 +257,6 @@
         });
     })
     </script>
-    <!-- Page specific script -->
-
     <script>
         $(function() {
             var Toast = Swal.mixin({
@@ -452,11 +482,16 @@
 
             //Colorpicker
             $('.my-colorpicker1').colorpicker()
-                //color picker with addon
+            //color picker with addon
             $('.my-colorpicker2').colorpicker()
 
             $('.my-colorpicker2').on('colorpickerChange', function(event) {
                 $('.my-colorpicker2 .fa-square').css('color', event.color.toString());
+            })
+            $('.my-colorpicker3').colorpicker()
+
+            $('.my-colorpicker3').on('colorpickerChange', function(event) {
+                $('.my-colorpicker3 .fa-square').css('color', event.color.toString());
             })
 
             $("input[data-bootstrap-switch]").each(function() {

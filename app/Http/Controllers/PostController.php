@@ -57,7 +57,8 @@ class PostController extends Controller
             'excerpt'           => 'required',
             'body'              => 'required',
             'image'             => 'image|mimes:png,jpg,jpeg|max:10240',
-            'status'            => 'required'
+            'status'            => 'required',
+            'icon'              => 'mimes:ico,icon,png,jpg,jpeg|max:1024',
         ];
         $messages = [
             'order_position.required'    => 'Order Position Required',
@@ -73,6 +74,10 @@ class PostController extends Controller
             'image.max'         => 'Gambar Max. 10 Mb',
 
             'status.required'   => 'Status Required',
+
+            'icon.image'        => 'Icon Wajib  di Isi dengan Image Format : Ico, Icon, JPEG, JPG, PNG Max. 1 Mb',
+            'icon.mimes'        => 'Icon Wajib  dengan Format : Ico, Icon, JPEG, JPG, PNG Max. 1 Mb',
+            'icon.max'          => 'Icon Max. 1 Mb',
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -99,6 +104,20 @@ class PostController extends Controller
             $uploadedFile   = 'images-post/' . $uploadedFile;
         }
 
+        // Icon
+        $icon       = $request->file('icon');
+        if ($icon   == null) {
+            $icon   = "";
+        } else {
+            // Ganti Nama Icon
+            $getFileExtIcon = $icon->getClientOriginalExtension();
+            $iconName       = $slug . '-' . '.' . $getFileExtIcon;
+            // Upload Icon
+            $icon->storeAs('public/images-post/icons', $iconName);
+            // Save Icon di DB
+            $icon       = 'images-post/icons/' . $iconName;
+        }
+
         $query  = Post::create([
             'id_post_category'  => $request->id_post_category,
             'id_author'         => Auth::user()->id,
@@ -111,7 +130,10 @@ class PostController extends Controller
             'excerpt'           => $request->excerpt,
             'body'              => $request->body,
             'image'             => $uploadedFile,
-            'status'            => $request->status
+            'status'            => $request->status,
+            'icon'              => $icon,
+            'bg_color'          => $request->bg_color,
+            'bg_hover_color'    => $request->bg_hover_color
         ]);
 
         if ($query) {
@@ -159,7 +181,8 @@ class PostController extends Controller
             'excerpt'           => 'required',
             'body'              => 'required',
             'image'             => 'image|mimes:png,jpg,jpeg|max:10240',
-            'status'            => 'required'
+            'status'            => 'required',
+            'icon'              => 'mimes:ico,icon,png,jpg,jpeg|max:1024',
         ];
         $messages = [
             'order_position.required'    => 'Order Position Required',
@@ -172,6 +195,10 @@ class PostController extends Controller
             'image.mimes'       => 'Gambar Wajib  dengan Format : JPEG, JPG, PNG Max. 10 Mb',
             'image.max'         => 'Gambar Max. 10 Mb',
             'status.required'   => 'Status Required',
+
+            'icon.image'        => 'Icon Wajib  di Isi dengan Image Format : Ico, Icon, JPEG, JPG, PNG Max. 1 Mb',
+            'icon.mimes'        => 'Icon Wajib  dengan Format : Ico, Icon, JPEG, JPG, PNG Max. 1 Mb',
+            'icon.max'          => 'Icon Max. 1 Mb',
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -221,6 +248,22 @@ class PostController extends Controller
             $uploadedFile   = $request->image_hidden;
         }
 
+        // Icon
+        $icon       = $request->file('icon');
+        if ($icon   == null) {
+            $icon   = $request->icon_hidden;
+        } else {
+            // Delete Old Icon
+            File::delete('storage/' . $request->icon_hidden);
+            // Ganti Nama Icon
+            $getFileExtIcon = $icon->getClientOriginalExtension();
+            $iconName       = $slug . '-' . '.' . $getFileExtIcon;
+            // Upload Icon
+            $icon->storeAs('public/images-post/icons', $iconName);
+            // Save Icon di DB
+            $icon       = 'images-post/icons/' . $iconName;
+        }
+
         $query  = Post::whereId($id)->update([
             'id_post_category'  => $request->id_post_category,
             'id_author'         => Auth::user()->id,
@@ -233,7 +276,10 @@ class PostController extends Controller
             'excerpt'           => $request->excerpt,
             'body'              => $request->body,
             'image'             => $uploadedFile,
-            'status'            => $request->status
+            'status'            => $request->status,
+            'icon'              => $icon,
+            'bg_color'          => $request->bg_color,
+            'bg_hover_color'    => $request->bg_hover_color
         ]);
 
         if ($query) {
@@ -253,6 +299,7 @@ class PostController extends Controller
     {
         $find  = Post::find($id);
         File::delete('storage/' . $find->image);
+        File::delete('storage/' . $find->icon);
         if (Post::where('id', $find->id)->delete()) {
             return response()->json(['success'  => 'Post Delete Successfully']);
         } else {

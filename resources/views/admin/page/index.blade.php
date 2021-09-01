@@ -44,8 +44,9 @@
                         <th></th>
                         <th><i class="fas fa-user-secret"></i>&nbsp; Status</th>
                         <th style="width: 40px">
-                            <a class="btn btn-info btn-sm" href="javascript:void(0)" id="addPage">
-                            <i class="fas fa-user-plus"></i>&nbsp; &nbsp; Add Page</a>
+                            <a class="btn btn-info btn-sm add" href="javascript:void(0)" id="add">
+                                <i class="fas fa-user-plus"></i>&nbsp; &nbsp; Add Page
+                            </a>
                         </th>
                     </tr>
                 </thead>
@@ -59,8 +60,12 @@
                         <td>{{$show->status}}</td>
                         <td class="project-actions text-right">
                             <a class="btn btn-primary btn-sm" href="#"> <i class="fas fa-folder"></i></a>
-                            <a class="btn btn-warning btn-sm edit" href="javascript:void(0)" id="edit" data-id="{{$show->id}}"><i class="fas fa-pencil-alt"></i></a>
-                            <a class="btn btn-danger btn-sm delete" href="javascript:void(0)" id="delete" data-id="{{$show->id}}"><i class="fas fa-trash"></i></a>
+                            <a class="btn btn-warning btn-sm edit" href="javascript:void(0)" id="edit" data-id="{{$show->id}}">
+                                <i class="fas fa-pencil-alt"></i>
+                            </a>
+                            <a class="btn btn-danger btn-sm delete" href="javascript:void(0)" id="delete" data-id="{{$show->id}}">
+                                <i class="fas fa-trash"></i>
+                            </a>
                         </td>
                     </tr>
                     @endforeach

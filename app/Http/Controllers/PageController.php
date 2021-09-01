@@ -25,7 +25,6 @@ class PageController extends Controller
         ];
         $data['page_category']  = PageCategory::where('status', 'Active')->orderBy('title')->get();
         $data['data']           = Page::with('PageCategory', 'User')->orderByDesc('updated_at')->get();
-        dd($data['data']);
         return view('admin.page.index', $data);
     }
 
@@ -57,7 +56,8 @@ class PageController extends Controller
             'excerpt'           => 'required',
             'body'              => 'required',
             'image'             => 'image|mimes:png,jpg,jpeg|max:10240',
-            'status'            => 'required'
+            'status'            => 'required',
+            'icon'              => 'mimes:ico,icon,png,jpg,jpeg|max:1024',
         ];
         $messages = [
             'title.required'    => 'Title Required',
@@ -72,6 +72,10 @@ class PageController extends Controller
             'image.max'         => 'Gambar Max. 10 Mb',
 
             'status.required'   => 'Status Required',
+
+            'icon.image'        => 'Icon Wajib  di Isi dengan Image Format : Ico, Icon, JPEG, JPG, PNG Max. 1 Mb',
+            'icon.mimes'        => 'Icon Wajib  dengan Format : Ico, Icon, JPEG, JPG, PNG Max. 1 Mb',
+            'icon.max'          => 'Icon Max. 1 Mb',
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -88,7 +92,6 @@ class PageController extends Controller
             $uploadedFile   = "";
         } else {
             // Ganti Nama Image
-            $image          = $request->file('image');
             $ImgValue       = $request->file('image');
             $getFileExt     = $ImgValue->getClientOriginalExtension();
             $uploadedFile   = $slug . '-' . '.' . $getFileExt;
@@ -97,6 +100,21 @@ class PageController extends Controller
             // Save Image di DB
             $uploadedFile   = 'images-page/' . $uploadedFile;
         }
+
+        // Icon
+        $icon       = $request->file('icon');
+        if ($icon   == null) {
+            $icon   = "";
+        } else {
+            // Ganti Nama Icon
+            $getFileExtIcon = $icon->getClientOriginalExtension();
+            $iconName       = $slug . '-' . '.' . $getFileExtIcon;
+            // Upload Icon
+            $icon->storeAs('public/images-page/icons', $iconName);
+            // Save Icon di DB
+            $icon       = 'images-page/icons/' . $iconName;
+        }
+
 
         $query  = Page::create([
             'id_page_category'  => $request->id_page_category,
@@ -109,7 +127,10 @@ class PageController extends Controller
             'excerpt'           => $request->excerpt,
             'body'              => $request->body,
             'image'             => $uploadedFile,
-            'status'            => $request->status
+            'status'            => $request->status,
+            'icon'              => $icon,
+            'bg_color'          => $request->bg_color,
+            'bg_hover_color'    => $request->bg_hover_color
         ]);
 
         if ($query) {
@@ -156,7 +177,8 @@ class PageController extends Controller
             'excerpt'           => 'required',
             'body'              => 'required',
             'image'             => 'image|mimes:png,jpg,jpeg|max:10240',
-            'status'            => 'required'
+            'status'            => 'required',
+            'icon'              => 'mimes:ico,icon,png,jpg,jpeg|max:1024',
         ];
         $messages = [
             'title.required'    => 'Title Required',
@@ -171,6 +193,10 @@ class PageController extends Controller
             'image.max'         => 'Gambar Max. 10 Mb',
 
             'status.required'   => 'Status Required',
+
+            'icon.image'        => 'Icon Wajib  di Isi dengan Image Format : Ico, Icon, JPEG, JPG, PNG Max. 1 Mb',
+            'icon.mimes'        => 'Icon Wajib  dengan Format : Ico, Icon, JPEG, JPG, PNG Max. 1 Mb',
+            'icon.max'          => 'Icon Max. 1 Mb',
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -185,9 +211,7 @@ class PageController extends Controller
         $image              = $request->file('image');
         if (($request->title != $request->title_hidden) && ($image != NULL)) {
             // Change Image Name
-            $image          = $request->file('image');
-            $ImgValue       = $request->file('image');
-            $getFileExt     = $ImgValue->getClientOriginalExtension();
+            $getFileExt     = $image->getClientOriginalExtension();
             $uploadedFile   = $slug . '-' . '.' . $getFileExt;
             // Delete Old Image
             File::delete('storage/' . $request->image_hidden);
@@ -206,9 +230,7 @@ class PageController extends Controller
             Storage::rename('public/' . $request->image_hidden, 'public/' . $uploadedFile);
         } else if (($request->title == $request->title_hidden) && ($image != NULL)) {
             // Change Image Name
-            $image          = $request->file('image');
-            $ImgValue       = $request->file('image');
-            $getFileExt     = $ImgValue->getClientOriginalExtension();
+            $getFileExt     = $image->getClientOriginalExtension();
             $uploadedFile   = $slug . '-' . '.' . $getFileExt;
             // Delete Old Image
             File::delete('storage/' . $request->image_hidden);
@@ -218,6 +240,22 @@ class PageController extends Controller
             $uploadedFile   = 'images-page/' . $uploadedFile;
         } else {
             $uploadedFile   = $request->image_hidden;
+        }
+
+        // Icon
+        $icon       = $request->file('icon');
+        if ($icon   == null) {
+            $icon   = $request->icon_hidden;
+        } else {
+            // Delete Old Icon
+            File::delete('storage/' . $request->icon_hidden);
+            // Ganti Nama Icon
+            $getFileExtIcon = $icon->getClientOriginalExtension();
+            $iconName       = $slug . '-' . '.' . $getFileExtIcon;
+            // Upload Icon
+            $icon->storeAs('public/images-page/icons', $iconName);
+            // Save Icon di DB
+            $icon       = 'images-page/icons/' . $iconName;
         }
 
         $query  = Page::whereId($id)->update([
@@ -231,7 +269,10 @@ class PageController extends Controller
             'excerpt'           => $request->excerpt,
             'body'              => $request->body,
             'image'             => $uploadedFile,
-            'status'            => $request->status
+            'status'            => $request->status,
+            'icon'              => $icon,
+            'bg_color'          => $request->bg_color,
+            'bg_hover_color'    => $request->bg_hover_color
         ]);
 
         if ($query) {
@@ -251,6 +292,7 @@ class PageController extends Controller
     {
         $find  = Page::find($id);
         File::delete('storage/' . $find->image);
+        File::delete('storage/' . $find->icon);
         // $query ?  return response()->json(['success'  => 'Page Delete Successfully']) :  return response()->json(['error'    => 'Page Delete Failed']);
         if (Page::where('id', $find->id)->delete()) {
             return response()->json(['success'  => 'Page Delete Successfully']);

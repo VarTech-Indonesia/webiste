@@ -7,7 +7,6 @@ use App\Http\Controllers\LocalizationController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PostController;
-
 // User
 use App\Http\Controllers\HomeController;
 /*
