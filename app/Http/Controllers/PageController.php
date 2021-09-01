@@ -24,6 +24,7 @@ class PageController extends Controller
         ];
         $data['page_category']  = PageCategory::where('status', 'Active')->orderBy('title')->get();
         $data['data']           = Page::with('PageCategory', 'User')->orderByDesc('updated_at')->get();
+        dd($data['data']);
         return view('admin.page.index', $data);
     }
 
