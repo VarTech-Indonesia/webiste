@@ -15,7 +15,8 @@
             <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="50">
                 <div class=" service-box rounded mt-4 p-4">
                     <div class="service-icon mb-3">
-                        <i class="mdi mdi-database"></i>
+                        {{-- <i class="mdi mdi-database"></i> --}}
+                        <img src="{{asset('storage/'.$item_layanan->image)}}" alt="" class="img-fluid mx-auto d-block rounded">
                     </div>
                     <div class="services-desc">
                         <div class="service-title mb-2 position-relative">

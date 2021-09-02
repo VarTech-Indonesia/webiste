@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Home;
 use App\Models\Page;
 use App\Models\Post;
+use App\Models\Testimonial;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -19,25 +20,23 @@ class HomeController extends Controller
         $data   = [
             'title' =>  'VarTech Indonesia'
         ];
-        $data['data']   =
-            Page::whereHas('PageCategory', function ($query) {
-                return $query->where('status', 'Active')->where('title', 'Tentang Kami');
-            })->where('status', 'Published')->first();
 
         $data['layanan']   =
             Post::whereHas('PostCategory', function ($query) {
-                return $query->where('status', 'Active')->where('title', 'Layanan');
+                return $query->where('status', 'Active')->where('title', 'Layanan Kami');
             })->where('status', 'Published')->orderBy('order_position')->get();
 
-        $data['portofolio']   =
-            Page::whereHas('PageCategory', function ($query) {
+        $data['portofolio']     =
+            Post::whereHas('PostCategory', function ($query) {
                 return $query->where('status', 'Active')->where('title', 'Portofolio');
             })->where('status', 'Published')->get();
 
-        $data['testimoni']   =
+        $data['testimonial']    = Testimonial::where('status', 'Published')->orderBy('order_position')->get();
+
+        $data['data']           =
             Page::whereHas('PageCategory', function ($query) {
-                return $query->where('status', 'Active')->where('title', 'Testimoni');
-            })->where('status', 'Published')->get();
+                return $query->where('status', 'Active')->where('title', 'Tentang Kami');
+            })->where('status', 'Published')->first();
 
         return view('index', $data);
     }

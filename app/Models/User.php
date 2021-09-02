@@ -27,7 +27,16 @@ class User extends Authenticatable
     {
         return $this->belongsTo('App\Models\Page');
     }
-
+    // Relationship to Post
+    public function belongsToPost()
+    {
+        return $this->belongsTo('App\Models\Post');
+    }
+    // Relationship to Testimonial
+    public function belongsToTestimonial()
+    {
+        return $this->belongsTo('App\Models\Testimonial');
+    }
     /**
      * The attributes that should be hidden for arrays.
      *

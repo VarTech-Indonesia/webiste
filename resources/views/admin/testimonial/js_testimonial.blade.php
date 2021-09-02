@@ -18,7 +18,8 @@ $(function() {
         $('#title_hidden').val('');
         $('#excerpt').summernote('code', '');
         $('#body').summernote('code', '');
-        $('#link').val('');
+        $('#customer').val('');
+        $('#position').val('');
         $("#customRadio1").prop('checked', true);
         $('#image').val('');
         $('#image_hidden').val('');
@@ -32,12 +33,11 @@ $(function() {
 
     $('body').on('click', '.edit', function() {
         let id = $(this).data('id');
-        $.get("{{ url('admin/post-admin') }}" + '/' + id + '/edit', function(data) {
+        $.get("{{ url('admin/testimonial-admin') }}" + '/' + id + '/edit', function(data) {
             $('#ajaxModel').modal('show');
             $('#modelHeading').html("Edit Post");
             $('#saveBtn').val("update");
             $('#id_hidden').val(data.id);
-            $('#id_post_category').val(data.id_post_category);
             $('#meta_keywords').val(data.meta_keywords);
             $('#meta_description').val(data.meta_description); 
             $('#order_position').val(data.order_position);
@@ -45,7 +45,8 @@ $(function() {
             $('#title_hidden').val(data.title);
             $('#excerpt').summernote('code', data.excerpt);
             $('#body').summernote('code', data.body);
-            $('#link').val(data.link);
+            $('#customer').val(data.customer);
+            $('#position').val(data.position);
             (data.status === "Published") ?  $("#customRadio1").prop('checked', true) :  $("#customRadio2").prop('checked', true);
             $('#image').val('');
             $('#image_hidden').val(data.image);
@@ -64,7 +65,7 @@ $(function() {
         let id = $('#id_hidden').val();
         let status_button = $('#saveBtn').val();
         let url;
-        status_button === ("create") ? url = "{{ url('admin/post-admin/store') }}" : url = "{{ url('admin/post-admin/update') }}" + "/" + id;
+        status_button === ("create") ? url = "{{ url('admin/testimonial-admin/store') }}" : url = "{{ url('admin/testimonial-admin/update') }}" + "/" + id;
         jQuery('.alert-danger').hide();
         jQuery('.alert-success').hide();
         const formData = new FormData(form);
@@ -112,7 +113,7 @@ $(function() {
         }).then((result) => {
             if (result.isConfirmed) {
                 $.ajax({
-                    url: "{{ url('admin/post-admin/delete') }}" + "/" + id,
+                    url: "{{ url('admin/testimonial-admin/delete') }}" + "/" + id,
                     type: "DELETE",
                     dataType: 'JSON',
                     success: function(result) {

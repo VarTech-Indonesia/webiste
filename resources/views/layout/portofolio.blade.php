@@ -21,8 +21,12 @@
                     </div>
                     <div class="position-relative">
                         <div class="blog-content text-center bg-white p-4" data-aos="fade-up" data-aos-duration="2000" data-aos-delay="1000">
-                            <p class="text-uppercase f-13 mb-2 text-muted">{{ $item_portofolio->title }}</p>
-                            <h5 class="font-weight-normal f-18"><a href="#" class="text-dark">{{ $item_portofolio->title }}</a></h5>
+                            {{-- <p class="text-uppercase f-13 mb-2 text-muted">{{ $item_portofolio->title }}</p> --}}
+                            <h5 class="font-weight-normal f-18">
+                                <a href="{{ $item_portofolio->link }}" class="text-dark" target="_blank">
+                                {{ $item_portofolio->link }}
+                                </a>
+                            </h5>
                             <p class="text-muted f-14">
                                 {!! $item_portofolio->excerpt !!}
                             </p>
