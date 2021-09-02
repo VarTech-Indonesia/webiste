@@ -25,6 +25,7 @@ use App\Http\Controllers\HomeController;
 // });
 // User
 Route::get('/', [HomeController::class, 'index']);
+Route::get('/page/{slug}', [HomeController::class, 'page']);
 Route::get('/lang/{locale}', [LocalizationController::class, 'index']);
 // Admin
 Route::get('/admin', [AuthController::class, 'index'])->name('admin');

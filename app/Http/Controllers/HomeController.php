@@ -17,11 +17,11 @@ class HomeController extends Controller
     public function index()
     {
         $data   = [
-            'title' =>  'Vartech Indonesia | IT Company'
+            'title' =>  'VarTech Indonesia'
         ];
-        $data['beranda']   =
+        $data['data']   =
             Page::whereHas('PageCategory', function ($query) {
-                return $query->where('status', 'Active')->where('title', 'Beranda');
+                return $query->where('status', 'Active')->where('title', 'Tentang Kami');
             })->where('status', 'Published')->first();
 
         $data['layanan']   =
@@ -41,7 +41,32 @@ class HomeController extends Controller
 
         return view('index', $data);
     }
+    public function page($slug)
+    {
+        // dd($slug);
+        $data   = [
+            'title' =>  $slug
+        ];
+        $data['data']   =
+            Page::where('slug', $slug)->first();
+        return view('page', $data);
+        // $data['layanan']   =
+        //     Post::whereHas('PostCategory', function ($query) {
+        //         return $query->where('status', 'Active')->where('title', 'Layanan');
+        //     })->where('status', 'Published')->orderBy('order_position')->get();
 
+        // $data['portofolio']   =
+        //     Page::whereHas('PageCategory', function ($query) {
+        //         return $query->where('status', 'Active')->where('title', 'Portofolio');
+        //     })->where('status', 'Published')->get();
+
+        // $data['testimoni']   =
+        //     Page::whereHas('PageCategory', function ($query) {
+        //         return $query->where('status', 'Active')->where('title', 'Testimoni');
+        //     })->where('status', 'Published')->get();
+
+        // return view('index', $data);
+    }
     /**
      * Show the form for creating a new resource.
      *
