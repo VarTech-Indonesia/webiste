@@ -1,6 +1,14 @@
 <!-- Nilai Start -->
 <section class="section" id="about">
     <div class="container">
+        <div class="row"  data-aos="fade-right" data-aos-duration="1000">
+            <div class="col-lg-12">
+                <div class="title-heading mb-5">
+                    <h3 class="text-dark mb-1 font-weight-light text-uppercase">VarTech Indonesia</h3>
+                    <div class="title-border-simple position-relative"></div>
+                </div>
+            </div>
+        </div>
         <div class="row" data-aos="fade-right" data-aos-duration="1000">
             <div class="col-lg-3">
                 <div class="about-box about-light text-center p-3">
