@@ -45,15 +45,15 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{route('page-category.index')}}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Categories</p>
+                            <a href="{{ url('admin/page-admin') }}" class="nav-link">
+                                <i class="fas fa-angle-right"></i>
+                                <p>Pages</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ url('admin/page-admin') }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Pages</p>
+                            <a href="{{route('page-category.index')}}" class="nav-link">
+                                <i class="fas fa-angle-right"></i>
+                                <p>Categories</p>
                             </a>
                         </li>
                     </ul>
@@ -68,15 +68,15 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{route('post-category.index')}}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Categories</p>
+                            <a href="{{ url('admin/post-admin') }}" class="nav-link">
+                                <i class="fas fa-angle-right"></i>
+                                <p>Posts</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ url('admin/post-admin') }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Posts</p>
+                            <a href="{{route('post-category.index')}}" class="nav-link">
+                                <i class="fas fa-angle-right"></i>
+                                <p>Categories</p>
                             </a>
                         </li>
                     </ul>
@@ -93,10 +93,10 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('user-admin.index')}}" class="nav-link">
+                    <a href="{{url('admin/testimonial-admin')}}" class="nav-link">
                         <img src="{{asset('storage/images-front/slider.svg')}}" width="20px" >
                         <p>
-                            Guest Book
+                            Testimonial
                             <span class="badge badge-info right">
                                 2
                             </span>

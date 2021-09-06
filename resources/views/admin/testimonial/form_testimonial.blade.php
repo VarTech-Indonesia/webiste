@@ -56,21 +56,6 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <label>
-                                    <h6>Post Categories</h6>
-                                </label>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="fas fa-cogs"></i></span>
-                                    </div>
-                                    <select id="id_post_category" class="form-control" name="id_post_category" style="cursor: pointer" autofocus required>
-                                        @foreach ($post_category as $post_category_items)
-                                        <option value="{{ $post_category_items->id }}">{{$post_category_items->title}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label>
                                     <h6>Order Position</h6>
                                 </label>
                                 <div class="input-group">
@@ -115,13 +100,24 @@
                             </div>
                             <div class="form-group">
                                 <label>
-                                    <h6>Link</h6>
+                                    <h6>Customer</h6>
                                 </label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text"><i class="far fa-clipboard"></i></span>
+                                        <span class="input-group-text"><i class="fas fa-user-tie"></i></span>
                                     </div>
-                                    <input type="text" name="link" id="link" class="form-control" placeholder="Link" value="{{ old('link') }}">
+                                    <input type="text" name="customer" id="customer" class="form-control" placeholder="Customer" value="{{ old('customer') }}" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>
+                                    <h6>Position</h6>
+                                </label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-fire-alt"></i></span>
+                                    </div>
+                                    <input type="text" name="position" id="position" class="form-control" placeholder="Position" value="{{ old('position') }}" required>
                                 </div>
                             </div>
                             <div class="form-group">

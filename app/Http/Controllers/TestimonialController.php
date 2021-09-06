@@ -3,14 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Post;
-use App\Models\PostCategory;
+use App\Models\Testimonial;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 
-class PostController extends Controller
+class TestimonialController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,12 +19,11 @@ class PostController extends Controller
     public function index()
     {
         $data = [
-            'title'         => 'Data Post | VarTech Indonesia',
-            'title_table'   => 'Data Post'
+            'title'         => 'Data Testimonial | VarTech Indonesia',
+            'title_table'   => 'Data Testimonial'
         ];
-        $data['post_category']  = PostCategory::where('status', 'Active')->orderBy('title')->get();
-        $data['data']           = Post::with('PostCategory', 'User')->orderByDesc('updated_at')->get();
-        return view('admin.post.index', $data);
+        $data['data']           = Testimonial::orderByDesc('updated_at')->get();
+        return view('admin.testimonial.index', $data);
     }
 
     /**
@@ -36,11 +34,10 @@ class PostController extends Controller
     public function create()
     {
         $data = [
-            'title'         => 'Add Data Post | VarTech Indonesia',
-            'title_table'   => 'Add Data Post'
+            'title'         => 'Add Data Testimonial | VarTech Indonesia',
+            'title_table'   => 'Add Data Testimonial'
         ];
-        $data['post_category']  = PostCategory::where('status', 'Active')->orderBy('title')->get();
-        return view('admin.post.index', $data);
+        return view('admin.testimonial.index', $data);
     }
 
     /**
@@ -56,6 +53,8 @@ class PostController extends Controller
             'title'             => 'required|min:5|max:255',
             'excerpt'           => 'required',
             'body'              => 'required',
+            'customer'          => 'required',
+            'position'          => 'required',
             'image'             => 'image|mimes:png,jpg,jpeg|max:10240',
             'status'            => 'required',
             'icon'              => 'mimes:ico,icon,png,jpg,jpeg|max:1024',
@@ -68,6 +67,8 @@ class PostController extends Controller
 
             'excerpt.required'  => 'Excerpt Required',
             'body.required'     => 'Body Required',
+            'customer.required' => 'Customer Required',
+            'position.required' => 'Customer Position Required',
 
             'image.image'       => 'Gambar Wajib  di Isi dengan Image Format : JPEG, JPG, PNG Max. 10 Mb',
             'image.mimes'       => 'Gambar Wajib  dengan Format : JPEG, JPG, PNG Max. 10 Mb',
@@ -99,9 +100,9 @@ class PostController extends Controller
             $getFileExt     = $ImgValue->getClientOriginalExtension();
             $uploadedFile   = $slug . '-' . '.' . $getFileExt;
             // Upload Image
-            $image->storeAs('public/images-post', $uploadedFile);
+            $image->storeAs('public/images-testimonial', $uploadedFile);
             // Save Image di DB
-            $uploadedFile   = 'images-post/' . $uploadedFile;
+            $uploadedFile   = 'images-testimonial/' . $uploadedFile;
         }
 
         // Icon
@@ -113,13 +114,12 @@ class PostController extends Controller
             $getFileExtIcon = $icon->getClientOriginalExtension();
             $iconName       = $slug . '-' . '.' . $getFileExtIcon;
             // Upload Icon
-            $icon->storeAs('public/images-post/icons', $iconName);
+            $icon->storeAs('public/images-testimonial/icons', $iconName);
             // Save Icon di DB
-            $icon       = 'images-post/icons/' . $iconName;
+            $icon       = 'images-testimonial/icons/' . $iconName;
         }
 
-        $query  = Post::create([
-            'id_post_category'  => $request->id_post_category,
+        $query  = Testimonial::create([
             'id_author'         => Auth::user()->id,
             'slug'              => $slug,
             'seo_title'         => $seo_title,
@@ -129,7 +129,8 @@ class PostController extends Controller
             'title'             => $request->title,
             'excerpt'           => $request->excerpt,
             'body'              => $request->body,
-            'link'              => $request->link,
+            'customer'          => $request->customer,
+            'position'          => $request->position,
             'image'             => $uploadedFile,
             'status'            => $request->status,
             'icon'              => $icon,
@@ -138,9 +139,9 @@ class PostController extends Controller
         ]);
 
         if ($query) {
-            return response()->json(['success'  => 'Post Category Saved Successfully']);
+            return response()->json(['success'  => 'Testimonial Category Saved Successfully']);
         } else {
-            return response()->json(['error'    => 'Post Category Saved Failed']);
+            return response()->json(['error'    => 'Testimonial Category Saved Failed']);
         }
     }
 
@@ -163,7 +164,7 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        $data   = Post::find($id);
+        $data   = Testimonial::find($id);
         return response()->json($data);
     }
 
@@ -181,6 +182,8 @@ class PostController extends Controller
             'title'             => 'required|min:5|max:255',
             'excerpt'           => 'required',
             'body'              => 'required',
+            'customer'          => 'required',
+            'position'          => 'required',
             'image'             => 'image|mimes:png,jpg,jpeg|max:10240',
             'status'            => 'required',
             'icon'              => 'mimes:ico,icon,png,jpg,jpeg|max:1024',
@@ -192,6 +195,8 @@ class PostController extends Controller
             'title.max'         => 'Title Max. 255 karakter',
             'excerpt.required'  => 'Excerpt Required',
             'body.required'     => 'Body Required',
+            'customer.required' => 'Customer Required',
+            'position.required' => 'Customer Position Required',
             'image.image'       => 'Gambar Wajib  di Isi dengan Image Format : JPEG, JPG, PNG Max. 10 Mb',
             'image.mimes'       => 'Gambar Wajib  dengan Format : JPEG, JPG, PNG Max. 10 Mb',
             'image.max'         => 'Gambar Max. 10 Mb',
@@ -214,37 +219,35 @@ class PostController extends Controller
         $image              = $request->file('image');
         if (($request->title != $request->title_hidden) && ($image != NULL)) {
             // Change Image Name
-            $image          = $request->file('image');
             $ImgValue       = $request->file('image');
             $getFileExt     = $ImgValue->getClientOriginalExtension();
             $uploadedFile   = $slug . '-' . '.' . $getFileExt;
             // Delete Old Image
             File::delete('storage/' . $request->image_hidden);
             // Upload New Image
-            $image->storeAs('public/images-post', $uploadedFile);
+            $image->storeAs('public/images-testimonial', $uploadedFile);
             // Save Image in DB
-            $uploadedFile   = 'images-post/' . $uploadedFile;
+            $uploadedFile   = 'images-testimonial/' . $uploadedFile;
         } else if (($request->title != $request->title_hidden) && ($image == NULL)) {
             // Change Image Name
             $image          = $request->image_hidden;
             $getFileExt     = substr($image, strpos($image, ".") + 1);
             $uploadedFile   = $slug . '-' . '.' . $getFileExt;
             // Save Image in DB
-            $uploadedFile   = 'images-post/' . $uploadedFile;
+            $uploadedFile   = 'images-testimonial/' . $uploadedFile;
             // Rename Image
             Storage::rename('public/' . $request->image_hidden, 'public/' . $uploadedFile);
         } else if (($request->title == $request->title_hidden) && ($image != NULL)) {
             // Change Image Name
-            $image          = $request->file('image');
             $ImgValue       = $request->file('image');
             $getFileExt     = $ImgValue->getClientOriginalExtension();
             $uploadedFile   = $slug . '-' . '.' . $getFileExt;
             // Delete Old Image
             File::delete('storage/' . $request->image_hidden);
             // Upload New Image
-            $image->storeAs('public/images-post', $uploadedFile);
+            $image->storeAs('public/images-testimonial', $uploadedFile);
             // Save Image in DB
-            $uploadedFile   = 'images-post/' . $uploadedFile;
+            $uploadedFile   = 'images-testimonial/' . $uploadedFile;
         } else {
             $uploadedFile   = $request->image_hidden;
         }
@@ -260,13 +263,12 @@ class PostController extends Controller
             $getFileExtIcon = $icon->getClientOriginalExtension();
             $iconName       = $slug . '-' . '.' . $getFileExtIcon;
             // Upload Icon
-            $icon->storeAs('public/images-post/icons', $iconName);
+            $icon->storeAs('public/images-testimonial/icons', $iconName);
             // Save Icon di DB
-            $icon       = 'images-post/icons/' . $iconName;
+            $icon       = 'images-testimonial/icons/' . $iconName;
         }
 
-        $query  = Post::whereId($id)->update([
-            'id_post_category'  => $request->id_post_category,
+        $query  = Testimonial::whereId($id)->update([
             'id_author'         => Auth::user()->id,
             'slug'              => $slug,
             'seo_title'         => $seo_title,
@@ -276,7 +278,8 @@ class PostController extends Controller
             'title'             => $request->title,
             'excerpt'           => $request->excerpt,
             'body'              => $request->body,
-            'link'              => $request->link,
+            'customer'          => $request->customer,
+            'position'          => $request->position,
             'image'             => $uploadedFile,
             'status'            => $request->status,
             'icon'              => $icon,
@@ -285,9 +288,9 @@ class PostController extends Controller
         ]);
 
         if ($query) {
-            return response()->json(['success'  => 'Post Saved Successfully']);
+            return response()->json(['success'  => 'Testimonial Saved Successfully']);
         } else {
-            return response()->json(['error'    => 'Post Saved Failed']);
+            return response()->json(['error'    => 'Testimonial Saved Failed']);
         }
     }
 
@@ -299,13 +302,13 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        $find  = Post::find($id);
+        $find  = Testimonial::find($id);
         File::delete('storage/' . $find->image);
         File::delete('storage/' . $find->icon);
-        if (Post::where('id', $find->id)->delete()) {
-            return response()->json(['success'  => 'Post Delete Successfully']);
+        if (Testimonial::where('id', $find->id)->delete()) {
+            return response()->json(['success'  => 'Testimonial Delete Successfully']);
         } else {
-            return response()->json(['error'    => 'Post Delete Failed']);
+            return response()->json(['error'    => 'Testimonial Delete Failed']);
         }
     }
 }

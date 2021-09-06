@@ -7,6 +7,7 @@ use App\Http\Controllers\LocalizationController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\TestimonialController;
 // User
 use App\Http\Controllers\HomeController;
 /*
@@ -25,7 +26,8 @@ use App\Http\Controllers\HomeController;
 // });
 // User
 Route::get('/', [HomeController::class, 'index']);
-Route::get('index/page/{slug}', [HomeController::class, 'page']);
+Route::get('/page/{slug}', [HomeController::class, 'page']);
+Route::get('/testimonial/{slug}', [HomeController::class, 'testimonial']);
 Route::get('/lang/{locale}', [LocalizationController::class, 'index']);
 // Admin
 Route::get('/admin', [AuthController::class, 'index'])->name('admin');
@@ -60,4 +62,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     Route::GET('/post-admin/{id}/edit', [PostController::class, 'edit']);
     Route::POST('/post-admin/update/{id}', [PostController::class, 'update']);
     Route::DELETE('/post-admin/delete/{id}', [PostController::class, 'destroy']);
+    // Testimonial
+    Route::GET('/testimonial-admin', [TestimonialController::class, 'index']);
+    Route::POST('/testimonial-admin/store', [TestimonialController::class, 'store']);
+    Route::GET('/testimonial-admin/{id}/edit', [TestimonialController::class, 'edit']);
+    Route::POST('/testimonial-admin/update/{id}', [TestimonialController::class, 'update']);
+    Route::DELETE('/testimonial-admin/delete/{id}', [TestimonialController::class, 'destroy']);
 });
