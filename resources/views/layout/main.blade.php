@@ -5,9 +5,9 @@
     <meta charset="utf-8" />
     <title>{{$title}}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="{{ $data->meta_description }}" />
     <meta name="keywords" content="{{ $data->meta_keywords }}" />
-    <meta content="VarTech" name="author" />
+    <meta name="description" content="{{ $data->meta_description }}" />
+    <meta content="VarTech" name="VarTech Indonesia" />
     <!-- favicon -->
     <link rel="shortcut icon" href="{{asset('storage/images-front/vartech.ico')}}">
     <!--Material Icon -->
@@ -86,7 +86,7 @@
                                 <h1 class="text-white font-weight-normal home-5-title mb-0"></h1>
                                 <p class="text-white-70 mt-4 f-15 mb-0">Information Technology and Printing Service Provider</p>
                                 <div class="mt-5">
-                                    {{-- <button type="submit" class="btn btn-custom">Lihat Lebih Lanjut >></button> --}}
+                                    <button type="submit" class="btn btn-custom">Lihat Lebih Lanjut</button>
                                 </div>
                             </div>
                         </div>
@@ -201,32 +201,28 @@
     <script src="{{asset('storage/js/TextPlugin.min.js')}}"></script>
     <script>
         gsap.registerPlugin(TextPlugin);
-        // gsap.from('.navbar', {
-        //     duration: 1.5,
-        //     y: '-300%',
-        //     opacity: 0,
-        //     ease: 'bounce'
-        // });
-        gsap.to(".gsap-text-profesional", {
-            duration: 1,
+
+        gsap.to(".gsap-text-pendidikan", {
+            duration: 2,
             delay: 1,
-            text: "Profesional"
+            text: "Teknologi Informasi Bidang Pendidikan"
         })
-        gsap.to(".gsap-text-terpercaya", {
-            duration: 1,
-            delay: 2,
-            text: "Terpercaya"
-        })
-        gsap.to(".gsap-text-adaftif", {
-            duration: 1,
+        gsap.to(".gsap-text-kesehatan", {
+            duration: 2,
             delay: 3,
-            text: "Adaftif"
+            text: "Layanan IT Bidang Kesehatan"
         })
-        gsap.to(".gsap-text-inovatif", {
-            duration: 1,
-            delay: 4,
-            text: "Inovatif"
+        gsap.to(".gsap-text-pemerintahan", {
+            duration: 2,
+            delay: 5,
+            text: "Layanan IT Bidang Pemerintahan"
         })
+        gsap.to(".gsap-text-bisnis", {
+            duration: 2,
+            delay: 7,
+            text: "Layanan IT Bidang Bisnis"
+        })
+
     </script>
 </body>
 

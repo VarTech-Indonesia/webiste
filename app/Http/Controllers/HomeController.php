@@ -20,6 +20,10 @@ class HomeController extends Controller
         $data   = [
             'title' =>  'VarTech Indonesia'
         ];
+        $data['service']   =
+            Page::whereHas('PageCategory', function ($query) {
+                return $query->where('status', 'Active')->where('title', 'Service');
+            })->where('status', 'Published')->orderBy('created_at')->get();
 
         $data['layanan']   =
             Post::whereHas('PostCategory', function ($query) {

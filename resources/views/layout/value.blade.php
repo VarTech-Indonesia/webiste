@@ -10,27 +10,30 @@
             </div>
         </div>
         <div class="row" data-aos="fade-right" data-aos-duration="1000">
+            @foreach ($service as $item_service)
             <div class="col-lg-3">
-                <div class="about-box about-light text-center p-3">
-                    <div class="about-icon mb-4">
-                        <i class="mdi mdi-nature"></i>
+                <div class="about-box about-light text-center">
+                    <div  data-aos="zoom-in" data-aos-duration="2000">
+                       <img src="{{asset('storage/'.$item_service->icon)}}" width="100px">
                     </div>
-                    <h4 class="font-weight-light">
-                        <a href="#" class="text-dark">
-                            <p class="gsap-text-profesional"></p>
+                    <h4 class="font-weight-light" data-aos="fade-up" data-aos-duration="2000">
+                        <a href="/page/{{$item_service->slug}}" class="text-dark">
+                            <p>{{$item_service->title}}</p>
                         </a>
                     </h4>
                     <p class="text-muted f-14"></p>
                 </div>
             </div>
-            <div class="col-lg-3">
+            @endforeach
+           
+            {{-- <div class="col-lg-3">
                 <div class="about-box about-light text-center p-3">
                     <div class="about-icon mb-4">
                         <i class="mdi mdi-lightbulb"></i>
                     </div>
                     <h4 class="font-weight-light">
                         <a href="#" class="text-dark">
-                            <p class="gsap-text-terpercaya"></p>
+                            <p class="gsap-text-kesehatan"></p>
                         </a>
                     </h4>
                     <p class="text-muted f-14"></p>
@@ -62,7 +65,59 @@
                     <p class="text-muted f-14"></p>
                 </div>
             </div>
-        </div>
+            <div class="col-lg-3">
+                <div class="about-box about-light text-center p-3">
+                    <div class="about-icon mb-4">
+                        <i class="mdi mdi-lightbulb"></i>
+                    </div>
+                    <h4 class="font-weight-light">
+                        <a href="#" class="text-dark">
+                            <p class="gsap-text-inovatif"></p>
+                        </a>
+                    </h4>
+                    <p class="text-muted f-14"></p>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="about-box about-light text-center p-3">
+                    <div class="about-icon mb-4">
+                        <i class="mdi mdi-lightbulb"></i>
+                    </div>
+                    <h4 class="font-weight-light">
+                        <a href="#" class="text-dark">
+                            <p class="gsap-text-inovatif"></p>
+                        </a>
+                    </h4>
+                    <p class="text-muted f-14"></p>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="about-box about-light text-center p-3">
+                    <div class="about-icon mb-4">
+                        <i class="mdi mdi-lightbulb"></i>
+                    </div>
+                    <h4 class="font-weight-light">
+                        <a href="#" class="text-dark">
+                            <p class="gsap-text-inovatif"></p>
+                        </a>
+                    </h4>
+                    <p class="text-muted f-14"></p>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="about-box about-light text-center p-3">
+                    <div class="about-icon mb-4">
+                        <i class="mdi mdi-lightbulb"></i>
+                    </div>
+                    <h4 class="font-weight-light">
+                        <a href="#" class="text-dark">
+                            <p class="gsap-text-inovatif"></p>
+                        </a>
+                    </h4>
+                    <p class="text-muted f-14"></p>
+                </div>
+            </div>
+        </div> --}}
     </div>
 </section>
 <!-- Nilai End -->

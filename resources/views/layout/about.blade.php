@@ -14,7 +14,7 @@
             </div>
             <div class="col-md-6" data-aos="zoom-in" data-aos-duration="2000">
                 <div class="">
-                    <img src="{{asset('storage/'.$data->image)}}" width="553px" >
+                    <img src="{{asset('storage/'.$data->image)}}" alt="{{$data->slug}}" class="img-fluid mx-auto d-block" >
                 </div>
             </div>
         </div>

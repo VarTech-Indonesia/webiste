@@ -63,9 +63,9 @@ class PageController extends Controller
             'slug'              => 'required|min:5|max:255|unique:Pages,slug',
             'excerpt'           => 'required',
             'body'              => 'required',
-            'image'             => 'image|mimes:png,jpg,jpeg|max:10240',
+            'image'             => 'image|mimes:svg,png,jpg,jpeg|max:10240',
             'status'            => 'required',
-            'icon'              => 'mimes:ico,icon,png,jpg,jpeg|max:1024',
+            'icon'              => 'mimes:svg,ico,icon,png,jpg,jpeg|max:1024',
         ];
         $messages = [
             'title.required'    => 'Title Required',
@@ -177,9 +177,9 @@ class PageController extends Controller
             'title'             => 'required|min:5|max:255',
             'excerpt'           => 'required',
             'body'              => 'required',
-            'image'             => 'image|mimes:png,jpg,jpeg|max:10240',
+            'image'             => 'image|mimes:svg,png,jpg,jpeg|max:10240',
             'status'            => 'required',
-            'icon'              => 'mimes:ico,icon,png,jpg,jpeg|max:1024',
+            'icon'              => 'mimes:svg,ico,icon,png,jpg,jpeg|max:1024',
         ];
         $messages = [
             'title.required'    => 'Title Required',

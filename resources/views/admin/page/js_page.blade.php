@@ -17,6 +17,7 @@ $(function() {
     });
     $(".summernote").on("summernote.change", function (e) {
         let data=$('#excerpt').summernote('code').replace(/<\/?[^>]+(>|$)/g, "");
+        $('#meta_description').val('');
         $('#meta_description').val(data);
     });
 
