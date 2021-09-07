@@ -22,6 +22,17 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <label>
+                                    <h6>Slug</h6>
+                                </label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="far fa-clipboard"></i></span>
+                                    </div>
+                                    <input type="text" name="slug" id="slug" class="form-control" placeholder="Slug Automatic With TItle" value="{{ old('slug') }}" required readonly>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>
                                     <h6>Meta Keywords</h6>
                                 </label>
                                 <div class="input-group">
@@ -39,7 +50,9 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="far fa-clipboard"></i></span>
                                     </div>
-                                    <input type="text" name="meta_description" id="meta_description" class="form-control" placeholder="Meta Description" value="{{ old('meta_description') }}">
+                                    <textarea name="meta_description" id="meta_description" class="form-control" placeholder="Meta Description" rows="10">
+                                        {{ old('meta_description') }}
+                                    </textarea>
                                 </div>
                             </div>
                         </div>

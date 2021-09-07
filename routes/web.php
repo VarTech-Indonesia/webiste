@@ -50,6 +50,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     Route::resource('page-category', PageCategoryController::class);
     // Page
     Route::GET('/page-admin', [PageController::class, 'index']);
+    Route::GET('/page-admin/check-slug', [PageController::class, 'page_slug'])->name('page_slug');
     Route::POST('/page-admin/store', [PageController::class, 'store']);
     Route::GET('/page-admin/{id}/edit', [PageController::class, 'edit']);
     Route::POST('/page-admin/update/{id}', [PageController::class, 'update']);

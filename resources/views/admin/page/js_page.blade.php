@@ -6,6 +6,20 @@ $(function() {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
+    $('#title').change(function(e) {
+        $.get('{{ route('page_slug') }}',
+            {'title':$(this).val()},
+            function (data) {
+                $('#slug').val(data.slug);
+                $('#meta_keywords').val(data.meta_keywords);
+            }
+        );
+    });
+    $(".summernote").on("summernote.change", function (e) {
+        let data=$('#excerpt').summernote('code').replace(/<\/?[^>]+(>|$)/g, "");
+        $('#meta_description').val(data);
+    });
+
 
     $('body').on('click', '.add', function() {
         $('#ajaxModel').modal('show');
@@ -17,6 +31,7 @@ $(function() {
         $('#meta_description').val('');
         $('#title').val('');
         $('#title_hidden').val('');
+        $('#slug').val('');
         $('#excerpt').summernote('code', '');
         $('#body').summernote('code', '');
         $("#customRadio1").prop('checked', true);
@@ -42,6 +57,7 @@ $(function() {
             $('#meta_description').val(data.meta_description);
             $('#title').val(data.title);
             $('#title_hidden').val(data.title);
+            $('#slug').val(data.slug);
             $('#excerpt').summernote('code', data.excerpt);
             $('#body').summernote('code', data.body);
             (data.status === "Published") ?  $("#customRadio1").prop('checked', true) :  $("#customRadio2").prop('checked', true);
@@ -59,8 +75,8 @@ $(function() {
 
     $('#saveBtn').click(function(e) {
         e.preventDefault();
-        let id = $('#id_hidden').val();
-        let status_button = $('#saveBtn').val();
+        let id              = $('#id_hidden').val();
+        let status_button   = $('#saveBtn').val();
         let url;
         status_button === ("create") ? url = "{{ url('admin/page-admin/store') }}" : url = "{{ url('admin/page-admin/update') }}" + "/" + id;
         jQuery('.alert-danger').hide();
