@@ -30,7 +30,6 @@
    ========== */
 
 @import url("https://fonts.googleapis.com/css?family=Rubik:300,400,500,700");
-
 body {
     font-family: "Rubik", sans-serif;
 }
@@ -68,7 +67,7 @@ p {
     display: block;
     width: 0;
     height: 2px;
-    background: #ff8700;
+    background: #c0097a;
     -webkit-transition: width .3s;
     transition: width .3s;
 }
@@ -261,45 +260,36 @@ p {
         box-shadow: 0 10px 33px rgba(0, 0, 0, 0.1);
         color: #ffffff !important;
     }
-
     .navbar-custom .navbar-nav {
         margin-top: 0px;
     }
-
     .navbar-custom .navbar-nav li a {
         -webkit-transition: all 0.4s;
         transition: all 0.4s;
         color: rgba(255, 255, 255, 0.6) !important;
         margin: 0px;
     }
-
     .navbar-custom .navbar-nav li.active a {
         border-color: transparent;
     }
-
     .navbar-custom>.container {
         width: 90%;
     }
-
     .navbar-toggler {
         font-size: 24px;
         margin-top: 0px;
         margin-bottom: 0px;
         color: #ffffff !important;
     }
-
     .nav-icon {
         display: block;
     }
-
     .nav-icon li a {
         margin: 0 10px !important;
     }
-
     .navbar-light .nav-item .nav-link:after {
         background: #ffffff;
     }
-
     .navbar-custom.navbar-light .navbar-nav li.active a,
     .navbar-custom.navbar-light .navbar-nav li a:hover,
     .navbar-custom.navbar-light .navbar-nav li a:active {
@@ -562,7 +552,6 @@ p {
         -webkit-transform: translateY(0);
         transform: translateY(0);
     }
-
     100% {
         -webkit-transform: translateY(-12px);
         transform: translateY(-12px);
@@ -574,7 +563,6 @@ p {
         -webkit-transform: translateY(0);
         transform: translateY(0);
     }
-
     100% {
         -webkit-transform: translateY(-12px);
         transform: translateY(-12px);
@@ -1390,23 +1378,18 @@ p {
     .mt-40 {
         margin-top: 40px;
     }
-
     .contact-box {
         padding: 8px !important;
     }
-
     .home-3-title {
         font-size: 36px;
     }
-
     .video-button {
         position: static;
     }
-
     .home-4-content {
         max-width: 100%;
     }
-
     .home-4-img {
         padding: 50px 0px 0px !important;
     }
@@ -1416,19 +1399,15 @@ p {
     .mt-10 {
         margin-top: 10px;
     }
-
     .subcribe-form input {
         width: 100%;
     }
-
     .home-6-title {
         font-size: 34px;
     }
-
     .home-6-bg {
         height: auto;
     }
-
     .home-4-bg {
         height: auto;
     }
@@ -1518,14 +1497,12 @@ p {
 }
 
 @-webkit-keyframes sk-cubeGridScaleDelay {
-
     0%,
     70%,
     100% {
         -webkit-transform: scale3D(1, 1, 1);
         transform: scale3D(1, 1, 1);
     }
-
     35% {
         -webkit-transform: scale3D(0, 0, 1);
         transform: scale3D(0, 0, 1);
@@ -1533,14 +1510,12 @@ p {
 }
 
 @keyframes sk-cubeGridScaleDelay {
-
     0%,
     70%,
     100% {
         -webkit-transform: scale3D(1, 1, 1);
         transform: scale3D(1, 1, 1);
     }
-
     35% {
         -webkit-transform: scale3D(0, 0, 1);
         transform: scale3D(0, 0, 1);
