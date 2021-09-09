@@ -56,7 +56,7 @@
                         <td>{{$loop->iteration}}</td>
                         <td>{{$show->pageCategory->title}}</td>
                         <td>{{$show->title}}</td>
-                        <td><img src="{{asset('storage/'.$show->image)}}" width="200px"></td>
+                        <td><img src="{{asset('storage/'.$show->image)}}" width="50px"></td>
                         <td>{{$show->status}}</td>
                         <td class="project-actions text-right">
                             <a class="btn btn-primary btn-sm" href="#"> <i class="fas fa-folder"></i></a>
