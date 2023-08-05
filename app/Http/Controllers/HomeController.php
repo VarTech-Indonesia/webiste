@@ -46,13 +46,10 @@ class HomeController extends Controller
     }
     public function page($slug)
     {
-        // dd($slug);
-        $data   = [
-            'title' =>  $slug
-        ];
-        $data['data']   =
-            Page::where('slug', $slug)->first();
-        return view('page', $data);
+        $data   =Page::where('slug', $slug)->first();
+        $title  =$data->title. " | VarTech Indonesia";
+        $data['data']=Page::where('slug', $slug)->first();
+        return view('page', compact('data','title'));
         // $data['layanan']   =
         //     Post::whereHas('PostCategory', function ($query) {
         //         return $query->where('status', 'Active')->where('title', 'Layanan');

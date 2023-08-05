@@ -1,0 +1,1 @@
+[09-Sep-2021 14:07:31 UTC] PHP Fatal error:  Cannot use temporary expression in write context in /home/vartechc/public_html/app/Http/Controllers/HomeController.php on line 55

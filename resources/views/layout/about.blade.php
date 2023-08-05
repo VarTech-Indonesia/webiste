@@ -14,7 +14,7 @@
             <div class="col-lg-4" data-aos="zoom-in" data-aos-duration="2000">
                 <div class="about-box about-light text-center p-3">
                     <div class="mb-3">
-                        <img src="{{asset('storage/'.$item_service->icon)}}" width="100px">
+                        <img src="{{asset('storage/'.$item_service->icon)}}" width="50px">
                     </div>
                     <h4 class="font-weight-light"><a href="/page/{{$item_service->slug}}" class="text-dark">{{$item_service->title}}</a></h4>
                     <p class="text-muted f-14">{!!$item_service->excerpt!!}</p>
