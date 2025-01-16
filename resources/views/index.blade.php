@@ -1,6 +1,7 @@
 @extends('layout/main')
 @section('title', $title)
 @section('main-content')
+    @include('layout/jumbotron')
     @include('layout/about')
     @include('layout/service')
     @include('layout/portofolio')

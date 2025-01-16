@@ -33,7 +33,7 @@
     <nav class="navbar navbar-expand-lg fixed-top navbar-custom navbar-light sticky sticky-dark">
         <div class="container">
             <a class="navbar-brand logo" href="#">
-                <img src="{{asset('storage/images-front/VarTech.png')}}" alt="" height="30">
+                <img src="{{asset('storage/images-front/vartech.png')}}" alt="" height="30">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="mdi mdi-menu"></i>
@@ -70,6 +70,8 @@
         </div>
     </nav>
     <!-- Navbar End -->
+<<<<<<< HEAD
+=======
 
     <!-- Jumbotron Start -->
     <section class="section home-3-bg" id="home">
@@ -109,6 +111,7 @@
         </div>
     </section>
     <!-- Jumbotron End -->
+>>>>>>> 3733f53dd9b4fb2fb1d6b013ccf107c43fbe59a5
     
         @yield('main-content')
 
